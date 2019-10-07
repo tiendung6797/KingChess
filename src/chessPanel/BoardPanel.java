@@ -35,13 +35,11 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	private Pieces piecesChoise;
 	private boolean isHumanTurn;
 	private boolean wasChoisePieces = false;
-	private PanelInformation panelInformation;
 	private ArtificialIntelligence ai;
 	private boolean win;
 
-	public BoardPanel(GameSetting gameSetting, PanelInformation panelInformation) {
+	public BoardPanel(GameSetting gameSetting) {
 		this.gameSetting = gameSetting;
-		this.panelInformation = panelInformation;
 		this.positionBoard = new PositionBoard(gameSetting.getLevel(), gameSetting, this);
 		this.setBorder(new LineBorder(Color.BLACK));
 		this.setBackground(gameSetting.getBackgroundColor());
@@ -133,10 +131,9 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 				ai = new ArtificialIntelligence(gameSetting, positionBoard.copy(gameSetting.getLevel(), gameSetting));
 			}
 			positionBoard = ai.getNextPosition();
-			panelInformation.appendTextRed(positionBoard.getParentMove().toString());
 			isHumanTurn = true;
 			showCanMove = true;
-			panelInformation.insertText("======*** Human Turn ***=====");
+			System.out.println("======*** Human Turn ***=====");
 
 			repaint();
 			showCanMove = false;
@@ -149,16 +146,11 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 
 	public void moveHumanInWatchMode() {
 		if (gameSetting.isWatchMode() && !win && isHumanTurn) {
-			// System.out.println("Move Human");
 			PositionBoard old = positionBoard.getOldPositionBoard();
 			ai = new ArtificialIntelligence(gameSetting, positionBoard.copy(gameSetting.getLevel(), gameSetting));
 			positionBoard = ai.getNextHumanPosition();
-			System.out.println("DCM VKL : " + positionBoard.equal(old));
-			// piecesChoise = positionBoard.getParentMove().getPieces()
-			panelInformation.appendTextRed(positionBoard.getParentMove().toString());
 			isHumanTurn = false;
 			showCanMove = true;
-			panelInformation.insertText("======**** Ai Turn ****======");
 			repaint();
 			showCanMove = false;
 
@@ -184,12 +176,11 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 					if (wasChoisePieces && piecesChoise.canMove(location)) {
 						Move move = new Move(piecesChoise, location);
 
-						panelInformation.appendTextGreen(move.toString());
 						positionBoard = positionBoard.newPositionBoard(move);
 
 						isHumanTurn = false;
 						showCanMove = false;
-						panelInformation.insertText("======**** Ai Turn ****======");
+						System.out.println("======**** Ai Turn ****======");
 
 						checkWin();
 						wasChoisePieces = false;
@@ -210,12 +201,10 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 					} else {
 						if (wasChoisePieces && piecesChoise.canMove(location)) {
 							Move move = new Move(piecesChoise, location);
-							panelInformation.appendTextRed(move.toString());
 							positionBoard = positionBoard.newPositionBoard(move);
 							isHumanTurn = true;
 							repaint();
 							showCanMove = false;
-							panelInformation.insertText("Human Turn");
 							checkWin();
 							wasChoisePieces = false;
 							repaint();

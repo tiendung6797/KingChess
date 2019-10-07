@@ -21,17 +21,15 @@ import core.Utils;
 
 public class RadioPanel extends JPanel implements MouseListener {
 	private GameSetting gameSetting;
-	private PanelInformation panelInformation;
 	private BoardPanel boardPanel;
 	private JLabel radio2P, radioAi, radioWatch, lblWatchMode;
 	private ImageIcon labelGameMode, labelWatchMode;
 
-	public RadioPanel(GameSetting gameSetting, PanelInformation panelInformation, BoardPanel boardPanel) {
+	public RadioPanel(GameSetting gameSetting, BoardPanel boardPanel) {
 		this.setBounds(360, Utils.BOARD_GAME_HEIGHT, Utils.BOARD_GAME_WIDTH, 60);
 		this.setFocusable(true);
 		this.setBackground(Color.GREEN);
 		this.gameSetting = gameSetting;
-		this.panelInformation = panelInformation;
 		this.boardPanel = boardPanel;
 		
 		labelGameMode = Utils.resizeImageIcon("mode", 80, 40);
@@ -106,7 +104,6 @@ public class RadioPanel extends JPanel implements MouseListener {
 			radio2P.setIcon(Utils.RADIO_MODE_ON);
 			gameSetting.setWatchMode(false);
 			gameSetting.setAiPlay(false);
-			panelInformation.insertText("Movde : " + "2Player");
 		} else {
 			radio2P.setIcon(Utils.RADIO_MODE_OFF);
 		}
@@ -115,23 +112,19 @@ public class RadioPanel extends JPanel implements MouseListener {
 			radioWatch.setIcon(Utils.RADIO_MODE_ON);
 			gameSetting.setWatchMode(true);
 			gameSetting.setAiPlay(false);
-			panelInformation.insertText("Movde : " + "Watch");
 		} else {
 			radioWatch.setIcon(Utils.RADIO_MODE_OFF);
 		}
 		
 		if(lbl == radioAi) {
 			radioAi.setIcon(Utils.RADIO_MODE_ON);
-			panelInformation.insertText("Movde : " + "AiPlay");
 			gameSetting.setWatchMode(false);
 			gameSetting.setAiPlay(true);
 			if (!boardPanel.isHumanTurn()) {
 				ArtificialIntelligence ai = new ArtificialIntelligence(gameSetting, boardPanel.getPositionBoard());
 				boardPanel.setPositionBoard(ai.getNextPosition());
-				panelInformation.appendTextYellow(boardPanel.getPositionBoard().getParentMove().toString());
 				boardPanel.setHumanTurn(true);
 				boardPanel.setShowCanMove(true);
-				panelInformation.insertText("======***** Human Turn *****======");
 				boardPanel.repaint();
 				boardPanel.setShowCanMove(false);
 				boardPanel.repaint();

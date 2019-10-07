@@ -19,12 +19,10 @@ import core.Utils;
 
 public class LevelPanel extends JPanel implements MouseListener {
 	private GameSetting gameSetting;
-	private PanelInformation panelInformation;
 	private ArrayList<JLabel> listRadio;
 	private JLabel radio1, radio2, radio3, radio4, radio5, radio6;
 
-	public LevelPanel(GameSetting gameSetting, PanelInformation panelInformation) {
-		this.panelInformation = panelInformation;
+	public LevelPanel(GameSetting gameSetting) {
 		this.setBounds(0, Utils.BOARD_GAME_HEIGHT, 360, 60);
 		this.setFocusable(true);
 		this.gameSetting = gameSetting;
@@ -176,7 +174,6 @@ public class LevelPanel extends JPanel implements MouseListener {
 		}
 		gameSetting.setLevel(iRadio);
 		GameSetting.rootLevel = gameSetting.getLevel();
-		panelInformation.insertText("Level = " + iRadio);
 	}
 	
 	@Override

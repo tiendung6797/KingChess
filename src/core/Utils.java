@@ -97,9 +97,7 @@ public class Utils {
 	public static final ImageIcon ICON_RADIO_ENABLE = resizeImageIcon("radioEnable", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
 	public static final ImageIcon ICON_RADIO_UNABLE = resizeImageIcon("radioUnable", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
 	
-	public static final ImageIcon ICON_COLOR_CHOOSER1 = resizeImageIcon("color3", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	public static final ImageIcon ICON_SETTING_OK1 = resizeImageIcon("ok3", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
-	public static final ImageIcon ICON_COLOR_CHOOSER2 = resizeImageIcon("color1", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	public static final ImageIcon ICON_SETTING_OK2 = resizeImageIcon("ok1", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	
 	public static final String TITLE_SETTING_GAME_MODE = "Chon Hinh Thuc Choi";
@@ -111,7 +109,6 @@ public class Utils {
 	
 	public static final String LABEL_GAME_MODE_2P = "Human vs Human";
 	public static final String LABEL_GAME_MODE_PAI = "Human vs AI";
-	public static final String LABEL_GAME_MODE_WATCH_SAME = "Watch Same";
 	
 	public static final String ERROR_BUTTON_COLOR_HANDLER_IN = "None Button In!";
 	public static final String ERROR_BUTTON_COLOR_HANDLER_OUT = "None Button Out!";

@@ -643,9 +643,6 @@ public class PositionBoard {
 	}
 
 	public boolean equal(PositionBoard positionBoard) {
-		if (gameSetting.isAcceptSame()) {
-			return false;
-		}
 		if (this.getDepth() != gameSetting.getLevel() - 1) {
 			return false;
 		}

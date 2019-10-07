@@ -34,23 +34,13 @@ import core.Utils;
 public class MainSettingPanel extends JPanel {
 
 	private GameSetting gameSetting;
-	private ColorChooser colorChooser;
 	private JFrame frameColor;
 	private SettingFrameListener settingFrameListener;
 	private ArrayList<JLabel> listLevel = new ArrayList<>();
-	private JLabel btnColor, btnOk;
+	private JLabel btnOk;
 	
 	public MainSettingPanel(GameSetting gameSetting) {
 		this.gameSetting = gameSetting;
-		
-		frameColor = new JFrame();
-		colorChooser = new ColorChooser(gameSetting);
-		colorChooser.setOpaque(true);
-		frameColor.setContentPane(colorChooser);
-		frameColor.setIconImage(Utils.GAME_AVATAR);
-		frameColor.setTitle(Utils.TITLE_COLOR_FRAME);
-		frameColor.pack();
-		frameColor.setVisible(false);
 		
 		this.setBorder(BorderFactory.createEmptyBorder(5, 50, 5, 50));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -217,14 +207,10 @@ public class MainSettingPanel extends JPanel {
 		
 		JLabel rdAi = new JLabel(Utils.LABEL_GAME_MODE_PAI);
 		JLabel rd2P = new JLabel(Utils.LABEL_GAME_MODE_2P);
-		JLabel rdSame = new JLabel(Utils.LABEL_GAME_MODE_WATCH_SAME);
 		
 		rdAi.setIcon(Utils.ICON_RADIO_UNABLE);
 		rd2P.setIcon(Utils.ICON_RADIO_UNABLE);
-		rdSame.setIcon(Utils.ICON_RADIO_UNABLE);
-		if (gameSetting.isAcceptSame()) {
-			rdSame.setIcon(Utils.ICON_RADIO_ENABLE);
-		}
+
 		if (gameSetting.isAiPlay()) {
 			rdAi.setIcon(Utils.ICON_RADIO_ENABLE);
 		} else {
@@ -247,25 +233,11 @@ public class MainSettingPanel extends JPanel {
 				gameSetting.setAiPlay(false);
 			}
 		});
-		rdSame.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if(gameSetting.isAcceptSame()) {
-					rdSame.setIcon(Utils.ICON_RADIO_UNABLE);
-					gameSetting.setAcceptSame(false);
-				} else {
-					rdSame.setIcon(Utils.ICON_RADIO_ENABLE);
-					gameSetting.setAcceptSame(true);
-				}
-			}
-		});
+
 		rdPanel.add(rd2P);
 		Component area1 = Box.createRigidArea(new Dimension(10, 0));
 		rdPanel.add(area1);
 		rdPanel.add(rdAi);
-		Component area2 = Box.createRigidArea(new Dimension(10, 0));
-		rdPanel.add(area2);
-		rdPanel.add(rdSame);
 		return rdPanel;
 	}
 
@@ -276,14 +248,10 @@ public class MainSettingPanel extends JPanel {
 		Box rdPanel = Box.createHorizontalBox();
 		rdPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		btnColor = new JLabel();
-		btnColor.setIcon(Utils.ICON_COLOR_CHOOSER1);
-		btnColor.addMouseListener(new ButtonColorHandler());
 		btnOk = new JLabel();
 		btnOk.setIcon(Utils.ICON_SETTING_OK1);
 		btnOk.addMouseListener(new ButtonColorHandler());
 
-		rdPanel.add(btnColor);
 		Component c = Box.createRigidArea(new Dimension(20, 0));
 		rdPanel.add(c);
 		rdPanel.add(btnOk);
@@ -293,9 +261,7 @@ public class MainSettingPanel extends JPanel {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			JLabel label = (JLabel) e.getSource();
-			if(label == btnColor) {
-				btnColor.setIcon(Utils.ICON_COLOR_CHOOSER2);
-			} else if(label == btnOk) {
+			if(label == btnOk) {
 				btnOk.setIcon(Utils.ICON_SETTING_OK2);
 			} else {
 				System.err.println(Utils.ERROR_BUTTON_COLOR_HANDLER_IN);
@@ -305,9 +271,7 @@ public class MainSettingPanel extends JPanel {
 		@Override
 		public void mouseExited(MouseEvent e) {
 			JLabel label = (JLabel) e.getSource();
-			if(label == btnColor) {
-				btnColor.setIcon(Utils.ICON_COLOR_CHOOSER1);
-			} else if(label == btnOk) {
+			if(label == btnOk) {
 				btnOk.setIcon(Utils.ICON_SETTING_OK1);
 			} else {
 				System.err.println(Utils.ERROR_BUTTON_COLOR_HANDLER_OUT);
@@ -317,13 +281,10 @@ public class MainSettingPanel extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			JLabel label = (JLabel) e.getSource();
-			if(label == btnColor) {
-				frameColor.setVisible(!frameColor.isVisible());
-			} else if(label == btnOk) {
+			if(label == btnOk) {
 				if(settingFrameListener != null) {
 					settingFrameListener.closeSettingFrameOccurred();
 				}
-				frameColor.dispose();
 			}
 		}
 
@@ -332,46 +293,6 @@ public class MainSettingPanel extends JPanel {
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) {
-		}
-	}
-	
-	class ColorChooser extends JPanel implements ChangeListener {
-		private static final long serialVersionUID = -37223332575085998L;
-		private JColorChooser tcc;
-		private JLabel banner;
-		private Color color;
-		private GameSetting gameSetting;
-		
-		public ColorChooser(GameSetting gameSetting) {
-			this.setLayout(new BorderLayout());
-			this.gameSetting = gameSetting;
-			banner = new JLabel(Utils.LABEL_COLOR_CHOOSER_VIEW, JLabel.CENTER);
-			banner.setForeground(Color.yellow);
-			banner.setBackground(Color.blue);
-			banner.setOpaque(true);
-			banner.setFont(new Font("SansSerif", Font.BOLD, 24));
-			banner.setPreferredSize(new Dimension(100, 65));
-
-			JPanel bannerPanel = new JPanel(new BorderLayout());
-			bannerPanel.add(banner, BorderLayout.CENTER);
-			bannerPanel.setBorder(BorderFactory.createTitledBorder(Utils.LABEL_COLOR_CHOOSER_BORDER));
-
-			tcc = new JColorChooser(banner.getForeground());
-			tcc.getSelectionModel().addChangeListener(this);
-			tcc.setBorder(BorderFactory.createTitledBorder(Utils.LABEL_COLOR_CHOOSER_TITLE));
-
-			add(bannerPanel, BorderLayout.CENTER);
-			add(tcc, BorderLayout.PAGE_END);
-		}
-		
-		@Override
-		public void stateChanged(ChangeEvent e) {
-			color = tcc.getColor();
-			banner.setForeground(color);
-			this.gameSetting.setBackgroundColor(color);
-		}
-		public Color getColor() {
-			return color;
 		}
 	}
 	

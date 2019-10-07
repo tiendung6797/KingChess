@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import chessPanel.BoardPanel;
 import chessPanel.ButtonPanel;
 import chessPanel.LevelPanel;
-import chessPanel.PanelInformation;
 import chessPanel.RadioPanel;
 import core.GameSetting;
 import core.Utils;
@@ -17,7 +16,6 @@ public class MainChessFrame extends JFrame {
 	private GameSetting gameSetting;
 	private RadioPanel radioPanel;
 	private LevelPanel levelPanel;
-	private PanelInformation panelInformation;
 	private ButtonPanel buttonPanel;
 	private MenuFrame menuFrame;
 
@@ -36,13 +34,11 @@ public class MainChessFrame extends JFrame {
 	}
 
 	public void addCompoment() {
-		panelInformation = new PanelInformation(gameSetting);
-		boardPanel = new BoardPanel(gameSetting, panelInformation);
-		radioPanel = new RadioPanel(gameSetting, panelInformation, boardPanel);
-		levelPanel = new LevelPanel(gameSetting, panelInformation);
+		boardPanel = new BoardPanel(gameSetting);
+		radioPanel = new RadioPanel(gameSetting, boardPanel);
+		levelPanel = new LevelPanel(gameSetting);
 		buttonPanel = new ButtonPanel(gameSetting, this);
 		
-		add(panelInformation);
 		add(boardPanel);
 		add(radioPanel);
 		add(levelPanel);
@@ -51,9 +47,6 @@ public class MainChessFrame extends JFrame {
 	
 	public BoardPanel getBoardPanel() {
 		return boardPanel;
-	}
-	public PanelInformation getPanelInformation() {
-		return panelInformation;
 	}
 	public MenuFrame getMenuFrame() {
 		return menuFrame;

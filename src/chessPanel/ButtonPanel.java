@@ -78,9 +78,8 @@ public class ButtonPanel extends JPanel implements MouseListener {
 		if(lbl == btnUndo) {
 			// First Button: Undo
 			if (!gameSetting.isAiPlay()) {	
-				mainChessFrame.getPanelInformation().insertText("Undo: ");
 				Move move = mainChessFrame.getBoardPanel().getPositionBoard().getParentMove();
-				mainChessFrame.getPanelInformation().appendTextYellow(move.toString());
+				System.out.println(move.toString());
 				mainChessFrame.getBoardPanel()
 								.setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard());
 				mainChessFrame.getBoardPanel().repaint();
@@ -91,9 +90,8 @@ public class ButtonPanel extends JPanel implements MouseListener {
 				}
 			} else {
 				for (int i = 0; i <= 1; i++) {
-					mainChessFrame.getPanelInformation().insertText("Undo: ");
 					Move move = mainChessFrame.getBoardPanel().getPositionBoard().getParentMove();
-					mainChessFrame.getPanelInformation().appendTextYellow(move.toString());
+					System.out.println(move.toString());
 					mainChessFrame.getBoardPanel().setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard());
 					mainChessFrame.getBoardPanel().repaint();
 					if (mainChessFrame.getBoardPanel().isHumanTurn()) {
