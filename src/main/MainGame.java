@@ -12,7 +12,7 @@ public class MainGame {
 		GameSetting gameSetting = new GameSetting();
 		new MenuFrame(gameSetting);
 		new File(Utils.getCurrentDirectory() + "\\image").mkdirs();
-		createPicture();
+		//createPicture();
 	}
 	
 	public static void createPicture() {
