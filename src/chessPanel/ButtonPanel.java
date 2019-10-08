@@ -79,7 +79,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 			// First Button: Undo
 			if (!gameSetting.isAiPlay()) {	
 				Move move = mainChessFrame.getBoardPanel().getPositionBoard().getParentMove();
-				System.out.println(move.toString());
+				move.toString();
 				mainChessFrame.getBoardPanel()
 								.setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard());
 				mainChessFrame.getBoardPanel().repaint();
@@ -91,7 +91,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 			} else {
 				for (int i = 0; i <= 1; i++) {
 					Move move = mainChessFrame.getBoardPanel().getPositionBoard().getParentMove();
-					System.out.println(move.toString());
+					move.toString();
 					mainChessFrame.getBoardPanel().setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard());
 					mainChessFrame.getBoardPanel().repaint();
 					if (mainChessFrame.getBoardPanel().isHumanTurn()) {

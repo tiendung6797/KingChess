@@ -30,6 +30,7 @@ import javax.swing.event.ChangeListener;
 import core.GameSetting;
 import core.SettingFrameListener;
 import core.Utils;
+import javax.swing.Icon;
 
 public class MainSettingPanel extends JPanel {
 
@@ -98,19 +99,17 @@ public class MainSettingPanel extends JPanel {
 		Box rdPanel = Box.createHorizontalBox();
 		rdPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		createButtonLevel(Utils.ICON_GAME_LEVEL1, "1", rdPanel);
-		createButtonLevel(Utils.ICON_GAME_LEVEL2, "2", rdPanel);
-		createButtonLevel(Utils.ICON_GAME_LEVEL3, "3", rdPanel);
-		createButtonLevel(Utils.ICON_GAME_LEVEL4, "4", rdPanel);
-		createButtonLevel(Utils.ICON_GAME_LEVEL5, "5", rdPanel);
-		createButtonLevel(Utils.ICON_GAME_LEVEL6, "6", rdPanel);
+		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel);
+		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel);
+		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel);
 		
 		int i = GameSetting.rootLevel;
 		checkRadioLevel(i);
 		return rdPanel;
 	}
-	private JLabel createButtonLevel(ImageIcon icon, String actionCmd, Box parent) {
+	private JLabel createButtonLevel(ImageIcon icon, Box parent) {
 		JLabel radio = new JLabel(icon);
+		radio.setText("sdsdsd");
 		radio.addMouseListener(new RadioLevelHandler());
 		listLevel.add(radio);
 		parent.add(radio);
@@ -119,11 +118,11 @@ public class MainSettingPanel extends JPanel {
 		return radio;
 	}
 	private void checkRadioLevel(int id) {
-		for(int i = 1; i <= 6; i++) {
+		for(int i = 4; i <= 6; i++) {
 			if(id == i) {
-				listLevel.get(i-1).setIcon(Utils.resizeImageIcon("set"+i, Utils.RADIO_LEVEL_WIDTH2, Utils.RADIO_LEVEL_HEIGHT2));
+				listLevel.get(i-4).setIcon(Utils.resizeImageIcon("checkTrue", Utils.RADIO_LEVEL_WIDTH, Utils.RADIO_LEVEL_HEIGHT));
 			} else {
-				listLevel.get(i-1).setIcon(Utils.resizeImageIcon(""+i, Utils.RADIO_LEVEL_WIDTH2, Utils.RADIO_LEVEL_HEIGHT2));
+				listLevel.get(i-4).setIcon(Utils.resizeImageIcon("checkFalse", Utils.RADIO_LEVEL_WIDTH, Utils.RADIO_LEVEL_HEIGHT));
 			}
 		}
 	}
@@ -133,7 +132,7 @@ public class MainSettingPanel extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			JLabel label = (JLabel) e.getSource();
 			for(JLabel lbl : listLevel) {
-				int i = listLevel.indexOf(lbl) + 1;
+				int i = listLevel.indexOf(lbl) + 4;
 				if(label == lbl) {
 					gameSetting.setLevel(i);
 					GameSetting.rootLevel = gameSetting.getLevel();

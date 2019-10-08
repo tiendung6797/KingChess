@@ -11,7 +11,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -124,16 +123,23 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	}
 
 	public void moveAi() {
-		if ((gameSetting.isAiPlay() || gameSetting.isWatchMode()) && !win && !isHumanTurn) {
-			if (!gameSetting.isWatchMode()) {
-				ai = new ArtificialIntelligence(gameSetting, positionBoard);
-			} else {
-				ai = new ArtificialIntelligence(gameSetting, positionBoard.copy(gameSetting.getLevel(), gameSetting));
-			}
+		if (gameSetting.isAiPlay() && !gameSetting.isWatchMode() && !win && !isHumanTurn) {
+			ai = new ArtificialIntelligence(gameSetting, positionBoard);
 			positionBoard = ai.getNextPosition();
 			isHumanTurn = true;
 			showCanMove = true;
 			System.out.println("======*** Human Turn ***=====");
+
+			repaint();
+			showCanMove = false;
+
+			checkWin();
+			repaint();
+		} else if (gameSetting.isWatchMode() && gameSetting.isWatchMode() && !win && !isHumanTurn) {
+			ai = new ArtificialIntelligence(gameSetting, positionBoard.copy(gameSetting.getLevel(), gameSetting));
+			positionBoard = ai.getNextPosition();
+			isHumanTurn = true;
+			showCanMove = true;
 
 			repaint();
 			showCanMove = false;
@@ -173,7 +179,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 					
 					repaint();
 				} else {
-					if (wasChoisePieces && piecesChoise.canMove(location)) {
+					if (wasChoisePieces && piecesChoise.canMove(location) && gameSetting.isAiPlay()) {
 						Move move = new Move(piecesChoise, location);
 
 						positionBoard = positionBoard.newPositionBoard(move);
@@ -185,8 +191,18 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 						checkWin();
 						wasChoisePieces = false;
 						repaint();
-					}
+					} else if (wasChoisePieces && piecesChoise.canMove(location) && !gameSetting.isAiPlay()) {
+						Move move = new Move(piecesChoise, location);
 
+						positionBoard = positionBoard.newPositionBoard(move);
+
+						isHumanTurn = false;
+						showCanMove = false;
+
+						checkWin();
+						wasChoisePieces = false;
+						repaint();
+					} 
 				}
 
 			} else {

@@ -33,7 +33,6 @@ public class ButtonSave extends JLabel {
 					String nameFile = file.getName();
 					if (nameFile.length() > 4) {
 						String txt = nameFile.substring(nameFile.length() - 4);
-						System.out.println(txt);
 						if (txt.equals(".txt")) {
 
 						} else {
@@ -44,7 +43,6 @@ public class ButtonSave extends JLabel {
 						file = new File(file.toString() + ".txt");
 						file = new File(file.getParentFile(), nameFile + ".txt");
 					}
-					System.out.println("Open file : " + file.getPath());
 					try {
 						BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 						String document = boardPanel.getPositionBoard().toTextSave();

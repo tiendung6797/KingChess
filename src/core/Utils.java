@@ -27,8 +27,6 @@ public class Utils {
 	public static final int BUTTON_CONTROL_HEIGHT = 50;
 	public static final int RADIO_LEVEL_WIDTH = 40;
 	public static final int RADIO_LEVEL_HEIGHT = 40;
-	public static final int RADIO_LEVEL_WIDTH2 = 45;
-	public static final int RADIO_LEVEL_HEIGHT2 = 50;
 	public static final int GAME_MODE_RADIO_WIDTH = 90;
 	public static final int GAME_MODE_RADIO_HEIGHT = 45;
 	public static final String INFORMATION_INTRODUCE = 	"    ============****============== \n" 
@@ -77,9 +75,6 @@ public class Utils {
 	
 
 	///////////// For MainSettingPanel //////////////////////////
-	public static final ImageIcon ICON_GAME_LEVEL1 = resizeImageIcon("1", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
-	public static final ImageIcon ICON_GAME_LEVEL2 = resizeImageIcon("2", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
-	public static final ImageIcon ICON_GAME_LEVEL3 = resizeImageIcon("3", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
 	public static final ImageIcon ICON_GAME_LEVEL4 = resizeImageIcon("4", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
 	public static final ImageIcon ICON_GAME_LEVEL5 = resizeImageIcon("5", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
 	public static final ImageIcon ICON_GAME_LEVEL6 = resizeImageIcon("6", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);

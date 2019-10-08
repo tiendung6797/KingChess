@@ -125,8 +125,6 @@ public class ArtificialIntelligence implements Runnable {
 			}
 			this.positionBoard.setDepth(gameSetting.getLevel());
 		}
-		System.out.println("lv : " +gameSetting.getLevel());
-		System.out.println("depth " + positionBoard.getDepth());
 		AlphaBeta(-10000000, 10000000, this.positionBoard);
 	}
 

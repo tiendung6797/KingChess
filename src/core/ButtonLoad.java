@@ -45,8 +45,6 @@ public class ButtonLoad extends JLabel {
 				int returnVal = fileChooser.showOpenDialog(new JFrame());
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fileChooser.getSelectedFile();
-					System.out.println(file);
-					System.out.println("Open file : " + file.getPath());
 					try {
 						BufferedReader br = new BufferedReader(new FileReader(file));
 						String line = br.readLine();
