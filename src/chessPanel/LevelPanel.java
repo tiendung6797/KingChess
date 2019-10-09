@@ -37,9 +37,9 @@ public class LevelPanel extends JPanel {
 	}
 
 	public void addRadioButton(Box box) {
-		radio4 = createRadioButton("4", "4", box);
-		radio5 = createRadioButton("5", "5", box);
-		radio6 = createRadioButton("6", "6", box);
+		radio4 = createRadioButton("4", box);
+		radio5 = createRadioButton("5", box);
+		radio6 = createRadioButton("6", box);
 		switch (gameSetting.getLevel()) {
 		case 4:
 			Utils.changeStateOfRadioButton(radio4, "set4");
@@ -53,7 +53,7 @@ public class LevelPanel extends JPanel {
 		}
 	}
 	
-	public JLabel createRadioButton(String iconName, String actionCommand, Box box) {
+	public JLabel createRadioButton(String iconName, Box box) {
 		JLabel radio = new JLabel();
 		radio.setIcon(Utils.resizeImageIcon(iconName, Utils.RADIO_LEVEL_WIDTH, Utils.RADIO_LEVEL_HEIGHT));
 		radio.setBackground(null);

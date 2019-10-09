@@ -21,7 +21,7 @@ import core.Utils;
 
 public class ButtonPanel extends JPanel implements MouseListener {
 	private GameSetting gameSetting;
-	private JLabel btnUndo, btnMenu, btnExit, btnSave;
+	private JLabel btnUndo, btnExit, btnSave;
 	private MainChessFrame mainChessFrame;
 
 	public ButtonPanel(GameSetting gameSetting, MainChessFrame mainChessFrame) {
@@ -50,7 +50,6 @@ public class ButtonPanel extends JPanel implements MouseListener {
 		boxPanel2.setAlignmentX(CENTER_ALIGNMENT);
 		
 		btnUndo = createButtonControl("undo3", boxPanel1);
-		btnMenu = createButtonControl("setting3", boxPanel1);
 		btnSave = new ButtonSave(mainChessFrame.getBoardPanel());
 		btnSave.setIcon(Utils.ICON_SAVE1);
 		btnSave.addMouseListener(this);
@@ -105,8 +104,6 @@ public class ButtonPanel extends JPanel implements MouseListener {
 			Utils.inGame = false;
 			mainChessFrame.getMenuFrame().setVisible(true);
 			mainChessFrame.dispose();
-		} else if(lbl == btnMenu) {
-			new SettingFrame(gameSetting);
 		} else if(lbl == btnSave) {
 			
 		}
@@ -120,8 +117,6 @@ public class ButtonPanel extends JPanel implements MouseListener {
 		JLabel label = (JLabel) e.getSource();
 		if(label == btnUndo){
 			btnUndo.setIcon(Utils.ICON_UNDO2);
-		} else if(label == btnMenu) {
-			btnMenu.setIcon(Utils.ICON_SETTING2);
 		} else if(label == btnExit) {
 			btnExit.setIcon(Utils.ICON_EXIT2);
 		} else {
@@ -133,8 +128,6 @@ public class ButtonPanel extends JPanel implements MouseListener {
 		JLabel label = (JLabel) e.getSource();
 		if(label == btnUndo){
 			btnUndo.setIcon(Utils.ICON_UNDO1);
-		} else if(label == btnMenu) {
-			btnMenu.setIcon(Utils.ICON_SETTING1);
 		} else if(label == btnExit) {
 			btnExit.setIcon(Utils.ICON_EXIT1);
 		} else {

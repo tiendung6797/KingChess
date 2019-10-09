@@ -86,28 +86,16 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		if (showCanMove) {
-			g2d.setColor(Color.CYAN);
 			for (int i = 0; i < piecesChoise.getNumberCanMove().size(); i++) {
 				g2d.setColor(Color.CYAN);
 				int locationY = (int) (piecesChoise.getNumberCanMove().get(i) / 8) + 1;
 				int locationX = piecesChoise.getNumberCanMove().get(i) % 8;
 				g2d.fillRect(20 + (locationX) * (600 / 8), 30 + (8 - locationY) * (595 / 8), 600 / 8, 595 / 8);
-				Font f = new Font("Dialog", Font.PLAIN, 40);
-				g2d.setColor(Color.RED);
-				g2d.drawString(String.valueOf(piecesChoise.getDefaulsePower()
-								+ piecesChoise.getPowerBonuses()[piecesChoise.getNumberCanMove().get(i)]),
-						40 + (locationX) * (600 / 8), 50 + (8 - locationY) * (595 / 8));
-
-				// }
 			}
-			g2d.setColor(Color.BLUE);
+			g2d.setColor(new Color(44, 84, 143));
 			int locationY = (int) (piecesChoise.getNumberInBoard() / 8) + 1;
 			int locationX = piecesChoise.getNumberInBoard() % 8;
 			g2d.fillRect(17 + (locationX) * (600 / 8), 28 + (8 - locationY) * (595 / 8), 600 / 8, 595 / 8);
-			g2d.setColor(Color.RED);
-			g2d.drawString(String.valueOf(piecesChoise.getDefaulsePower()
-							+ piecesChoise.getPowerBonuses()[piecesChoise.getNumberInBoard()]),
-					40 + (locationX) * (600 / 8), 50 + (8 - locationY) * (595 / 8));
 		}
 		ImageIcon imageBackGround = new ImageIcon(this.getClass().getResource("/image/board.png"));
 		g2d.drawImage(imageBackGround.getImage(), 0, 0, 640, 640, null);

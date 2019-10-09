@@ -64,12 +64,10 @@ public class Utils {
 	
 	/////////////// For ButtonPanel ////////////////////////////
 	public static final ImageIcon ICON_UNDO1 = resizeImageIcon("undo3", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
-	public static final ImageIcon ICON_SETTING1 = resizeImageIcon("setting3", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	public static final ImageIcon ICON_EXIT1 = resizeImageIcon("exit3", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	public static final ImageIcon ICON_SAVE1 = resizeImageIcon("save3", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	
 	public static final ImageIcon ICON_UNDO2 = resizeImageIcon("undo4", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
-	public static final ImageIcon ICON_SETTING2 = resizeImageIcon("setting4", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	public static final ImageIcon ICON_EXIT2 = resizeImageIcon("exit4", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	public static final ImageIcon ICON_SAVE2 = resizeImageIcon("save4", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	

@@ -99,17 +99,17 @@ public class MainSettingPanel extends JPanel {
 		Box rdPanel = Box.createHorizontalBox();
 		rdPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel);
-		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel);
-		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel);
+		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel, "1");
+		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel, "2");
+		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel, "3");
 		
 		int i = GameSetting.rootLevel;
 		checkRadioLevel(i);
 		return rdPanel;
 	}
-	private JLabel createButtonLevel(ImageIcon icon, Box parent) {
+	private JLabel createButtonLevel(ImageIcon icon, Box parent, String a) {
 		JLabel radio = new JLabel(icon);
-		radio.setText("sdsdsd");
+		radio.setText(a);
 		radio.addMouseListener(new RadioLevelHandler());
 		listLevel.add(radio);
 		parent.add(radio);

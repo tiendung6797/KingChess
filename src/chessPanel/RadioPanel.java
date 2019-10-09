@@ -15,35 +15,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import core.ArtificialIntelligence;
 import core.GameSetting;
 import core.Utils;
 
 public class RadioPanel extends JPanel implements MouseListener {
 	private GameSetting gameSetting;
-	private BoardPanel boardPanel;
-	private JLabel radio2P, radioAi, radioWatch, lblWatchMode;
-	private ImageIcon labelGameMode, labelWatchMode;
+	private JLabel radioWatch, lblWatchMode;
+	private ImageIcon labelWatchMode;
 
 	public RadioPanel(GameSetting gameSetting, BoardPanel boardPanel) {
 		this.setBounds(360, Utils.BOARD_GAME_HEIGHT, Utils.BOARD_GAME_WIDTH, 60);
 		this.setFocusable(true);
 		this.setBackground(Color.GREEN);
 		this.gameSetting = gameSetting;
-		this.boardPanel = boardPanel;
 		
-		labelGameMode = Utils.resizeImageIcon("mode", 80, 40);
 		labelWatchMode = Utils.resizeImageIcon("labelWatchMode", 100, 45);
-		JLabel lblGameMode = new JLabel(labelGameMode);
 		lblWatchMode = new JLabel(labelWatchMode);
 		
-		Box b1 = Box.createHorizontalBox();
-		b1.add(lblGameMode);
 		Component b = Box.createRigidArea(new Dimension(40, 0));
 		Box b2 = Box.createHorizontalBox();
 		b2.add(lblWatchMode);
-		addRadioButton(b1, b2);			// Important Method
-		this.add(b1);
+		addRadioButton(b2);			// Important Method
 		this.add(b);
 		this.add(b2);
 		
@@ -56,26 +48,15 @@ public class RadioPanel extends JPanel implements MouseListener {
 		timerSetting.start();
 	}
 
-	public void addRadioButton(Box b1, Box b2) {
-		
-		radio2P = createRadioButton("2Player", "off", b1);
-		radioAi = createRadioButton("AiPlay", "off", b1);
+	public void addRadioButton(Box b2) {
 		radioWatch = createRadioButton(null, "off", b2);
 		checkRadioSelected();
 	}
 	private void checkRadioSelected() {
-		if(gameSetting.isAiPlay()) {
-			radioAi.setIcon(Utils.RADIO_MODE_ON);
-			radio2P.setIcon(Utils.RADIO_MODE_OFF);
-			radioWatch.setIcon(Utils.RADIO_MODE_OFF);
-		} else if(gameSetting.isWatchMode()) {
+		if(gameSetting.isWatchMode()) {
 			radioWatch.setIcon(Utils.RADIO_MODE_ON);
-			radio2P.setIcon(Utils.RADIO_MODE_OFF);
-			radioAi.setIcon(Utils.RADIO_MODE_OFF);
 		} else {
 			radioWatch.setIcon(Utils.RADIO_MODE_OFF);
-			radioAi.setIcon(Utils.RADIO_MODE_OFF);
-			radio2P.setIcon(Utils.RADIO_MODE_ON);
 		}
 		
 	}
@@ -100,38 +81,18 @@ public class RadioPanel extends JPanel implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		JLabel lbl = (JLabel) e.getSource();
-		if(lbl == radio2P) {
-			radio2P.setIcon(Utils.RADIO_MODE_ON);
-			gameSetting.setWatchMode(false);
-			gameSetting.setAiPlay(false);
-		} else {
-			radio2P.setIcon(Utils.RADIO_MODE_OFF);
-		}
 		
 		if(lbl == radioWatch) {
-			radioWatch.setIcon(Utils.RADIO_MODE_ON);
-			gameSetting.setWatchMode(true);
-			gameSetting.setAiPlay(false);
-		} else {
-			radioWatch.setIcon(Utils.RADIO_MODE_OFF);
-		}
-		
-		if(lbl == radioAi) {
-			radioAi.setIcon(Utils.RADIO_MODE_ON);
-			gameSetting.setWatchMode(false);
-			gameSetting.setAiPlay(true);
-			if (!boardPanel.isHumanTurn()) {
-				ArtificialIntelligence ai = new ArtificialIntelligence(gameSetting, boardPanel.getPositionBoard());
-				boardPanel.setPositionBoard(ai.getNextPosition());
-				boardPanel.setHumanTurn(true);
-				boardPanel.setShowCanMove(true);
-				boardPanel.repaint();
-				boardPanel.setShowCanMove(false);
-				boardPanel.repaint();
+			if(gameSetting.isWatchMode()) {
+				radioWatch.setIcon(Utils.RADIO_MODE_OFF);
+				gameSetting.setWatchMode(false);
+				gameSetting.setAiPlay(false);
+			} else {
+				radioWatch.setIcon(Utils.RADIO_MODE_ON);
+				gameSetting.setWatchMode(true);
+				gameSetting.setAiPlay(false);
 			}
-		} else {
-			radioAi.setIcon(Utils.RADIO_MODE_OFF);
-		}
+		} 
 	}
 	
 	@Override
