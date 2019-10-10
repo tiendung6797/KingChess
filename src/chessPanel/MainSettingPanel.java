@@ -1,5 +1,6 @@
 package chessPanel;
 
+import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -31,11 +32,11 @@ import core.GameSetting;
 import core.SettingFrameListener;
 import core.Utils;
 import javax.swing.Icon;
+import java.awt.SystemColor;
 
 public class MainSettingPanel extends JPanel {
 
 	private GameSetting gameSetting;
-	private JFrame frameColor;
 	private SettingFrameListener settingFrameListener;
 	private ArrayList<JLabel> listLevel = new ArrayList<>();
 	private JLabel btnOk;
@@ -45,41 +46,46 @@ public class MainSettingPanel extends JPanel {
 		
 		this.setBorder(BorderFactory.createEmptyBorder(5, 50, 5, 50));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		JLabel lb1 = new JLabel(Utils.TITLE_SETTING_GAME_MODE);
+		JLabel lb1 = new JLabel("MODE");
 		lb1.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lb1.setForeground(Color.WHITE);
-		lb1.setFont(new Font("Serif", Font.BOLD, 20));
+		lb1.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
-		JLabel lb2 = new JLabel(Utils.TITLE_SETTING_CHESSMAN_MOVE_FIRST);
+		JLabel lb2 = new JLabel("WHO FIRST?");
 		lb2.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lb2.setForeground(Color.WHITE);
-		lb2.setFont(new Font("Serif", Font.BOLD, 20));
+		lb2.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
-		JLabel lb3 = new JLabel(Utils.TITLE_SETTING_CHOICE_LEVEL);
+		JLabel lb3 = new JLabel("LEVEL");
 		lb3.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lb3.setForeground(Color.WHITE);
-		lb3.setFont(new Font("Serif", Font.BOLD, 20));
+		lb3.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
 		Component b1 = Box.createRigidArea(new Dimension(0, 20));
-		Box box1 = Box.createVerticalBox();
-		box1.add(lb1);
-		box1.add(getTypePanel());
-		this.add(box1);
+		Component b2 = Box.createRigidArea(new Dimension(0, 10));
+		Component b3 = Box.createRigidArea(new Dimension(0, 25));
+		Component b4 = Box.createRigidArea(new Dimension(0, 10));
+		Component b5 = Box.createRigidArea(new Dimension(0, 25));
+		Component b6 = Box.createRigidArea(new Dimension(0, 10));
+		Component b7 = Box.createRigidArea(new Dimension(0, 25));
+		
 		this.add(b1);
-		
-		Component b2 = Box.createRigidArea(new Dimension(0, 25));
-		this.add(lb2);
-		this.add(getColorPanel());
+		this.add(lb1);
 		this.add(b2);
-		
-		Component b3 = Box.createRigidArea(new Dimension(0, 20));
-		this.add(lb3);
-		this.add(getLvPanel());
+		this.add(getTypePanel());
 		this.add(b3);
 		
-		Component b4 = Box.createRigidArea(new Dimension(0, 20));
-		this.add(getButtonPanel());
+		this.add(lb2);
 		this.add(b4);
+		this.add(getColorPanel());
+		this.add(b5);
+		
+		this.add(lb3);
+		this.add(b6);
+		this.add(getLvPanel());
+		this.add(b7);
+		
+		this.add(getButtonPanel());
 		
 		Timer timerRadioLevel = new Timer(500, new ActionListener() {
 			@Override
@@ -99,17 +105,18 @@ public class MainSettingPanel extends JPanel {
 		Box rdPanel = Box.createHorizontalBox();
 		rdPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel, "1");
-		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel, "2");
-		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel, "3");
+		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel, "Easy");
+		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel, "Medium");
+		createButtonLevel(Utils.ICON_CHECK_FALSE, rdPanel, "Hard");
 		
 		int i = GameSetting.rootLevel;
 		checkRadioLevel(i);
 		return rdPanel;
 	}
-	private JLabel createButtonLevel(ImageIcon icon, Box parent, String a) {
-		JLabel radio = new JLabel(icon);
-		radio.setText(a);
+	private JLabel createButtonLevel(ImageIcon icon, Box parent, String level) {
+		JLabel radio = new JLabel(level);
+		radio.setFont(new Font("Times New Roman", Font.BOLD, 19));
+		radio.setIcon(icon);
 		radio.addMouseListener(new RadioLevelHandler());
 		listLevel.add(radio);
 		parent.add(radio);
@@ -160,11 +167,13 @@ public class MainSettingPanel extends JPanel {
 		Box rdPanel = Box.createHorizontalBox();
 		rdPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		JLabel cbBlack = new JLabel(Utils.LABEL_CHESSMAN_BLACK);
+		JLabel cbBlack = new JLabel("Black pieces");
+		//cbBlack.setForeground(new Color(66, 66, 66));
+		cbBlack.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		cbBlack.setIcon(Utils.ICON_CHECK_FALSE);
-		Component box = Box.createRigidArea(new Dimension(65, 0));
-		JLabel cbWhite = new JLabel(Utils.LABEL_CHESSMAN_WHITE);
-		cbWhite.setForeground(Color.WHITE);
+		Component box = Box.createRigidArea(new Dimension(40, 0));
+		JLabel cbWhite = new JLabel("White pieces");
+		cbWhite.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		cbWhite.setIcon(Utils.ICON_CHECK_FALSE);
 		if (gameSetting.isAiFirst()) {
 			cbBlack.setIcon(Utils.ICON_CHECK_TRUE);
@@ -204,39 +213,65 @@ public class MainSettingPanel extends JPanel {
 		Box rdPanel = Box.createHorizontalBox();
 		rdPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		JLabel rdAi = new JLabel(Utils.LABEL_GAME_MODE_PAI);
-		JLabel rd2P = new JLabel(Utils.LABEL_GAME_MODE_2P);
-		
-		rdAi.setIcon(Utils.ICON_RADIO_UNABLE);
-		rd2P.setIcon(Utils.ICON_RADIO_UNABLE);
+		JLabel rdAi = new JLabel("Computer");
+		rdAi.setFont(new Font("Times New Roman", Font.BOLD, 19));
+		JLabel rd2P = new JLabel("Human");
+		rd2P.setFont(new Font("Times New Roman", Font.BOLD, 19));
+		JLabel rdWm = new JLabel("Watch");
+		rdWm.setFont(new Font("Times New Roman", Font.BOLD, 19));
 
 		if (gameSetting.isAiPlay()) {
-			rdAi.setIcon(Utils.ICON_RADIO_ENABLE);
+			rdAi.setIcon(Utils.ICON_CHECK_TRUE);
+			rd2P.setIcon(Utils.ICON_CHECK_FALSE);
+			rdWm.setIcon(Utils.ICON_CHECK_FALSE);
+		} else if(gameSetting.isWatchMode()){
+			rdAi.setIcon(Utils.ICON_CHECK_FALSE);
+			rd2P.setIcon(Utils.ICON_CHECK_FALSE);
+			rdWm.setIcon(Utils.ICON_CHECK_TRUE);
 		} else {
-			rd2P.setIcon(Utils.ICON_RADIO_ENABLE);
+			rdAi.setIcon(Utils.ICON_CHECK_FALSE);
+			rd2P.setIcon(Utils.ICON_CHECK_TRUE);
+			rdWm.setIcon(Utils.ICON_CHECK_FALSE);
 		}
 		
 		rdAi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				rdAi.setIcon(Utils.ICON_RADIO_ENABLE);
-				rd2P.setIcon(Utils.ICON_RADIO_UNABLE);
+				rdAi.setIcon(Utils.ICON_CHECK_TRUE);
+				rd2P.setIcon(Utils.ICON_CHECK_FALSE);
+				rdWm.setIcon(Utils.ICON_CHECK_FALSE);
 				gameSetting.setAiPlay(true);
+				gameSetting.setWatchMode(false);
 			}
 		});
 		rd2P.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				rdAi.setIcon(Utils.ICON_RADIO_UNABLE);
-				rd2P.setIcon(Utils.ICON_RADIO_ENABLE);
+				rdAi.setIcon(Utils.ICON_CHECK_FALSE);
+				rd2P.setIcon(Utils.ICON_CHECK_TRUE);
+				rdWm.setIcon(Utils.ICON_CHECK_FALSE);
 				gameSetting.setAiPlay(false);
+				gameSetting.setWatchMode(false);
+			}
+		});
+		rdWm.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				rdAi.setIcon(Utils.ICON_CHECK_FALSE);
+				rd2P.setIcon(Utils.ICON_CHECK_FALSE);
+				rdWm.setIcon(Utils.ICON_CHECK_TRUE);
+				gameSetting.setAiPlay(false);
+				gameSetting.setWatchMode(true);
 			}
 		});
 
 		rdPanel.add(rd2P);
-		Component area1 = Box.createRigidArea(new Dimension(10, 0));
+		Component area1 = Box.createRigidArea(new Dimension(14, 0));
 		rdPanel.add(area1);
 		rdPanel.add(rdAi);
+		Component area2 = Box.createRigidArea(new Dimension(14, 0));
+		rdPanel.add(area2);
+		rdPanel.add(rdWm);
 		return rdPanel;
 	}
 

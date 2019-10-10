@@ -111,29 +111,31 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	}
 
 	public void moveAi() {
-		if (gameSetting.isAiPlay() && !gameSetting.isWatchMode() && !win && !isHumanTurn) {
-			ai = new ArtificialIntelligence(gameSetting, positionBoard);
-			positionBoard = ai.getNextPosition();
-			isHumanTurn = true;
-			showCanMove = true;
-			System.out.println("======*** Human Turn ***=====");
+		if ((gameSetting.isAiPlay() || gameSetting.isWatchMode()) && !win && !isHumanTurn) {
+			if(!gameSetting.isWatchMode()) {
+				ai = new ArtificialIntelligence(gameSetting, positionBoard);
+				positionBoard = ai.getNextPosition();
+				isHumanTurn = true;
+				showCanMove = true;
+				System.out.println("======*** Human Turn ***=====");
 
-			repaint();
-			showCanMove = false;
+				repaint();
+				showCanMove = false;
 
-			checkWin();
-			repaint();
-		} else if (gameSetting.isWatchMode() && gameSetting.isWatchMode() && !win && !isHumanTurn) {
-			ai = new ArtificialIntelligence(gameSetting, positionBoard.copy(gameSetting.getLevel(), gameSetting));
-			positionBoard = ai.getNextPosition();
-			isHumanTurn = true;
-			showCanMove = true;
-
-			repaint();
-			showCanMove = false;
-
-			checkWin();
-			repaint();
+				checkWin();
+				repaint();
+			} else {
+				ai = new ArtificialIntelligence(gameSetting, positionBoard.copy(gameSetting.getLevel(), gameSetting));
+				positionBoard = ai.getNextPosition();
+				isHumanTurn = true;
+				showCanMove = true;
+	
+				repaint();
+				showCanMove = false;
+	
+				checkWin();
+				repaint();
+			}
 		}
 
 	}

@@ -1,5 +1,6 @@
 package core;
 
+import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -45,9 +46,9 @@ public class Utils {
 	public static final String TITLE_MENU_ITEM_INSTRUCTIONE = "Game Instruction";
 	
 	/////////////////////// For SettingFrame /////////////////////////////
-	public static final String TITLE_MENU_ITEM_SETTING = "Game Setting";
-	public static final int SETTING_FRAME_WIDTH = 500;
-	public static final int SETTING_FRAME_HEIGHT = 530;
+	public static final String TITLE_MENU_ITEM_SETTING = "GAME SETTING";
+	public static final int SETTING_FRAME_WIDTH = 480;
+	public static final int SETTING_FRAME_HEIGHT = 460;
 	
 	////////////// For ColorFrame, ChessmanChooserFrame //////////////////////
 	public static final String TITLE_COLOR_FRAME = "Color Chooser";
@@ -87,33 +88,11 @@ public class Utils {
 	public static final ImageIcon ICON_CHECK_TRUE = resizeImageIcon("checkTrue", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
 	public static final ImageIcon ICON_CHECK_FALSE = resizeImageIcon("checkFalse", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
 	
-	public static final ImageIcon ICON_RADIO_ENABLE = resizeImageIcon("radioEnable", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
-	public static final ImageIcon ICON_RADIO_UNABLE = resizeImageIcon("radioUnable", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
-	
 	public static final ImageIcon ICON_SETTING_OK1 = resizeImageIcon("ok3", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	public static final ImageIcon ICON_SETTING_OK2 = resizeImageIcon("ok1", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	
-	public static final String TITLE_SETTING_GAME_MODE = "Chon Hinh Thuc Choi";
-	public static final String TITLE_SETTING_CHESSMAN_MOVE_FIRST = "Chon Quan Di Truoc";
-	public static final String TITLE_SETTING_CHOICE_LEVEL = "Chon Do Kho";
-	
-	public static final String LABEL_CHESSMAN_BLACK = "Black Chessman";
-	public static final String LABEL_CHESSMAN_WHITE = "White Chessman";
-	
-	public static final String LABEL_GAME_MODE_2P = "Human vs Human";
-	public static final String LABEL_GAME_MODE_PAI = "Human vs AI";
-	
 	public static final String ERROR_BUTTON_COLOR_HANDLER_IN = "None Button In!";
 	public static final String ERROR_BUTTON_COLOR_HANDLER_OUT = "None Button Out!";
-	
-	public static final String LABEL_COLOR_CHOOSER_VIEW = "Select Background Color For BoardChess";
-	public static final String LABEL_COLOR_CHOOSER_BORDER = "Preview";
-	public static final String LABEL_COLOR_CHOOSER_TITLE = "Choose Text Color";
-	
-	//////////////////// For PanelInformation //////////////////////////
-	public static final String STRING_MODE_2P = "2 Player";
-	public static final String STRING_WATCH_MODE = "Watch Mode";
-	public static final String STRING_MODE_AI ="AI Play";
 	
 	//////////////////// For RadioPanel ////////////////////////////////
 	public static final ImageIcon RADIO_MODE_ON = resizeImageIcon("on", GAME_MODE_RADIO_WIDTH, GAME_MODE_RADIO_HEIGHT);
