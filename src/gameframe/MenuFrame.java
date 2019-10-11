@@ -1,5 +1,6 @@
 package gameframe;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
@@ -42,11 +43,14 @@ public class MenuFrame extends JFrame {
 			btnExit = new JLabel(Utils.ICON_BTN_EXIT);
 			btnLoad = new ButtonLoad(menuFrame, gameSetting);
 
+			Component b1 = Box.createRigidArea(new Dimension(0, 10));
+			
 			box.setPreferredSize(new Dimension(375, 600));
 			box.add(Box.createVerticalStrut(20));
 			box.add(btnStart);
 			box.add(btnLoad);
 			box.add(btnSetting);
+			box.add(b1);
 			box.add(btnExit);
 
 			this.add(box);

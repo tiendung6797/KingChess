@@ -48,26 +48,26 @@ public class MainSettingPanel extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JLabel lb1 = new JLabel("MODE");
 		lb1.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lb1.setForeground(Color.WHITE);
+		lb1.setForeground(new Color(160, 82, 45));
 		lb1.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
 		JLabel lb2 = new JLabel("WHO FIRST?");
 		lb2.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lb2.setForeground(Color.WHITE);
+		lb2.setForeground(new Color(139, 69, 19));
 		lb2.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
 		JLabel lb3 = new JLabel("LEVEL");
 		lb3.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lb3.setForeground(Color.WHITE);
+		lb3.setForeground(new Color(139, 69, 19));
 		lb3.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
 		Component b1 = Box.createRigidArea(new Dimension(0, 20));
-		Component b2 = Box.createRigidArea(new Dimension(0, 10));
-		Component b3 = Box.createRigidArea(new Dimension(0, 25));
-		Component b4 = Box.createRigidArea(new Dimension(0, 10));
-		Component b5 = Box.createRigidArea(new Dimension(0, 25));
-		Component b6 = Box.createRigidArea(new Dimension(0, 10));
-		Component b7 = Box.createRigidArea(new Dimension(0, 25));
+		Component b2 = Box.createRigidArea(new Dimension(0, 7));
+		Component b3 = Box.createRigidArea(new Dimension(0, 30));
+		Component b4 = Box.createRigidArea(new Dimension(0, 7));
+		Component b5 = Box.createRigidArea(new Dimension(0, 30));
+		Component b6 = Box.createRigidArea(new Dimension(0, 7));
+		Component b7 = Box.createRigidArea(new Dimension(0, 30));
 		
 		this.add(b1);
 		this.add(lb1);
@@ -115,6 +115,7 @@ public class MainSettingPanel extends JPanel {
 	}
 	private JLabel createButtonLevel(ImageIcon icon, Box parent, String level) {
 		JLabel radio = new JLabel(level);
+		radio.setForeground(Color.BLACK);
 		radio.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		radio.setIcon(icon);
 		radio.addMouseListener(new RadioLevelHandler());
@@ -168,11 +169,12 @@ public class MainSettingPanel extends JPanel {
 		rdPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		JLabel cbBlack = new JLabel("Black pieces");
-		//cbBlack.setForeground(new Color(66, 66, 66));
+		cbBlack.setForeground(Color.BLACK);
 		cbBlack.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		cbBlack.setIcon(Utils.ICON_CHECK_FALSE);
 		Component box = Box.createRigidArea(new Dimension(40, 0));
 		JLabel cbWhite = new JLabel("White pieces");
+		cbWhite.setForeground(Color.BLACK);
 		cbWhite.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		cbWhite.setIcon(Utils.ICON_CHECK_FALSE);
 		if (gameSetting.isAiFirst()) {
@@ -214,10 +216,13 @@ public class MainSettingPanel extends JPanel {
 		rdPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		JLabel rdAi = new JLabel("Computer");
+		rdAi.setForeground(Color.BLACK);
 		rdAi.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		JLabel rd2P = new JLabel("Human");
+		rd2P.setForeground(Color.BLACK);
 		rd2P.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		JLabel rdWm = new JLabel("Watch");
+		rdWm.setForeground(Color.BLACK);
 		rdWm.setFont(new Font("Times New Roman", Font.BOLD, 19));
 
 		if (gameSetting.isAiPlay()) {

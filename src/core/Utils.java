@@ -1,6 +1,5 @@
 package core;
 
-import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,7 +15,7 @@ import javax.swing.JLabel;
 import main.MainGame;
 
 public class Utils {
-	public static final String GAME_NAME = "Chess-AI - @Copyright KSTN-CNTT-K58-Group2";
+	public static final String GAME_NAME = "KING CHESS - ©COPYRIGHT 2019 - DESIGN BY LIONEL";
 	public static final int GAME_WIDTH = 1000;
 	public static final int GAME_HEIGHT = 720;
 	public static final int BOARD_GAME_WIDTH = 640;
@@ -30,13 +29,10 @@ public class Utils {
 	public static final int RADIO_LEVEL_HEIGHT = 40;
 	public static final int GAME_MODE_RADIO_WIDTH = 90;
 	public static final int GAME_MODE_RADIO_HEIGHT = 45;
-	public static final String INFORMATION_INTRODUCE = 	"    ============****============== \n" 
-													+   "     =    CHESS GAME - GROUP2    = \n"
-													+   "     ============****============== \n";
 	
 	/////////////////////// For Menu Game ///////////////////////////
-	public static final int MENU_GAME_WIDTH = 920;
-	public static final int MENU_GAME_HEIGHT = 720;
+	public static final int MENU_GAME_WIDTH = 820;
+	public static final int MENU_GAME_HEIGHT = 620;
 
 	public static final Image BG_IMAGE_MENU = new ImageIcon(Utils.class.getResource("/image/bgImageMenu.jpg")).getImage();
 	public static final ImageIcon ICON_BTN_START = new ImageIcon(Utils.class.getResource("/image/iconBtnStart.png"));
@@ -48,7 +44,7 @@ public class Utils {
 	/////////////////////// For SettingFrame /////////////////////////////
 	public static final String TITLE_MENU_ITEM_SETTING = "GAME SETTING";
 	public static final int SETTING_FRAME_WIDTH = 480;
-	public static final int SETTING_FRAME_HEIGHT = 460;
+	public static final int SETTING_FRAME_HEIGHT = 480;
 	
 	////////////// For ColorFrame, ChessmanChooserFrame //////////////////////
 	public static final String TITLE_COLOR_FRAME = "Color Chooser";
@@ -71,19 +67,6 @@ public class Utils {
 	public static final ImageIcon ICON_UNDO2 = resizeImageIcon("undo4", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	public static final ImageIcon ICON_EXIT2 = resizeImageIcon("exit4", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
 	public static final ImageIcon ICON_SAVE2 = resizeImageIcon("save4", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);
-	
-
-	///////////// For MainSettingPanel //////////////////////////
-	public static final ImageIcon ICON_GAME_LEVEL4 = resizeImageIcon("4", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
-	public static final ImageIcon ICON_GAME_LEVEL5 = resizeImageIcon("5", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
-	public static final ImageIcon ICON_GAME_LEVEL6 = resizeImageIcon("6", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
-	
-	public static final ImageIcon ICON_GAME_SET_LEVEL1 = resizeImageIcon("set1", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
-	public static final ImageIcon ICON_GAME_SET_LEVEL2 = resizeImageIcon("set2", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
-	public static final ImageIcon ICON_GAME_SET_LEVEL3 = resizeImageIcon("set3", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
-	public static final ImageIcon ICON_GAME_SET_LEVEL4 = resizeImageIcon("set4", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
-	public static final ImageIcon ICON_GAME_SET_LEVEL5 = resizeImageIcon("set5", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
-	public static final ImageIcon ICON_GAME_SET_LEVEL6 = resizeImageIcon("set6", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
 	
 	public static final ImageIcon ICON_CHECK_TRUE = resizeImageIcon("checkTrue", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
 	public static final ImageIcon ICON_CHECK_FALSE = resizeImageIcon("checkFalse", RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT);
