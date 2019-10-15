@@ -36,6 +36,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	private boolean wasChoisePieces = false;
 	private ArtificialIntelligence ai;
 	private boolean win;
+	private Graphics g;
 
 	public BoardPanel(GameSetting gameSetting) {
 		this.gameSetting = gameSetting;
@@ -55,7 +56,6 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		win = false;
 
 		Timer timerMoveAi = new Timer(500, new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				moveAi();
 			}
@@ -87,7 +87,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		Graphics2D g2d = (Graphics2D) g;
 		if (showCanMove) {
 			for (int i = 0; i < piecesChoise.getNumberCanMove().size(); i++) {
-				g2d.setColor(Color.CYAN);
+				g2d.setColor(Color.RED);
 				int locationY = (int) (piecesChoise.getNumberCanMove().get(i) / 8) + 1;
 				int locationX = piecesChoise.getNumberCanMove().get(i) % 8;
 				g2d.fillRect(20 + (locationX) * (600 / 8), 30 + (8 - locationY) * (595 / 8), 600 / 8, 595 / 8);
@@ -97,24 +97,35 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			int locationX = piecesChoise.getNumberInBoard() % 8;
 			g2d.fillRect(17 + (locationX) * (600 / 8), 28 + (8 - locationY) * (595 / 8), 600 / 8, 595 / 8);
 		}
-		ImageIcon imageBackGround = new ImageIcon(this.getClass().getResource("/image/board.png"));
-		g2d.drawImage(imageBackGround.getImage(), 0, 0, 640, 640, null);
-		g2d.setColor(Color.WHITE);
-		Font f = new Font("Dialog", Font.PLAIN, 16);
-		g2d.setFont(f);
-		String[] listLocationX = { "a", "b", "c", "d", "e", "f", "g", "h" };
-		for (int i = 0; i <= 7; i++) {
-			g2d.drawString(String.valueOf(8 - i), 5, 25 + 595 / 8 * (i) + 595 / 16);
-			g2d.drawString(listLocationX[i], 20 + 600 / 8 * i + 600 / 16, 15);
-		}
+		/*
+		 * ImageIcon imageBackGround = new
+		 * ImageIcon(this.getClass().getResource("/image/b.jpg"));
+		 * g2d.drawImage(imageBackGround.getImage(), 0, 0, 640, 640, null);
+		 * g2d.setColor(Color.RED); Font f = new Font("Dialog", Font.PLAIN, 16);
+		 * g2d.setFont(f); String[] listLocationX = { "a", "b", "c", "d", "e", "f", "g",
+		 * "h" }; for (int i = 0; i <= 7; i++) { g2d.drawString(String.valueOf(8 - i),
+		 * 5, 25 + 595 / 8 * (i) + 595 / 16); g2d.drawString(listLocationX[i], 20 + 600
+		 * / 8 * i + 600 / 16, 15); }
+		 */
 		this.positionBoard.draw(g);
 	}
-
+	
 	public void moveAi() {
 		if ((gameSetting.isAiPlay() || gameSetting.isWatchMode()) && !win && !isHumanTurn) {
 			if(!gameSetting.isWatchMode()) {
 				ai = new ArtificialIntelligence(gameSetting, positionBoard);
 				positionBoard = ai.getNextPosition();
+				
+				//System.out.println(positionBoard.getParentMove().getPieces().getNumberInBoard());
+				//System.out.println(positionBoard.getParentMove().getNumberNext());
+				
+				/*
+				 * Graphics2D g2d = (Graphics2D) g; int locationY = (int)
+				 * (positionBoard.getParentMove().getNumberNext() / 8) + 1; int locationX =
+				 * positionBoard.getParentMove().getNumberNext() % 8; g2d.fillRect(20 +
+				 * (locationX) * (600 / 8), 30 + (8 - locationY) * (595 / 8), 600 / 8, 595 / 8);
+				 */
+				
 				isHumanTurn = true;
 				showCanMove = true;
 				System.out.println("======*** Human Turn ***=====");
@@ -142,9 +153,9 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 
 	public void moveHumanInWatchMode() {
 		if (gameSetting.isWatchMode() && !win && isHumanTurn) {
-			PositionBoard old = positionBoard.getOldPositionBoard();
 			ai = new ArtificialIntelligence(gameSetting, positionBoard.copy(gameSetting.getLevel(), gameSetting));
 			positionBoard = ai.getNextHumanPosition();
+			
 			isHumanTurn = false;
 			showCanMove = true;
 			repaint();
