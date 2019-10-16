@@ -56,9 +56,7 @@ public abstract class Pieces {
 						"/imgchessman/" + this.name + this.color + "3.png"));
 		
 		g2d.drawImage(imageBackGround.getImage(), 20 + (numberlocationX)
-				* (600 / 8), 25 + (8 - locationY) * (595 / 8), 600 / 8,
-				595 / 8, null);
-
+				* 75, 23 + (8 - locationY) * 75, 75, 75, null);
 	}
 
 	public void setInformation() {

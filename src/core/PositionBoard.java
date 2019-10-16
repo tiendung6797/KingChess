@@ -377,7 +377,7 @@ public class PositionBoard {
 		for (int i = 0; i < 16; i++) {
 			this.hashMapPieces.put(i, "Human");
 		}
-		for (int i = 16; i < 47; i++) {
+		for (int i = 16; i < 48; i++) {
 			this.hashMapPieces.put(i, "NoPiece");
 		}
 		for (int i = 48; i < 64; i++) {

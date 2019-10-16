@@ -1,9 +1,11 @@
 package chessPanel;
 
 import java.awt.Color;
-import java.awt.Font;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,6 +14,7 @@ import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -36,7 +39,6 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	private boolean wasChoisePieces = false;
 	private ArtificialIntelligence ai;
 	private boolean win;
-	private Graphics g;
 
 	public BoardPanel(GameSetting gameSetting) {
 		this.gameSetting = gameSetting;
@@ -81,32 +83,47 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		});
 		timerMoveHumanInWatchMode.start();
 	}
-
+	
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
-		if (showCanMove) {
-			for (int i = 0; i < piecesChoise.getNumberCanMove().size(); i++) {
-				g2d.setColor(Color.RED);
-				int locationY = (int) (piecesChoise.getNumberCanMove().get(i) / 8) + 1;
-				int locationX = piecesChoise.getNumberCanMove().get(i) % 8;
-				g2d.fillRect(20 + (locationX) * (600 / 8), 30 + (8 - locationY) * (595 / 8), 600 / 8, 595 / 8);
+		
+		ImageIcon imageBackGround = new ImageIcon(this.getClass().getResource("/image/board.png"));
+		g2d.drawImage(imageBackGround.getImage(), 0, 0, 642, 645, null);
+		
+		ImageIcon gray = new ImageIcon(this.getClass().getResource("/image/gray.jpg"));
+		ImageIcon dark = new ImageIcon(this.getClass().getResource("/image/dark.png"));
+		ImageIcon green = new ImageIcon(this.getClass().getResource("/image/green.jpg"));
+		ImageIcon green1 = new ImageIcon(this.getClass().getResource("/image/green1.jpg"));
+		ImageIcon brown = new ImageIcon(this.getClass().getResource("/image/brown.jpg"));
+		
+		for(int i = 0; i < 64;  i++) {
+			int setX = i % 8;
+			int setY = i / 8;
+			g2d.drawRect(20 + (setX * 75), 23 + ((7 - setY) * 75), 75, 75);
+			
+			if((setX + setY) % 2 == 0) {
+				g2d.drawImage(dark.getImage(), 20 + (setX * 75), 23 + (7 - setY) * 75, 75, 75, null);
+			}else {
+				g2d.drawImage(gray.getImage(), 20 + (setX * 75), 23 + (7 - setY) * 75, 75, 75, null);
 			}
-			g2d.setColor(new Color(44, 84, 143));
-			int locationY = (int) (piecesChoise.getNumberInBoard() / 8) + 1;
-			int locationX = piecesChoise.getNumberInBoard() % 8;
-			g2d.fillRect(17 + (locationX) * (600 / 8), 28 + (8 - locationY) * (595 / 8), 600 / 8, 595 / 8);
 		}
-		/*
-		 * ImageIcon imageBackGround = new
-		 * ImageIcon(this.getClass().getResource("/image/b.jpg"));
-		 * g2d.drawImage(imageBackGround.getImage(), 0, 0, 640, 640, null);
-		 * g2d.setColor(Color.RED); Font f = new Font("Dialog", Font.PLAIN, 16);
-		 * g2d.setFont(f); String[] listLocationX = { "a", "b", "c", "d", "e", "f", "g",
-		 * "h" }; for (int i = 0; i <= 7; i++) { g2d.drawString(String.valueOf(8 - i),
-		 * 5, 25 + 595 / 8 * (i) + 595 / 16); g2d.drawString(listLocationX[i], 20 + 600
-		 * / 8 * i + 600 / 16, 15); }
-		 */
+		
+		if (showCanMove) {
+			for (int j = 0; j < piecesChoise.getNumberCanMove().size(); j++) {
+				int locationY = (int) (piecesChoise.getNumberCanMove().get(j) / 8);
+				int locationX = piecesChoise.getNumberCanMove().get(j) % 8;
+				if((locationX + locationY) % 2 == 0) {
+					g2d.drawImage(green.getImage(), 20 + (locationX) * 75, 23 + (7 - locationY) * 75, 75, 75, null);
+				} else {
+					g2d.drawImage(green1.getImage(), 20 + (locationX) * 75, 23 + (7 - locationY) * 75, 75, 75, null);
+				}
+			}
+			int locationY = (int) (piecesChoise.getNumberInBoard() / 8);
+			int locationX = piecesChoise.getNumberInBoard() % 8;
+			g2d.drawImage(brown.getImage(), 20 + (locationX) * 75, 23 + (7 - locationY) * 75, 75, 75, null);
+		}
+		
 		this.positionBoard.draw(g);
 	}
 	
@@ -116,15 +133,13 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 				ai = new ArtificialIntelligence(gameSetting, positionBoard);
 				positionBoard = ai.getNextPosition();
 				
-				//System.out.println(positionBoard.getParentMove().getPieces().getNumberInBoard());
-				//System.out.println(positionBoard.getParentMove().getNumberNext());
+				int moveX = ai.getNextPosition().getParentMove().getNumberNext() % 8;
+				int moveY = ai.getNextPosition().getParentMove().getNumberNext() / 8;
 				
-				/*
-				 * Graphics2D g2d = (Graphics2D) g; int locationY = (int)
-				 * (positionBoard.getParentMove().getNumberNext() / 8) + 1; int locationX =
-				 * positionBoard.getParentMove().getNumberNext() % 8; g2d.fillRect(20 +
-				 * (locationX) * (600 / 8), 30 + (8 - locationY) * (595 / 8), 600 / 8, 595 / 8);
-				 */
+				//20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75
+				
+				//btn_withPlayer.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/image/withfriends.png")).getImage().getScaledInstance(65, 65, Image.SCALE_SMOOTH))); // NOI18N
+				
 				
 				isHumanTurn = true;
 				showCanMove = true;

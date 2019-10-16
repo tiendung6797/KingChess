@@ -1,7 +1,5 @@
 package gameframe;
 
-import java.io.IOException;
-
 import javax.swing.JFrame;
 
 import chessPanel.BoardPanel;

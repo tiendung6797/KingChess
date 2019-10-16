@@ -28,7 +28,7 @@ public class GameSetting {
 
 	public GameSetting() {
 		
-		this.backgroundColor = new Color(0x5858FA);
+		//this.backgroundColor = new Color(0x5858FA);
 		
 		this.level = 4;
 		GameSetting.rootLevel = this.level;
