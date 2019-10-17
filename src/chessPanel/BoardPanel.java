@@ -58,6 +58,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		win = false;
 
 		Timer timerMoveAi = new Timer(500, new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				moveAi();
 			}
@@ -119,13 +120,17 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 					g2d.drawImage(green1.getImage(), 20 + (locationX) * 75, 23 + (7 - locationY) * 75, 75, 75, null);
 				}
 			}
-			int locationY = (int) (piecesChoise.getNumberInBoard() / 8);
-			int locationX = piecesChoise.getNumberInBoard() % 8;
-			g2d.drawImage(brown.getImage(), 20 + (locationX) * 75, 23 + (7 - locationY) * 75, 75, 75, null);
+			if(piecesChoise.getNumberCanMove().size() > 0) {
+				int locationY = (int) (piecesChoise.getNumberInBoard() / 8);
+				int locationX = piecesChoise.getNumberInBoard() % 8;
+				g2d.drawImage(brown.getImage(), 20 + (locationX) * 75, 23 + (7 - locationY) * 75, 75, 75, null);
+			}
 		}
 		
 		this.positionBoard.draw(g);
 	}
+	
+	Graphics g;
 	
 	public void moveAi() {
 		if ((gameSetting.isAiPlay() || gameSetting.isWatchMode()) && !win && !isHumanTurn) {
@@ -133,13 +138,11 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 				ai = new ArtificialIntelligence(gameSetting, positionBoard);
 				positionBoard = ai.getNextPosition();
 				
+				ImageIcon brown = new ImageIcon(this.getClass().getResource("/image/brown.jpg"));
 				int moveX = ai.getNextPosition().getParentMove().getNumberNext() % 8;
 				int moveY = ai.getNextPosition().getParentMove().getNumberNext() / 8;
-				
-				//20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75
-				
-				//btn_withPlayer.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/image/withfriends.png")).getImage().getScaledInstance(65, 65, Image.SCALE_SMOOTH))); // NOI18N
-				
+				Graphics2D g2d = (Graphics2D) g;
+				g2d.drawImage(brown.getImage(), 20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75, null);
 				
 				isHumanTurn = true;
 				showCanMove = true;
@@ -163,9 +166,8 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 				repaint();
 			}
 		}
-
 	}
-
+	
 	public void moveHumanInWatchMode() {
 		if (gameSetting.isWatchMode() && !win && isHumanTurn) {
 			ai = new ArtificialIntelligence(gameSetting, positionBoard.copy(gameSetting.getLevel(), gameSetting));

@@ -109,32 +109,6 @@ public class Utils {
 		}
 	}
 	
-	
-	
-	public static String getCurrentDirectory() {
-		String path = null;
-		CodeSource codeSource = MainGame.class.getProtectionDomain().getCodeSource();
-		try {
-			File jarFile = new File(codeSource.getLocation().toURI().getPath());
-			path = jarFile.getParentFile().getPath();
-
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-		return path;
-	}
-	
-	public static void createPicture(String name) {
-		File file = new File(getCurrentDirectory() + "//image//" + name);
-		if (!file.exists()) {
-			try {
-				ExportResource("/image/" + name);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
 	public static String ExportResource(String resourceName) throws Exception {
 		InputStream stream = null;
 		OutputStream resStreamOut = null;
