@@ -74,34 +74,39 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		JLabel lbl = (JLabel) e.getSource();
-		/*
-		 * if(lbl == btnUndo) { // First Button: Undo if (!gameSetting.isAiPlay()) {
-		 * Move move =
-		 * mainChessFrame.getBoardPanel().getPositionBoard().getParentMove();
-		 * move.toString(); mainChessFrame.getBoardPanel()
-		 * .setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().
-		 * getOldPositionBoard()); mainChessFrame.getBoardPanel().repaint(); if
-		 * (mainChessFrame.getBoardPanel().isHumanTurn()) {
-		 * mainChessFrame.getBoardPanel().setHumanTurn(false); } else {
-		 * mainChessFrame.getBoardPanel().setHumanTurn(true); } } else { for (int i = 0;
-		 * i <= 1; i++) { Move move =
-		 * mainChessFrame.getBoardPanel().getPositionBoard().getParentMove();
-		 * move.toString();
-		 * mainChessFrame.getBoardPanel().setPositionBoard(mainChessFrame.getBoardPanel(
-		 * ).getPositionBoard().getOldPositionBoard());
-		 * mainChessFrame.getBoardPanel().repaint(); if
-		 * (mainChessFrame.getBoardPanel().isHumanTurn()) {
-		 * mainChessFrame.getBoardPanel().setHumanTurn(false); } else {
-		 * mainChessFrame.getBoardPanel().setHumanTurn(true); } } } } else
-		 */if(lbl == btnExit) {
+		if(lbl == btnUndo) {
+			// First Button: Undo
+			if (!gameSetting.isAiPlay()) {	
+				Move move = mainChessFrame.getBoardPanel().getPositionBoard().getParentMove();
+				move.toString();
+				mainChessFrame.getBoardPanel()
+								.setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard());
+				mainChessFrame.getBoardPanel().repaint();
+				if (mainChessFrame.getBoardPanel().isHumanTurn()) {
+					mainChessFrame.getBoardPanel().setHumanTurn(false);
+				} else {
+					mainChessFrame.getBoardPanel().setHumanTurn(true);
+				}
+			} else {
+				for (int i = 0; i <= 1; i++) {
+					Move move = mainChessFrame.getBoardPanel().getPositionBoard().getParentMove();
+					move.toString();
+					mainChessFrame.getBoardPanel().setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard());
+					mainChessFrame.getBoardPanel().repaint();
+					if (mainChessFrame.getBoardPanel().isHumanTurn()) {
+						mainChessFrame.getBoardPanel().setHumanTurn(false);
+					} else {
+						mainChessFrame.getBoardPanel().setHumanTurn(true);
+					}
+				}
+			}
+		} else if(lbl == btnExit) {
 			Utils.inGame = false;
 			mainChessFrame.getMenuFrame().setVisible(true);
 			mainChessFrame.dispose();
-		} /*
-			 * else if(lbl == btnSave) {
-			 * 
-			 * }
-			 */
+		} else if(lbl == btnSave) {
+			
+		}
 	}
 	
 	@Override

@@ -59,7 +59,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		Timer timerMoveAi = new Timer(500, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//moveAi();
+				moveAi();
 			}
 		});
 		timerMoveAi.start();
@@ -77,7 +77,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		Timer timerMoveHumanInWatchMode = new Timer(500, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//moveHumanInWatchMode();
+				moveHumanInWatchMode();
 			}
 		});
 		timerMoveHumanInWatchMode.start();
