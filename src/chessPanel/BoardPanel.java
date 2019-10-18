@@ -44,7 +44,6 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		this.gameSetting = gameSetting;
 		this.positionBoard = new PositionBoard(gameSetting.getLevel(), gameSetting, this);
 		this.setBorder(new LineBorder(Color.BLACK));
-		this.setBackground(gameSetting.getBackgroundColor());
 		this.setBounds(0, 0, Utils.BOARD_GAME_WIDTH, Utils.BOARD_GAME_HEIGHT);
 		this.setFocusable(true);
 		showCanMove = false;
@@ -60,7 +59,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		Timer timerMoveAi = new Timer(500, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				moveAi();
+				//moveAi();
 			}
 		});
 		timerMoveAi.start();
@@ -69,7 +68,6 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (isHumanTurn || !(gameSetting.isAiPlay() || gameSetting.isWatchMode())) {
-					setBackground(gameSetting.getBackgroundColor());
 					repaint();
 				}
 			}
@@ -79,7 +77,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		Timer timerMoveHumanInWatchMode = new Timer(500, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				moveHumanInWatchMode();
+				//moveHumanInWatchMode();
 			}
 		});
 		timerMoveHumanInWatchMode.start();
@@ -130,19 +128,14 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		this.positionBoard.draw(g);
 	}
 	
-	Graphics g;
-	
 	public void moveAi() {
 		if ((gameSetting.isAiPlay() || gameSetting.isWatchMode()) && !win && !isHumanTurn) {
 			if(!gameSetting.isWatchMode()) {
 				ai = new ArtificialIntelligence(gameSetting, positionBoard);
 				positionBoard = ai.getNextPosition();
 				
-				ImageIcon brown = new ImageIcon(this.getClass().getResource("/image/brown.jpg"));
 				int moveX = ai.getNextPosition().getParentMove().getNumberNext() % 8;
 				int moveY = ai.getNextPosition().getParentMove().getNumberNext() / 8;
-				Graphics2D g2d = (Graphics2D) g;
-				g2d.drawImage(brown.getImage(), 20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75, null);
 				
 				isHumanTurn = true;
 				showCanMove = true;

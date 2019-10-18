@@ -4,8 +4,6 @@ import java.awt.Color;
 
 public class GameSetting {
 	
-	private Color backgroundColor;
-	
 	private int level;
 	
 	private boolean humanFirst;
@@ -28,15 +26,13 @@ public class GameSetting {
 
 	public GameSetting() {
 		
-		//this.backgroundColor = new Color(0x5858FA);
-		
 		this.level = 4;
 		GameSetting.rootLevel = this.level;
 		
-		this.humanFirst = false;
-		this.aiFirst = true;
+		this.humanFirst = true;
+		this.aiFirst = false;
 		
-		this.aiPlay = true;
+		this.aiPlay = false;
 		
 		
 		
@@ -80,16 +76,6 @@ public class GameSetting {
 
 	public void setAiFirst(boolean aiFirst) {
 		this.aiFirst = aiFirst;
-	}
-
-	public Color getBackgroundColor() {
-		return backgroundColor;
-
-	}
-
-	public void setBackgroundColor(Color backgroundColor) {
-		this.backgroundColor = backgroundColor;
-
 	}
 
 	public boolean isAiPlay() {
