@@ -5,14 +5,12 @@ import javax.swing.JFrame;
 import chessPanel.BoardPanel;
 import chessPanel.ButtonPanel;
 import chessPanel.LevelPanel;
-import chessPanel.RadioPanel;
 import core.GameSetting;
 import core.Utils;
 
 public class MainChessFrame extends JFrame {
 	private BoardPanel boardPanel;
 	private GameSetting gameSetting;
-	private RadioPanel radioPanel;
 	private LevelPanel levelPanel;
 	private ButtonPanel buttonPanel;
 	private MenuFrame menuFrame;
@@ -33,12 +31,10 @@ public class MainChessFrame extends JFrame {
 
 	public void addCompoment() {
 		boardPanel = new BoardPanel(gameSetting);
-		radioPanel = new RadioPanel(gameSetting, boardPanel);
 		levelPanel = new LevelPanel(gameSetting);
 		buttonPanel = new ButtonPanel(gameSetting, this);
 		
 		add(boardPanel);
-		add(radioPanel);
 		add(levelPanel);
 		add(buttonPanel);
 	}

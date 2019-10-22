@@ -99,15 +99,10 @@ public class PositionBoard {
 					Move move = new Move(this.getListPiecesAi().get(i),
 							this.getListPiecesAi().get(i).getNumberCanMove().get(j));
 
-					if (gameSetting.isWatchMode()) {
-						PositionBoard newPosition = newPositionBoard(move);
-						if (!newPosition.equal(getOldPositionBoard().getOldPositionBoard().getOldPositionBoard())) {
-							listChildPosition.add(newPosition);
-						}
-					} else {
-						listChildPosition.add(newPositionBoard(move));
+					PositionBoard newPosition = newPositionBoard(move);
+					if (!newPosition.equal(getOldPositionBoard().getOldPositionBoard().getOldPositionBoard())) {
+						listChildPosition.add(newPosition);
 					}
-
 				}
 			}
 		} else {
@@ -116,20 +111,15 @@ public class PositionBoard {
 				for (int j = 0; j < this.getListPiecesHuman().get(i).getNumberCanMove().size(); j++) {
 					Move move = new Move(this.getListPiecesHuman().get(i),
 							this.getListPiecesHuman().get(i).getNumberCanMove().get(j));
-					if (gameSetting.isWatchMode()) {
-						PositionBoard newPosition = newPositionBoard(move);
-						if (!newPosition.equal(getOldPositionBoard().getOldPositionBoard().getOldPositionBoard())) {
-							listChildPosition.add(newPosition);
-						}
-					} else {
-						listChildPosition.add(newPositionBoard(move));
+					PositionBoard newPosition = newPositionBoard(move);
+					if (!newPosition.equal(getOldPositionBoard().getOldPositionBoard().getOldPositionBoard())) {
+						listChildPosition.add(newPosition);
 					}
-
 				}
 			}
 		}
 	}
-
+	
 	public PositionBoard copy(int depth, GameSetting gameSetting) {
 		PositionBoard newPositionBoard = new PositionBoard(depth, gameSetting);
 		newPositionBoard.boardPanel = this.boardPanel;
@@ -363,7 +353,7 @@ public class PositionBoard {
 		}
 		return null;
 	}
-
+	
 	public void draw(Graphics g) {
 		for (int i = 0; i < listPiecesHuman.size(); i++) {
 			listPiecesHuman.get(i).draw(g);
@@ -372,7 +362,7 @@ public class PositionBoard {
 			listPiecesAi.get(i).draw(g);
 		}
 	}
-
+	
 	public void addDefaulsePieces() {
 		for (int i = 0; i < 16; i++) {
 			this.hashMapPieces.put(i, "Human");
@@ -441,9 +431,9 @@ public class PositionBoard {
 	public void free() {
 		int k = listChildPosition.size();
 		while (k != 0) {
-			PositionBoard besChildPosition = this.getBestChild().copy(this.getBestChild().getDepth(), gameSetting);
-			besChildPosition.setAiWasEat(this.getBestChild().aiWasEat);
-			besChildPosition.setHumanWasEat(this.getBestChild().humanWasEat);
+			PositionBoard bestChildPosition = this.getBestChild().copy(this.getBestChild().getDepth(), gameSetting);
+			bestChildPosition.setAiWasEat(this.getBestChild().aiWasEat);
+			bestChildPosition.setHumanWasEat(this.getBestChild().humanWasEat);
 			try {
 				listChildPosition.remove(k - 1);
 				k--;
@@ -451,10 +441,10 @@ public class PositionBoard {
 
 				e.printStackTrace();
 			}
-			this.setBestChild(besChildPosition);
+			this.setBestChild(bestChildPosition);
 		}
 	}
-
+	
 	public boolean checkAiWin() {
 		this.setValue();
 		if (this.getValue() > 10000) {
@@ -484,162 +474,6 @@ public class PositionBoard {
 			}
 		}
 		return text;
-	}
-
-	/*****************************************************************************************************************
-	 * //////////// CODE ONLY USING FOR WATCH MODE
-	 * /////////////////////////////////////////////////////////////////////////
-	 * /////////////////////////////////////////
-	 * //////////////////////////////////////////////////////////////////////
-	 * /////////////////////////////////////////////////////////////////////////
-	 * /////////////////////////////////////////
-	 * //////////////////////////////////////////////////////////////////////
-	 *****************************************************************************************************************/
-	public void setListChildPositionForHumanInWatchMode() {
-		if (this.getDepth() % 2 != gameSetting.getLevel() % 2) {
-			for (int i = 0; i < this.getListPiecesAi().size(); i++) {
-				this.getListPiecesAi().get(i).setNumberCanMove();
-				for (int j = 0; j < this.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
-					Move move = new Move(this.getListPiecesAi().get(i),
-							this.getListPiecesAi().get(i).getNumberCanMove().get(j));
-					if (gameSetting.isWatchMode()) {
-						PositionBoard newPosition = newPositionBoardForHuManInWatchMode(move);
-						if (!newPosition.equal(getOldPositionBoard().getOldPositionBoard().getOldPositionBoard())) {
-							listChildPosition.add(newPosition);
-						}
-					} else {
-						listChildPosition.add(newPositionBoardForHuManInWatchMode(move));
-					}
-				}
-			}
-		} else {
-			for (int i = 0; i < this.getListPiecesHuman().size(); i++) {
-				this.getListPiecesHuman().get(i).setNumberCanMove();
-				for (int j = 0; j < this.getListPiecesHuman().get(i).getNumberCanMove().size(); j++) {
-					Move move = new Move(this.getListPiecesHuman().get(i),
-							this.getListPiecesHuman().get(i).getNumberCanMove().get(j));
-					if (gameSetting.isWatchMode()) {
-						PositionBoard newPosition = newPositionBoardForHuManInWatchMode(move);
-						if (!newPosition.equal(getOldPositionBoard().getOldPositionBoard().getOldPositionBoard())) {
-							listChildPosition.add(newPosition);
-						}
-					} else {
-						listChildPosition.add(newPositionBoardForHuManInWatchMode(move));
-					}
-				}
-			}
-		}
-	}
-
-	public PositionBoard newPositionBoardForHuManInWatchMode(Move move) {
-
-		PositionBoard newPositionBoard = this.copy(this.depth - 1, gameSetting);
-		if (newPositionBoard.getDepth() % 2 != gameSetting.getLevel() % 2) {
-
-			for (int i = 0; i < newPositionBoard.getListPiecesHuman().size(); i++) {
-				if (newPositionBoard.getListPiecesHuman().get(i).equalPiece(move.getPieces())) {
-					newPositionBoard.getListPiecesHuman().get(i).setNewLocation(move.getNumberNext());
-					break;
-				}
-			}
-			if (newPositionBoard.wasSetAi(move.getNumberNext())) {
-				newPositionBoard.getListPiecesAi().remove(newPositionBoard.getChoisePiecesAi(move.getNumberNext()));
-				newPositionBoard.setHumanWasEat(true);
-			}
-			if (move.getPieces().getName() == "Tuong") {
-				if (move.getPieces().getNumberInBoard() == 4) {
-					if (move.getNumberNext() == 6) {
-						Pieces rook = this.getChoisePiecesHuman(7);
-						Move move2 = new Move(rook, 5);
-						for (int i = 0; i < newPositionBoard.getListPiecesHuman().size(); i++) {
-							if (newPositionBoard.getListPiecesHuman().get(i).equalPiece(move2.getPieces())) {
-								newPositionBoard.getListPiecesHuman().get(i).setNewLocation(move2.getNumberNext());
-								break;
-							}
-						}
-						newPositionBoard.getHashMapPieces().put(move2.getPieces().getNumberInBoard(), "NoPiece");
-						newPositionBoard.getHashMapPieces().put(move2.getNumberNext(), "Human");
-					}
-					if (move.getNumberNext() == 2) {
-						Pieces rook = this.getChoisePiecesHuman(0);
-						Move move2 = new Move(rook, 3);
-						for (int i = 0; i < newPositionBoard.getListPiecesHuman().size(); i++) {
-							if (newPositionBoard.getListPiecesHuman().get(i).equalPiece(move2.getPieces())) {
-								newPositionBoard.getListPiecesHuman().get(i).setNewLocation(move2.getNumberNext());
-								break;
-							}
-						}
-						newPositionBoard.getHashMapPieces().put(move2.getPieces().getNumberInBoard(), "NoPiece");
-						newPositionBoard.getHashMapPieces().put(move2.getNumberNext(), "Human");
-					}
-				}
-			}
-			if (move.getPieces().getName() == "Tot") {
-				if ((int) move.getNumberNext() / 8 == 7) {
-					newPositionBoard.getListPiecesHuman()
-							.remove(newPositionBoard.getChoisePiecesHuman(move.getNumberNext()));
-					Pieces newQueen = new Queen(move.getNumberNext(), move.getPieces().getColor(),
-							move.getPieces().getSide(), newPositionBoard);
-					newPositionBoard.getListPiecesHuman().add(newQueen);
-				}
-			}
-			newPositionBoard.getHashMapPieces().put(move.getPieces().getNumberInBoard(), "NoPiece");
-			newPositionBoard.getHashMapPieces().put(move.getNumberNext(), "Human");
-		} else {
-			for (int i = 0; i < newPositionBoard.getListPiecesAi().size(); i++) {
-				if (newPositionBoard.getListPiecesAi().get(i).equalPiece(move.getPieces())) {
-					newPositionBoard.getListPiecesAi().get(i).setNewLocation(move.getNumberNext());
-
-				}
-			}
-			if (newPositionBoard.wasSetHuman(move.getNumberNext())) {
-				newPositionBoard.getListPiecesHuman()
-						.remove(newPositionBoard.getChoisePiecesHuman(move.getNumberNext()));
-				newPositionBoard.setAiWasEat(true);
-			}
-			if (move.getPieces().getName() == "Tuong") {
-				if (move.getPieces().getNumberInBoard() == 60) {
-					if (move.getNumberNext() == 62) {
-
-						move.toString();
-						Move move2 = new Move(this.getChoisePiecesAi(63), 61);
-						for (int i = 0; i < newPositionBoard.getListPiecesAi().size(); i++) {
-							if (newPositionBoard.getListPiecesAi().get(i).equalPiece(move2.getPieces())) {
-								newPositionBoard.getListPiecesAi().get(i).setNewLocation(move2.getNumberNext());
-								break;
-							}
-						}
-						newPositionBoard.getHashMapPieces().put(move2.getPieces().getNumberInBoard(), "NoPiece");
-						newPositionBoard.getHashMapPieces().put(move2.getNumberNext(), "Ai");
-					}
-					if (move.getNumberNext() == 58) {
-
-						Move move2 = new Move(this.getChoisePiecesAi(56), 59);
-						for (int i = 0; i < newPositionBoard.getListPiecesAi().size(); i++) {
-							if (newPositionBoard.getListPiecesAi().get(i).equalPiece(move2.getPieces())) {
-								newPositionBoard.getListPiecesAi().get(i).setNewLocation(move2.getNumberNext());
-								break;
-							}
-						}
-						newPositionBoard.getHashMapPieces().put(move2.getPieces().getNumberInBoard(), "NoPiece");
-						newPositionBoard.getHashMapPieces().put(move2.getNumberNext(), "Ai");
-					}
-				}
-			}
-			if (move.getPieces().getName() == "Tot") {
-				if ((int) move.getNumberNext() / 8 == 0) {
-					newPositionBoard.getListPiecesAi().remove(newPositionBoard.getChoisePiecesAi(move.getNumberNext()));
-					Pieces newQueen = new Queen(move.getNumberNext(), move.getPieces().getColor(),
-							move.getPieces().getSide(), newPositionBoard);
-					newPositionBoard.getListPiecesAi().add(newQueen);
-				}
-			}
-			newPositionBoard.getHashMapPieces().put(move.getPieces().getNumberInBoard(), "NoPiece");
-			newPositionBoard.getHashMapPieces().put(move.getNumberNext(), "Ai");
-		}
-		newPositionBoard.parentMove = move;
-		newPositionBoard.setOldPositionBoard(this);
-		return newPositionBoard;
 	}
 
 	public boolean equal(PositionBoard positionBoard) {

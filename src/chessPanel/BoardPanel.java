@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 
+import chessPieces.King;
 import chessPieces.Pieces;
 import core.ArtificialIntelligence;
 import core.GameSetting;
@@ -32,13 +33,15 @@ import core.Utils;
 
 public class BoardPanel extends JPanel implements MouseListener, MouseMotionListener {
 	private GameSetting gameSetting;
-	private PositionBoard positionBoard;
+	public PositionBoard positionBoard;
 	private boolean showCanMove;
 	private Pieces piecesChoise;
 	private boolean isHumanTurn;
 	private boolean wasChoisePieces = false;
 	private ArtificialIntelligence ai;
 	private boolean win;
+	
+	
 
 	public BoardPanel(GameSetting gameSetting) {
 		this.gameSetting = gameSetting;
@@ -55,7 +58,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			isHumanTurn = true;
 		}
 		win = false;
-
+		
 		Timer timerMoveAi = new Timer(500, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -63,24 +66,6 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			}
 		});
 		timerMoveAi.start();
-		
-		Timer timerSetting = new Timer(500, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (isHumanTurn || !(gameSetting.isAiPlay() || gameSetting.isWatchMode())) {
-					repaint();
-				}
-			}
-		});
-		timerSetting.start();
-		
-		Timer timerMoveHumanInWatchMode = new Timer(500, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				moveHumanInWatchMode();
-			}
-		});
-		timerMoveHumanInWatchMode.start();
 	}
 	
 	public void paint(Graphics g) {
@@ -126,123 +111,127 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		}
 		
 		this.positionBoard.draw(g);
+		
 	}
 	
-	public void moveAi() {
-		if ((gameSetting.isAiPlay() || gameSetting.isWatchMode()) && !win && !isHumanTurn) {
-			if(!gameSetting.isWatchMode()) {
-				ai = new ArtificialIntelligence(gameSetting, positionBoard);
-				positionBoard = ai.getNextPosition();
-				
-				int moveX = ai.getNextPosition().getParentMove().getNumberNext() % 8;
-				int moveY = ai.getNextPosition().getParentMove().getNumberNext() / 8;
-				
-				isHumanTurn = true;
-				showCanMove = true;
-				System.out.println("======*** Human Turn ***=====");
-
-				repaint();
-				showCanMove = false;
-
-				checkWin();
-				repaint();
-			} else {
-				ai = new ArtificialIntelligence(gameSetting, positionBoard.copy(gameSetting.getLevel(), gameSetting));
-				positionBoard = ai.getNextPosition();
-				isHumanTurn = true;
-				showCanMove = true;
-	
-				repaint();
-				showCanMove = false;
-	
-				checkWin();
-				repaint();
-			}
-		}
-	}
-	
-	public void moveHumanInWatchMode() {
-		if (gameSetting.isWatchMode() && !win && isHumanTurn) {
-			ai = new ArtificialIntelligence(gameSetting, positionBoard.copy(gameSetting.getLevel(), gameSetting));
-			positionBoard = ai.getNextHumanPosition();
+	public PositionBoard moveAi() {
+		if (gameSetting.isAiPlay() && !win && !isHumanTurn) {
+			ai = new ArtificialIntelligence(gameSetting, positionBoard);
+			positionBoard = ai.getNextPosition();
 			
-			isHumanTurn = false;
+			int moveX = ai.getNextPosition().getParentMove().getNumberNext() % 8;
+			int moveY = ai.getNextPosition().getParentMove().getNumberNext() / 8;
+			
+			
+			isHumanTurn = true;
 			showCanMove = true;
+			System.out.println("======*** Human Turn ***=====");
+
 			repaint();
 			showCanMove = false;
 
 			checkWin();
 			repaint();
+			
+			return positionBoard;
 		}
+		return null;
 	}
-
+	
+	/*
+	 * public void paintAiMove() { int moveX =
+	 * moveAi().getParentMove().getNumberNext() % 8; int moveY =
+	 * moveAi().getParentMove().getNumberNext() / 8;
+	 * 
+	 * System.out.println(moveAi().getParentMove().getNumberNext()); }
+	 */
+	
+	/*
+	 * public
+	 * 
+	 * public boolean checkMate() {
+	 * 
+	 * 
+	 * for (int i = 0; i < positionBoard.getListPiecesHuman().size(); i++) {
+	 * if(positionBoard.getListPiecesHuman().get(i).getName() == "Tuong") { return
+	 * positionBoard.getListPiecesHuman().get(i).getNumberInBoard(); } }
+	 * 
+	 * for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) { for(int j
+	 * = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size();
+	 * j++) { if(listPiecesAi.get(i).getNumberCanMove().get(j) == kingPosition) {
+	 * return true; }
+	 * 
+	 * } }
+	 * 
+	 * 
+	 * }
+	 */
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		win = false;
-		if (!gameSetting.isWatchMode()) {
-			if (isHumanTurn) {
-				int location = (7 - (int) ((e.getY() - 25) / (595 / 8))) * 8 + (int) ((e.getX() - 20) / (600 / 8));
-				if (positionBoard.wasSetHuman(location)) {
+		if (isHumanTurn) {
+			int location = (7 - (int) ((e.getY() - 23) / 75)) * 8 + (int) ((e.getX() - 20) / 75);
+			if (positionBoard.wasSetHuman(location)) {
+				showCanMove = true;
+				wasChoisePieces = true;
+				piecesChoise = positionBoard.getChoisePiecesHuman(location);
+				piecesChoise.setNumberCanMove();
+				
+				repaint();
+			} else {
+				if (wasChoisePieces && piecesChoise.canMove(location) && gameSetting.isAiPlay()) {
+					Move move = new Move(piecesChoise, location);
+
+					positionBoard = positionBoard.newPositionBoard(move);
+
+					isHumanTurn = false;
+					showCanMove = false;
+					System.out.println("======**** Ai Turn ****======");
+
+					checkWin();
+					wasChoisePieces = false;
+					repaint();
+				} else if (wasChoisePieces && piecesChoise.canMove(location) && !gameSetting.isAiPlay()) {
+					Move move = new Move(piecesChoise, location);
+
+					positionBoard = positionBoard.newPositionBoard(move);
+
+					isHumanTurn = false;
+					showCanMove = false;
+
+					checkWin();
+					wasChoisePieces = false;
+					repaint();
+				} 
+			}
+
+		} else {
+			if (!gameSetting.isAiPlay()) {
+				int location = (7 - (int) ((e.getY() - 23) / 75)) * 8 + (int) ((e.getX() - 20) / 75);
+				if (positionBoard.wasSetAi(location)) {
 					showCanMove = true;
 					wasChoisePieces = true;
-					piecesChoise = positionBoard.getChoisePiecesHuman(location);
+					piecesChoise = positionBoard.getChoisePiecesAi(location);
 					piecesChoise.setNumberCanMove();
-					
 					repaint();
 				} else {
-					if (wasChoisePieces && piecesChoise.canMove(location) && gameSetting.isAiPlay()) {
+					if (wasChoisePieces && piecesChoise.canMove(location)) {
 						Move move = new Move(piecesChoise, location);
-
 						positionBoard = positionBoard.newPositionBoard(move);
-
-						isHumanTurn = false;
+						isHumanTurn = true;
+						repaint();
 						showCanMove = false;
-						System.out.println("======**** Ai Turn ****======");
-
 						checkWin();
 						wasChoisePieces = false;
 						repaint();
-					} else if (wasChoisePieces && piecesChoise.canMove(location) && !gameSetting.isAiPlay()) {
-						Move move = new Move(piecesChoise, location);
-
-						positionBoard = positionBoard.newPositionBoard(move);
-
-						isHumanTurn = false;
-						showCanMove = false;
-
-						checkWin();
-						wasChoisePieces = false;
-						repaint();
-					} 
-				}
-
-			} else {
-				if (!gameSetting.isAiPlay()) {
-					int location = (7 - (int) ((e.getY() - 25) / (595 / 8))) * 8 + (int) ((e.getX() - 20) / (600 / 8));
-					if (positionBoard.wasSetAi(location)) {
-						showCanMove = true;
-						wasChoisePieces = true;
-						piecesChoise = positionBoard.getChoisePiecesAi(location);
-						piecesChoise.setNumberCanMove();
-						repaint();
-					} else {
-						if (wasChoisePieces && piecesChoise.canMove(location)) {
-							Move move = new Move(piecesChoise, location);
-							positionBoard = positionBoard.newPositionBoard(move);
-							isHumanTurn = true;
-							repaint();
-							showCanMove = false;
-							checkWin();
-							wasChoisePieces = false;
-							repaint();
-						}
 					}
 				}
 			}
 		}
 
 	}
-
+	
 	public void checkWin() {
 		if (isHumanTurn) {
 			if (this.positionBoard.checkAiWin()) {

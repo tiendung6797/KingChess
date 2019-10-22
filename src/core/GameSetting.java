@@ -1,23 +1,14 @@
 package core;
 
-import java.awt.Color;
-
 public class GameSetting {
-	
+
 	private int level;
-	
+
 	private boolean humanFirst;
 	private boolean aiFirst;
-	
-	
-	
+
 	private boolean aiPlay;
-	
-	
-	
-	
-	private boolean watchMode;
-	
+
 	// ////////////////////////////////
 	private boolean testing;
 	public static int rootLevel;
@@ -25,20 +16,15 @@ public class GameSetting {
 	// /////////////////////////////////
 
 	public GameSetting() {
-		
+
 		this.level = 4;
 		GameSetting.rootLevel = this.level;
-		
-		this.humanFirst = true;
-		this.aiFirst = false;
-		
-		this.aiPlay = false;
-		
-		
-		
-		
-		this.watchMode = false;
-		
+
+		this.humanFirst = false;
+		this.aiFirst = true;
+
+		this.aiPlay = true;
+
 		// ////////////////////////
 		this.testing = false;
 		// //////////////////////
@@ -84,14 +70,6 @@ public class GameSetting {
 
 	public void setAiPlay(boolean aiPlay) {
 		this.aiPlay = aiPlay;
-	}
-
-	public boolean isWatchMode() {
-		return watchMode;
-	}
-
-	public void setWatchMode(boolean watchMode) {
-		this.watchMode = watchMode;
 	}
 
 }

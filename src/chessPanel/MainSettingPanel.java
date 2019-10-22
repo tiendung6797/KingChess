@@ -221,22 +221,16 @@ public class MainSettingPanel extends JPanel {
 		JLabel rd2P = new JLabel("Human");
 		rd2P.setForeground(Color.BLACK);
 		rd2P.setFont(new Font("Times New Roman", Font.BOLD, 19));
-		JLabel rdWm = new JLabel("Watch");
-		rdWm.setForeground(Color.BLACK);
-		rdWm.setFont(new Font("Times New Roman", Font.BOLD, 19));
+		JLabel rdTr = new JLabel("Training");
+		rdTr.setForeground(Color.BLACK);
+		rdTr.setFont(new Font("Times New Roman", Font.BOLD, 19));
 
 		if (gameSetting.isAiPlay()) {
 			rdAi.setIcon(Utils.ICON_CHECK_TRUE);
 			rd2P.setIcon(Utils.ICON_CHECK_FALSE);
-			rdWm.setIcon(Utils.ICON_CHECK_FALSE);
-		} else if(gameSetting.isWatchMode()){
-			rdAi.setIcon(Utils.ICON_CHECK_FALSE);
-			rd2P.setIcon(Utils.ICON_CHECK_FALSE);
-			rdWm.setIcon(Utils.ICON_CHECK_TRUE);
-		} else {
+		}else {
 			rdAi.setIcon(Utils.ICON_CHECK_FALSE);
 			rd2P.setIcon(Utils.ICON_CHECK_TRUE);
-			rdWm.setIcon(Utils.ICON_CHECK_FALSE);
 		}
 		
 		rdAi.addMouseListener(new MouseAdapter() {
@@ -244,9 +238,7 @@ public class MainSettingPanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				rdAi.setIcon(Utils.ICON_CHECK_TRUE);
 				rd2P.setIcon(Utils.ICON_CHECK_FALSE);
-				rdWm.setIcon(Utils.ICON_CHECK_FALSE);
 				gameSetting.setAiPlay(true);
-				gameSetting.setWatchMode(false);
 			}
 		});
 		rd2P.addMouseListener(new MouseAdapter() {
@@ -254,19 +246,7 @@ public class MainSettingPanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				rdAi.setIcon(Utils.ICON_CHECK_FALSE);
 				rd2P.setIcon(Utils.ICON_CHECK_TRUE);
-				rdWm.setIcon(Utils.ICON_CHECK_FALSE);
 				gameSetting.setAiPlay(false);
-				gameSetting.setWatchMode(false);
-			}
-		});
-		rdWm.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				rdAi.setIcon(Utils.ICON_CHECK_FALSE);
-				rd2P.setIcon(Utils.ICON_CHECK_FALSE);
-				rdWm.setIcon(Utils.ICON_CHECK_TRUE);
-				gameSetting.setAiPlay(false);
-				gameSetting.setWatchMode(true);
 			}
 		});
 
@@ -276,7 +256,7 @@ public class MainSettingPanel extends JPanel {
 		rdPanel.add(rdAi);
 		Component area2 = Box.createRigidArea(new Dimension(14, 0));
 		rdPanel.add(area2);
-		rdPanel.add(rdWm);
+		rdPanel.add(rdTr);
 		return rdPanel;
 	}
 
