@@ -114,6 +114,8 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		
 	}
 	
+	
+	
 	public PositionBoard moveAi() {
 		if (gameSetting.isAiPlay() && !win && !isHumanTurn) {
 			ai = new ArtificialIntelligence(gameSetting, positionBoard);
@@ -137,6 +139,9 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		}
 		return null;
 	}
+	
+	
+	
 	
 	/*
 	 * public void paintAiMove() { int moveX =
@@ -166,6 +171,9 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	 * 
 	 * }
 	 */
+	
+	
+	
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
