@@ -1,11 +1,8 @@
 package chessPanel;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -14,7 +11,6 @@ import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -23,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 
-import chessPieces.King;
 import chessPieces.Pieces;
 import core.ArtificialIntelligence;
 import core.GameSetting;
@@ -110,6 +105,14 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			}
 		}
 		
+		/*
+		 * this.positionBoard.draw(g);
+		 * 
+		 * int moveX = moveAi().getParentMove().getNumberNext() % 8; int moveY =
+		 * moveAi().getParentMove().getNumberNext() / 8; g2d.drawImage(brown.getImage(),
+		 * 20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75, null);
+		 * 
+		 */
 		this.positionBoard.draw(g);
 		
 	}
@@ -121,10 +124,6 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			ai = new ArtificialIntelligence(gameSetting, positionBoard);
 			positionBoard = ai.getNextPosition();
 			
-			int moveX = ai.getNextPosition().getParentMove().getNumberNext() % 8;
-			int moveY = ai.getNextPosition().getParentMove().getNumberNext() / 8;
-			
-			
 			isHumanTurn = true;
 			showCanMove = true;
 			System.out.println("======*** Human Turn ***=====");
@@ -135,21 +134,12 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			checkWin();
 			repaint();
 			
-			return positionBoard;
 		}
-		return null;
+		return positionBoard;
 	}
 	
 	
 	
-	
-	/*
-	 * public void paintAiMove() { int moveX =
-	 * moveAi().getParentMove().getNumberNext() % 8; int moveY =
-	 * moveAi().getParentMove().getNumberNext() / 8;
-	 * 
-	 * System.out.println(moveAi().getParentMove().getNumberNext()); }
-	 */
 	
 	/*
 	 * public
@@ -237,7 +227,6 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 				}
 			}
 		}
-
 	}
 	
 	public void checkWin() {
