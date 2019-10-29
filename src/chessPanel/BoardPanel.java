@@ -105,19 +105,24 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			}
 		}
 		
-		/*
-		 * this.positionBoard.draw(g);
-		 * 
-		 * int moveX = moveAi().getParentMove().getNumberNext() % 8; int moveY =
-		 * moveAi().getParentMove().getNumberNext() / 8; g2d.drawImage(brown.getImage(),
-		 * 20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75, null);
-		 * 
-		 */
 		this.positionBoard.draw(g);
-		
 	}
 	
-	
+	public void update(Graphics g) {
+		super.paint(g);
+		Graphics2D g2d = (Graphics2D) g;
+		
+		int moveX = moveAi().getParentMove().getNumberNext() % 8; 
+		int moveY = moveAi().getParentMove().getNumberNext() / 8; 
+		
+		int choseX = moveAi().getParentMove().getPieces().getNumberInBoard() % 8;
+		int choseY = moveAi().getParentMove().getPieces().getNumberInBoard() / 8;
+		
+		ImageIcon brown = new ImageIcon(this.getClass().getResource("/image/brown.jpg"));
+		
+		g2d.drawImage(brown.getImage(), 20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75, null);
+		g2d.drawImage(brown.getImage(), 20 + (choseX) * 75, 23 + (7 - choseY) * 75, 75, 75, null);
+	}
 	
 	public PositionBoard moveAi() {
 		if (gameSetting.isAiPlay() && !win && !isHumanTurn) {
