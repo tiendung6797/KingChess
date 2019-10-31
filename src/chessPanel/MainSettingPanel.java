@@ -126,11 +126,11 @@ public class MainSettingPanel extends JPanel {
 		return radio;
 	}
 	private void checkRadioLevel(int id) {
-		for(int i = 4; i <= 6; i++) {
+		for(int i = 2; i <= 6; i += 2) {
 			if(id == i) {
-				listLevel.get(i-4).setIcon(Utils.resizeImageIcon("checkTrue", Utils.RADIO_LEVEL_WIDTH, Utils.RADIO_LEVEL_HEIGHT));
+				listLevel.get(i/2 - 1).setIcon(Utils.resizeImageIcon("checkTrue", Utils.RADIO_LEVEL_WIDTH, Utils.RADIO_LEVEL_HEIGHT));
 			} else {
-				listLevel.get(i-4).setIcon(Utils.resizeImageIcon("checkFalse", Utils.RADIO_LEVEL_WIDTH, Utils.RADIO_LEVEL_HEIGHT));
+				listLevel.get(i/2 - 1).setIcon(Utils.resizeImageIcon("checkFalse", Utils.RADIO_LEVEL_WIDTH, Utils.RADIO_LEVEL_HEIGHT));
 			}
 		}
 	}
@@ -140,7 +140,7 @@ public class MainSettingPanel extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			JLabel label = (JLabel) e.getSource();
 			for(JLabel lbl : listLevel) {
-				int i = listLevel.indexOf(lbl) + 4;
+				int i = (listLevel.indexOf(lbl) + 1) * 2;
 				if(label == lbl) {
 					gameSetting.setLevel(i);
 					GameSetting.rootLevel = gameSetting.getLevel();
