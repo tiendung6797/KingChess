@@ -87,10 +87,10 @@ public class MainSettingPanel extends JPanel {
 		
 		this.add(getButtonPanel());
 		
-		Timer timerRadioLevel = new Timer(500, new ActionListener() {
+		Timer timerRadioLevel = new Timer(0, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int i = gameSetting.getLevel();
+				int i = GameSetting.rootLevel;
 				checkRadioLevel(i);
 			}
 		});
@@ -221,9 +221,6 @@ public class MainSettingPanel extends JPanel {
 		JLabel rd2P = new JLabel("Human");
 		rd2P.setForeground(Color.BLACK);
 		rd2P.setFont(new Font("Times New Roman", Font.BOLD, 19));
-		JLabel rdTr = new JLabel("Training");
-		rdTr.setForeground(Color.BLACK);
-		rdTr.setFont(new Font("Times New Roman", Font.BOLD, 19));
 
 		if (gameSetting.isAiPlay()) {
 			rdAi.setIcon(Utils.ICON_CHECK_TRUE);
@@ -251,12 +248,9 @@ public class MainSettingPanel extends JPanel {
 		});
 
 		rdPanel.add(rd2P);
-		Component area1 = Box.createRigidArea(new Dimension(14, 0));
+		Component area1 = Box.createRigidArea(new Dimension(30, 0));
 		rdPanel.add(area1);
 		rdPanel.add(rdAi);
-		Component area2 = Box.createRigidArea(new Dimension(14, 0));
-		rdPanel.add(area2);
-		rdPanel.add(rdTr);
 		return rdPanel;
 	}
 

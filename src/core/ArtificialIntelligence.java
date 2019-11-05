@@ -22,14 +22,7 @@ public class ArtificialIntelligence implements Runnable {
 		}
 	}
 
-	/*********************************************************************************************************
-	 * -------------------CODE USING TO FIND ALphaBeta OF
-	 * POSITIONBOARD----------------------------------- --------------RETURN
-	 * VALUE OF BESTCHILD AND SET BESTCHILD POSITION IS THE POSITION BOARD AFTER
-	 * AI CHOISE-----
-	 * -------------------------------------------------------------------------
-	 *******************************************************************************************************/
-	private int AlphaBeta(int alpha, int beta, PositionBoard positionBoard1) {
+	private int AlphaBeta(PositionBoard positionBoard1) {
 		positionBoard1.setValue(); // value = AiValue - HumanValue
 		if (positionBoard1.getDepth() != 0) {
 			if (positionBoard1.getValue() < 15000 && positionBoard1.getValue() > -15000) {
@@ -44,15 +37,13 @@ public class ArtificialIntelligence implements Runnable {
 
 		if ((this.gameSetting.getLevel() - positionBoard1.getDepth()) % 2 == 0) {
 			int bestChild = -10000000;
-
+			
 			int i = 0;
-			while (i < positionBoard1.getListChildPosition().size() && bestChild < beta) {
-				if (bestChild > alpha) {
-					alpha = bestChild;
-				}
-				int value = AlphaBeta(alpha, beta, positionBoard1.getListChildPosition().get(i));
+			while (i < positionBoard1.getListChildPosition().size()) {
+				int value = AlphaBeta(positionBoard1.getListChildPosition().get(i));
 				if (value > bestChild) {
 					bestChild = value;
+					
 					positionBoard1.setBestChild(positionBoard1.getListChildPosition().get(i));
 
 				}
@@ -64,11 +55,8 @@ public class ArtificialIntelligence implements Runnable {
 		if ((this.gameSetting.getLevel() - positionBoard1.getDepth()) % 2 == 1) {
 			int bestChild = 10000000;
 			int i = 0;
-			while (i < positionBoard1.getListChildPosition().size() && bestChild > alpha) {
-				if (bestChild < beta) {
-					beta = bestChild;
-				}
-				int value = AlphaBeta(alpha, beta, positionBoard1.getListChildPosition().get(i));
+			while (i < positionBoard1.getListChildPosition().size()) {
+				int value = AlphaBeta( positionBoard1.getListChildPosition().get(i));
 				if (value < bestChild) {
 					bestChild = value;
 					positionBoard1.setBestChild(positionBoard1.getListChildPosition().get(i));
@@ -88,15 +76,6 @@ public class ArtificialIntelligence implements Runnable {
 	 *************************************************************************************************************/
 	@Override
 	public void run() {
-		if (GameSetting.rootLevel == 5) {
-			gameSetting.setLevel(4);
-			PositionBoard positionBoard2 = positionBoard.copy(positionBoard.getDepth(), gameSetting);
-			positionBoard2.setListChildPosition();
-			if (positionBoard2.getListChildPosition().size() <= 20) {
-				gameSetting.setLevel(5);
-			}
-			this.positionBoard.setDepth(gameSetting.getLevel());
-		}
 		if (GameSetting.rootLevel == 6) {
 			gameSetting.setLevel(4);
 			PositionBoard positionBoard2 = positionBoard.copy(positionBoard.getDepth(), gameSetting);
@@ -125,7 +104,7 @@ public class ArtificialIntelligence implements Runnable {
 			}
 			this.positionBoard.setDepth(gameSetting.getLevel());
 		}
-		AlphaBeta(-10000000, 10000000, this.positionBoard);
+		AlphaBeta(this.positionBoard);
 	}
 	/*************************************************************************************************************
 	 * /////////////////////////////////////////////////////////////////////////
