@@ -22,7 +22,7 @@ public class ArtificialIntelligence implements Runnable {
 		}
 	}
 
-	private int AlphaBeta(PositionBoard positionBoard1) {
+	private int AlphaBeta(int alpha, int beta, PositionBoard positionBoard1) {
 		positionBoard1.setValue(); // value = AiValue - HumanValue
 		if (positionBoard1.getDepth() != 0) {
 			if (positionBoard1.getValue() < 15000 && positionBoard1.getValue() > -15000) {
@@ -37,37 +37,46 @@ public class ArtificialIntelligence implements Runnable {
 
 		if ((this.gameSetting.getLevel() - positionBoard1.getDepth()) % 2 == 0) {
 			int bestChild = -10000000;
-			
-			int i = 0;
-			while (i < positionBoard1.getListChildPosition().size()) {
-				int value = AlphaBeta(positionBoard1.getListChildPosition().get(i));
+
+			for(int i = 0; i < positionBoard1.getListChildPosition().size(); i++) {
+				
+				int value = AlphaBeta(alpha, beta, positionBoard1.getListChildPosition().get(i));
 				if (value > bestChild) {
 					bestChild = value;
-					
 					positionBoard1.setBestChild(positionBoard1.getListChildPosition().get(i));
-
 				}
-				i++;
+				
+				if (bestChild > alpha) {
+					alpha = bestChild;
+				}
+				
+				if (beta <= alpha) break;
 			}
 			alphaBeta = bestChild;
 
 		}
 		if ((this.gameSetting.getLevel() - positionBoard1.getDepth()) % 2 == 1) {
 			int bestChild = 10000000;
-			int i = 0;
-			while (i < positionBoard1.getListChildPosition().size()) {
-				int value = AlphaBeta( positionBoard1.getListChildPosition().get(i));
+
+			for(int i = 0; i < positionBoard1.getListChildPosition().size(); i++) {
+				
+				int value = AlphaBeta(alpha, beta, positionBoard1.getListChildPosition().get(i));
 				if (value < bestChild) {
 					bestChild = value;
 					positionBoard1.setBestChild(positionBoard1.getListChildPosition().get(i));
 				}
-				i++;
+				
+				if (bestChild < beta) {
+					beta = bestChild;
+				}
+				
+				if (beta <= alpha) break;
 			}
 			alphaBeta = bestChild;
 		}
 		positionBoard1.free();
 		return alphaBeta;
-		
+
 	}
 
 	/*************************************************************************************************************
@@ -104,7 +113,7 @@ public class ArtificialIntelligence implements Runnable {
 			}
 			this.positionBoard.setDepth(gameSetting.getLevel());
 		}
-		AlphaBeta(this.positionBoard);
+		AlphaBeta(-10000000, 10000000, this.positionBoard);
 	}
 	/*************************************************************************************************************
 	 * /////////////////////////////////////////////////////////////////////////

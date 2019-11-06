@@ -103,6 +103,28 @@ public class King extends Pieces {
 					}
 				}
 			}
+			if (this.numberInBoard == 3) {
+				if (!positionBoard.wasSet(2)) {
+					if (!positionBoard.wasSet(1)) {
+						if (positionBoard.wasSetHuman(0)) {
+							if (positionBoard.getChoisePiecesHuman(0).getName() == "Xe") {
+								move.add(1);
+							}
+						}
+					}
+				}
+				if (!positionBoard.wasSet(4)) {
+					if (!positionBoard.wasSet(5)) {
+						if (!positionBoard.wasSet(6)) {
+							if (positionBoard.wasSetHuman(7)) {
+								if (positionBoard.getChoisePiecesHuman(7).getName() == "Xe") {
+									move.add(5);
+								}
+							}
+						}
+					}
+				}
+			}
 		} else {
 			if (!positionBoard.wasSetAi(listMove[0]) && listMove[0] < 64 && numberInBoard % 8 != 0) {
 				move.add(listMove[0]);
@@ -145,6 +167,28 @@ public class King extends Pieces {
 							if (positionBoard.wasSetAi(56)) {
 								if (positionBoard.getChoisePiecesAi(56).getName() == "Xe") {
 									move.add(58);
+								}
+							}
+						}
+					}
+				}
+			}
+			if (this.numberInBoard == 59) {
+				if (!positionBoard.wasSet(57)) {
+					if (!positionBoard.wasSet(58)) {
+						if (positionBoard.wasSetAi(56)) {
+							if (positionBoard.getChoisePiecesAi(56).getName() == "Xe") {
+								move.add(57);
+							}
+						}
+					}
+				}
+				if (!positionBoard.wasSet(60)) {
+					if (!positionBoard.wasSet(61)) {
+						if (!positionBoard.wasSet(62)) {
+							if (positionBoard.wasSetAi(63)) {
+								if (positionBoard.getChoisePiecesAi(63).getName() == "Xe") {
+									move.add(61);
 								}
 							}
 						}

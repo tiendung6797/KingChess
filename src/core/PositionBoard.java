@@ -167,6 +167,18 @@ public class PositionBoard {
 						newPositionBoard = newPositionBoard.newPositionBoard(move2);
 					}
 				}
+				if (move.getPieces().getNumberInBoard() == 3) {
+					if (move.getNumberNext() == 1) {
+						Pieces rook = this.getChoisePiecesHuman(0);
+						Move move2 = new Move(rook, 2);
+						newPositionBoard = newPositionBoard.newPositionBoard(move2);
+					}
+					if (move.getNumberNext() == 5) {
+						Pieces rook = this.getChoisePiecesHuman(7);
+						Move move2 = new Move(rook, 4);
+						newPositionBoard = newPositionBoard.newPositionBoard(move2);
+					}
+				}
 			}
 			if (move.getPieces().getName() == "Tot") {
 				if ((int) move.getNumberNext() / 8 == 7) {
@@ -222,6 +234,32 @@ public class PositionBoard {
 							newPositionBoard.getHashMapPieces().put(move2.getNumberNext(), "Human");
 						}
 					}
+					if (move.getPieces().getNumberInBoard() == 3) {
+						if (move.getNumberNext() == 1) {
+							Pieces rook = this.getChoisePiecesHuman(0);
+							Move move2 = new Move(rook, 2);
+							for (int i = 0; i < newPositionBoard.getListPiecesHuman().size(); i++) {
+								if (newPositionBoard.getListPiecesHuman().get(i).equalPiece(move2.getPieces())) {
+									newPositionBoard.getListPiecesHuman().get(i).setNewLocation(move2.getNumberNext());
+									break;
+								}
+							}
+							newPositionBoard.getHashMapPieces().put(move2.getPieces().getNumberInBoard(), "NoPiece");
+							newPositionBoard.getHashMapPieces().put(move2.getNumberNext(), "Human");
+						}
+						if (move.getNumberNext() == 5) {
+							Pieces rook = this.getChoisePiecesHuman(7);
+							Move move2 = new Move(rook, 4);
+							for (int i = 0; i < newPositionBoard.getListPiecesHuman().size(); i++) {
+								if (newPositionBoard.getListPiecesHuman().get(i).equalPiece(move2.getPieces())) {
+									newPositionBoard.getListPiecesHuman().get(i).setNewLocation(move2.getNumberNext());
+									break;
+								}
+							}
+							newPositionBoard.getHashMapPieces().put(move2.getPieces().getNumberInBoard(), "NoPiece");
+							newPositionBoard.getHashMapPieces().put(move2.getNumberNext(), "Human");
+						}
+					}
 				}
 				if (move.getPieces().getName() == "Tot") {
 					if ((int) move.getNumberNext() / 8 == 7) {
@@ -264,6 +302,33 @@ public class PositionBoard {
 						if (move.getNumberNext() == 58) {
 
 							Move move2 = new Move(this.getChoisePiecesAi(56), 59);
+							for (int i = 0; i < newPositionBoard.getListPiecesAi().size(); i++) {
+								if (newPositionBoard.getListPiecesAi().get(i).equalPiece(move2.getPieces())) {
+									newPositionBoard.getListPiecesAi().get(i).setNewLocation(move2.getNumberNext());
+									break;
+								}
+							}
+							newPositionBoard.getHashMapPieces().put(move2.getPieces().getNumberInBoard(), "NoPiece");
+							newPositionBoard.getHashMapPieces().put(move2.getNumberNext(), "Ai");
+						}
+					}
+					if (move.getPieces().getNumberInBoard() == 59) {
+						if (move.getNumberNext() == 57) {
+
+							move.toString(); 
+							Move move2 = new Move(this.getChoisePiecesAi(56), 58);
+							for (int i = 0; i < newPositionBoard.getListPiecesAi().size(); i++) {
+								if (newPositionBoard.getListPiecesAi().get(i).equalPiece(move2.getPieces())) {
+									newPositionBoard.getListPiecesAi().get(i).setNewLocation(move2.getNumberNext());
+									break;
+								}
+							}
+							newPositionBoard.getHashMapPieces().put(move2.getPieces().getNumberInBoard(), "NoPiece");
+							newPositionBoard.getHashMapPieces().put(move2.getNumberNext(), "Ai");
+						}
+						if (move.getNumberNext() == 61) {
+
+							Move move2 = new Move(this.getChoisePiecesAi(63), 60);
 							for (int i = 0; i < newPositionBoard.getListPiecesAi().size(); i++) {
 								if (newPositionBoard.getListPiecesAi().get(i).equalPiece(move2.getPieces())) {
 									newPositionBoard.getListPiecesAi().get(i).setNewLocation(move2.getNumberNext());
@@ -403,8 +468,8 @@ public class PositionBoard {
 			this.listPiecesHuman.add(new Knight(6, "Den", "Down", this));
 			this.listPiecesHuman.add(new Bishop(2, "Den", "Down", this));
 			this.listPiecesHuman.add(new Bishop(5, "Den", "Down", this));
-			this.listPiecesHuman.add(new Queen(3, "Den", "Down", this));
-			this.listPiecesHuman.add(new King(4, "Den", "Down", this));
+			this.listPiecesHuman.add(new Queen(4, "Den", "Down", this));
+			this.listPiecesHuman.add(new King(3, "Den", "Down", this));
 			for (int i = 8; i < 16; i++) {
 				this.listPiecesHuman.add(new Pawn(i, "Den", "Down", this));
 			}
@@ -414,8 +479,8 @@ public class PositionBoard {
 			this.listPiecesAi.add(new Knight(62, "Trang", "Up", this));
 			this.listPiecesAi.add(new Bishop(58, "Trang", "Up", this));
 			this.listPiecesAi.add(new Bishop(61, "Trang", "Up", this));
-			this.listPiecesAi.add(new Queen(59, "Trang", "Up", this));
-			this.listPiecesAi.add(new King(60, "Trang", "Up", this));
+			this.listPiecesAi.add(new Queen(60, "Trang", "Up", this));
+			this.listPiecesAi.add(new King(59, "Trang", "Up", this));
 			for (int i = 48; i < 56; i++) {
 				this.listPiecesAi.add(new Pawn(i, "Trang", "Up", this));
 			}
