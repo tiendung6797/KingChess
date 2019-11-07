@@ -36,6 +36,22 @@ public class ArtificialIntelligence implements Runnable {
 		}
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		if ((this.gameSetting.getLevel() - positionBoard1.getDepth()) % 2 == 0) {
 			int bestChild = -10000000;
