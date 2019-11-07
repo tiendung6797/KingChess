@@ -34,67 +34,41 @@ public class ArtificialIntelligence implements Runnable {
 			alphaBeta = positionBoard1.getValue();
 			return alphaBeta;
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 
 		if ((this.gameSetting.getLevel() - positionBoard1.getDepth()) % 2 == 0) {
 			int bestChild = -10000000;
-
-			for(int i = 0; i < positionBoard1.getListChildPosition().size(); i++) {
-				
+			
+			for (int i = 0; i < positionBoard1.getListChildPosition().size(); i++) {
+				if(alpha > bestChild) {
+					alpha = bestChild;
+				}
 				int value = AlphaBeta(alpha, beta, positionBoard1.getListChildPosition().get(i));
 				if (value > bestChild) {
 					bestChild = value;
 					positionBoard1.setBestChild(positionBoard1.getListChildPosition().get(i));
 				}
-				
-				if (bestChild > alpha) {
-					alpha = bestChild;
-				}
-				
-				if (beta <= alpha) break;
 			}
 			alphaBeta = bestChild;
-
 		}
+		
 		if ((this.gameSetting.getLevel() - positionBoard1.getDepth()) % 2 == 1) {
 			int bestChild = 10000000;
-
-			for(int i = 0; i < positionBoard1.getListChildPosition().size(); i++) {
-				
+			
+			for (int i = 0; i < positionBoard1.getListChildPosition().size(); i++) {
+				if(beta < bestChild) {
+					beta = bestChild;
+				}
 				int value = AlphaBeta(alpha, beta, positionBoard1.getListChildPosition().get(i));
 				if (value < bestChild) {
 					bestChild = value;
 					positionBoard1.setBestChild(positionBoard1.getListChildPosition().get(i));
 				}
-				
-				if (bestChild < beta) {
-					beta = bestChild;
-				}
-				
-				if (beta <= alpha) break;
 			}
 			alphaBeta = bestChild;
 		}
 		positionBoard1.free();
 		return alphaBeta;
-
+		
 	}
 
 	/*************************************************************************************************************
