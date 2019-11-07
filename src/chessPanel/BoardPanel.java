@@ -1,6 +1,7 @@
 package chessPanel;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -108,23 +109,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		this.positionBoard.draw(g);
 	}
 	
-	public void update(Graphics g) {
-		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;
-		
-		int moveX = moveAi().getParentMove().getNumberNext() % 8; 
-		int moveY = moveAi().getParentMove().getNumberNext() / 8; 
-		
-		int choseX = moveAi().getParentMove().getPieces().getNumberInBoard() % 8;
-		int choseY = moveAi().getParentMove().getPieces().getNumberInBoard() / 8;
-		
-		ImageIcon brown = new ImageIcon(this.getClass().getResource("/image/brown.jpg"));
-		
-		g2d.drawImage(brown.getImage(), 20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75, null);
-		g2d.drawImage(brown.getImage(), 20 + (choseX) * 75, 23 + (7 - choseY) * 75, 75, 75, null);
-	}
-	
-	public PositionBoard moveAi() {
+	public void moveAi() {
 		if (gameSetting.isAiPlay() && !win && !isHumanTurn) {
 			ai = new ArtificialIntelligence(gameSetting, positionBoard);
 			positionBoard = ai.getNextPosition();
@@ -139,8 +124,29 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			checkWin();
 			repaint();
 			
+			
+			
+			
+
+			Graphics g = getGraphics();
+			Graphics2D g2d = (Graphics2D) g;
+	
+			int moveX = positionBoard.getParentMove().getNumberNext() % 8; 
+			int moveY = positionBoard.getParentMove().getNumberNext() / 8; 
+			
+			
+			int choseX = positionBoard.getParentMove().getPieces().getNumberInBoard() % 8;
+			int choseY = positionBoard.getParentMove().getPieces().getNumberInBoard() / 8;
+			
+			ImageIcon brown = new ImageIcon(this.getClass().getResource("/image/brown.jpg"));
+			
+			g2d.drawImage(brown.getImage(), 20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75, null);
+			g2d.drawImage(brown.getImage(), 20 + (choseX) * 75, 23 + (7 - choseY) * 75, 75, 75, null);
+			
+			g2d.setColor(Color.CYAN);
+			g2d.fillRect(20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75);
+			
 		}
-		return positionBoard;
 	}
 	
 	

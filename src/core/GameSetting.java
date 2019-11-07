@@ -17,11 +17,11 @@ public class GameSetting {
 
 	public GameSetting() {
 
-		this.level = 6;
+		this.level = 4;
 		GameSetting.rootLevel = this.level;
 
-		this.humanFirst = true;
-		this.aiFirst = false;
+		this.humanFirst = false;
+		this.aiFirst = true;
 
 		this.aiPlay = true;
 

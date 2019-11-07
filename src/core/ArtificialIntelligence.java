@@ -29,6 +29,7 @@ public class ArtificialIntelligence implements Runnable {
 				positionBoard1.setListChildPosition();
 			}
 		}
+		
 		int alphaBeta = 0;
 		if (positionBoard1.getDepth() == 0 || positionBoard1.getListChildPosition().size() == 0) {
 			alphaBeta = positionBoard1.getValue();
@@ -37,44 +38,45 @@ public class ArtificialIntelligence implements Runnable {
 
 		if ((this.gameSetting.getLevel() - positionBoard1.getDepth()) % 2 == 0) {
 			int bestChild = -10000000;
-			
-			for (int i = 0; i < positionBoard1.getListChildPosition().size(); i++) {
-				if(alpha > bestChild) {
+
+			for(int i = 0; i < positionBoard1.getListChildPosition().size(); i++) {
+				if (bestChild > alpha) {
 					alpha = bestChild;
 				}
+				
 				int value = AlphaBeta(alpha, beta, positionBoard1.getListChildPosition().get(i));
 				if (value > bestChild) {
 					bestChild = value;
 					positionBoard1.setBestChild(positionBoard1.getListChildPosition().get(i));
 				}
+				
+				if (beta <= alpha) break;
 			}
 			alphaBeta = bestChild;
 		}
-		
 		if ((this.gameSetting.getLevel() - positionBoard1.getDepth()) % 2 == 1) {
 			int bestChild = 10000000;
-			
-			for (int i = 0; i < positionBoard1.getListChildPosition().size(); i++) {
-				if(beta < bestChild) {
+
+			for(int i = 0; i < positionBoard1.getListChildPosition().size(); i++) {
+				if (bestChild < beta) {
 					beta = bestChild;
 				}
+				
 				int value = AlphaBeta(alpha, beta, positionBoard1.getListChildPosition().get(i));
 				if (value < bestChild) {
 					bestChild = value;
 					positionBoard1.setBestChild(positionBoard1.getListChildPosition().get(i));
 				}
+				
+				if (beta <= alpha) break;
 			}
 			alphaBeta = bestChild;
 		}
 		positionBoard1.free();
 		return alphaBeta;
-		
+
 	}
 
-	/*************************************************************************************************************
-	 * /////////////////////////////////////////////////////////////////////////
-	 * //////////////////////////////////////
-	 *************************************************************************************************************/
 	@Override
 	public void run() {
 		if (GameSetting.rootLevel == 6) {
@@ -107,9 +109,4 @@ public class ArtificialIntelligence implements Runnable {
 		}
 		AlphaBeta(-10000000, 10000000, this.positionBoard);
 	}
-	/*************************************************************************************************************
-	 * /////////////////////////////////////////////////////////////////////////
-	 * //////////////////////////////////////
-	 *************************************************************************************************************/
-
 }
