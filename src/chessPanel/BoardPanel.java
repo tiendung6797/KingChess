@@ -127,6 +127,15 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 
 			Graphics g = getGraphics();
 			Graphics2D g2d = (Graphics2D) g;
