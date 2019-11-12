@@ -57,7 +57,6 @@ public class King extends Pieces {
 
 		if (this.getSide().equals("Down")) {
 			if (!positionBoard.wasSetHuman(listMove[0]) && listMove[0] < 64 && numberInBoard % 8 != 0) {
-
 				move.add(listMove[0]);
 			}
 			if (!positionBoard.wasSetHuman(listMove[2]) && listMove[2] < 64 && numberInBoard % 8 != 7) {

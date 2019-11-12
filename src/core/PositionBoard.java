@@ -541,15 +541,6 @@ public class PositionBoard {
 		return text;
 	}
 	
-	public int checkMate() {
-		for (int i = 0; i < listPiecesHuman.size(); i++) {
-			if(listPiecesHuman.get(i).getName() == "Tuong") {
-				return listPiecesHuman.get(i).getNumberInBoard();
-			}
-		}
-		return 0;
-	}
-
 	public boolean equal(PositionBoard positionBoard) {
 		if (this.getDepth() != gameSetting.getLevel() - 1) {
 			return false;

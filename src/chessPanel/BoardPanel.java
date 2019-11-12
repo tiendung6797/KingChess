@@ -111,8 +111,21 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	
 	public void moveAi() {
 		if (gameSetting.isAiPlay() && !win && !isHumanTurn) {
+			
+			
+			
 			ai = new ArtificialIntelligence(gameSetting, positionBoard);
 			positionBoard = ai.getNextPosition();
+			
+			//System.out.println(positionBoard.getParentMove().getPieces());
+			
+			
+			
+//			for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
+//				//for (int j = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
+//					System.out.println(positionBoard.getListPiecesAi().get(i));
+//				//}
+//			}
 			
 			isHumanTurn = true;
 			showCanMove = true;
@@ -137,23 +150,23 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			
 			
 
-			Graphics g = getGraphics();
-			Graphics2D g2d = (Graphics2D) g;
-	
-			int moveX = positionBoard.getParentMove().getNumberNext() % 8; 
-			int moveY = positionBoard.getParentMove().getNumberNext() / 8; 
-			
-			
-			int choseX = positionBoard.getParentMove().getPieces().getNumberInBoard() % 8;
-			int choseY = positionBoard.getParentMove().getPieces().getNumberInBoard() / 8;
-			
-			ImageIcon brown = new ImageIcon(this.getClass().getResource("/image/brown.jpg"));
-			
-			g2d.drawImage(brown.getImage(), 20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75, null);
-			g2d.drawImage(brown.getImage(), 20 + (choseX) * 75, 23 + (7 - choseY) * 75, 75, 75, null);
-			
-			g2d.setColor(Color.CYAN);
-			g2d.fillRect(20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75);
+//			Graphics g = getGraphics();
+//			Graphics2D g2d = (Graphics2D) g;
+//	
+//			int moveX = positionBoard.getParentMove().getNumberNext() % 8; 
+//			int moveY = positionBoard.getParentMove().getNumberNext() / 8; 
+//			
+//			
+//			int choseX = positionBoard.getParentMove().getPieces().getNumberInBoard() % 8;
+//			int choseY = positionBoard.getParentMove().getPieces().getNumberInBoard() / 8;
+//			
+//			ImageIcon brown = new ImageIcon(this.getClass().getResource("/image/brown.jpg"));
+//			
+//			g2d.drawImage(brown.getImage(), 20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75, null);
+//			g2d.drawImage(brown.getImage(), 20 + (choseX) * 75, 23 + (7 - choseY) * 75, 75, 75, null);
+//			
+//			g2d.setColor(Color.CYAN);
+//			g2d.fillRect(20 + (moveX) * 75, 23 + (7 - moveY) * 75, 75, 75);
 			
 		}
 	}
@@ -161,26 +174,26 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	
 	
 	
-	/*
-	 * public
-	 * 
-	 * public boolean checkMate() {
-	 * 
-	 * 
-	 * for (int i = 0; i < positionBoard.getListPiecesHuman().size(); i++) {
-	 * if(positionBoard.getListPiecesHuman().get(i).getName() == "Tuong") { return
-	 * positionBoard.getListPiecesHuman().get(i).getNumberInBoard(); } }
-	 * 
-	 * for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) { for(int j
-	 * = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size();
-	 * j++) { if(listPiecesAi.get(i).getNumberCanMove().get(j) == kingPosition) {
-	 * return true; }
-	 * 
-	 * } }
-	 * 
-	 * 
-	 * }
-	 */
+	 
+//	public boolean checkMate() {
+//
+//		for (int i = 0; i < positionBoard.getListPiecesHuman().size(); i++) {
+//			if (positionBoard.getListPiecesHuman().get(i).getName() == "Tuong") {
+//				return positionBoard.getListPiecesHuman().get(i).getNumberInBoard();
+//			}
+//		}
+//
+//		for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
+//			for (int j = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
+//				if (listPiecesAi.get(i).getNumberCanMove().get(j) == kingPosition) {
+//					return true;
+//				}
+//
+//			}
+//		}
+//
+//	}
+	 
 	
 	
 	
@@ -191,14 +204,37 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		if (isHumanTurn) {
 			int location = (7 - (int) ((e.getY() - 23) / 75)) * 8 + (int) ((e.getX() - 20) / 75);
 			if (positionBoard.wasSetHuman(location)) {
+				
+//				for (int i = 0; i < positionBoard.getListPiecesHuman().size(); i++) {
+//					//for (int j = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
+//						System.out.println(positionBoard.getListPiecesHuman().get(i).getNumberCanMove().size());
+//					//}
+//				}
+				
+				System.out.println(positionBoard.getListPiecesHuman().get(2).getNumberCanMove());
+				
 				showCanMove = true;
 				wasChoisePieces = true;
 				piecesChoise = positionBoard.getChoisePiecesHuman(location);
 				piecesChoise.setNumberCanMove();
 				
+				//System.out.println(piecesChoise.getNumberCanMove().size());
+				
+//				if(piecesChoise.getName() == "Tuong") {
+////					for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
+////						for (int j = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
+//							for(int k = 0; k < piecesChoise.getNumberCanMove().size(); k++ ) {
+//								if (piecesChoise.getNumberCanMove().get(k) == 11) {
+//									piecesChoise.getNumberCanMove().remove(k);
+//								}
+//							}
+////						}
+////					}
+//				}
+				
 				repaint();
 			} else {
-				if (wasChoisePieces && piecesChoise.canMove(location) && gameSetting.isAiPlay()) {
+				if (wasChoisePieces && piecesChoise.canMove(location)) {
 					Move move = new Move(piecesChoise, location);
 
 					positionBoard = positionBoard.newPositionBoard(move);
@@ -210,18 +246,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 					checkWin();
 					wasChoisePieces = false;
 					repaint();
-				} else if (wasChoisePieces && piecesChoise.canMove(location) && !gameSetting.isAiPlay()) {
-					Move move = new Move(piecesChoise, location);
-
-					positionBoard = positionBoard.newPositionBoard(move);
-
-					isHumanTurn = false;
-					showCanMove = false;
-
-					checkWin();
-					wasChoisePieces = false;
-					repaint();
-				} 
+				}
 			}
 
 		} else {
@@ -232,6 +257,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 					wasChoisePieces = true;
 					piecesChoise = positionBoard.getChoisePiecesAi(location);
 					piecesChoise.setNumberCanMove();
+					
 					repaint();
 				} else {
 					if (wasChoisePieces && piecesChoise.canMove(location)) {
