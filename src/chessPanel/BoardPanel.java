@@ -1,7 +1,6 @@
 package chessPanel;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -111,21 +110,8 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	
 	public void moveAi() {
 		if (gameSetting.isAiPlay() && !win && !isHumanTurn) {
-			
-			
-			
 			ai = new ArtificialIntelligence(gameSetting, positionBoard);
 			positionBoard = ai.getNextPosition();
-			
-			//System.out.println(positionBoard.getParentMove().getPieces());
-			
-			
-			
-//			for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
-//				//for (int j = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
-//					System.out.println(positionBoard.getListPiecesAi().get(i));
-//				//}
-//			}
 			
 			isHumanTurn = true;
 			showCanMove = true;
@@ -204,33 +190,26 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		if (isHumanTurn) {
 			int location = (7 - (int) ((e.getY() - 23) / 75)) * 8 + (int) ((e.getX() - 20) / 75);
 			if (positionBoard.wasSetHuman(location)) {
-				
-//				for (int i = 0; i < positionBoard.getListPiecesHuman().size(); i++) {
-//					//for (int j = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
-//						System.out.println(positionBoard.getListPiecesHuman().get(i).getNumberCanMove().size());
-//					//}
-//				}
-				
-				System.out.println(positionBoard.getListPiecesHuman().get(2).getNumberCanMove());
-				
 				showCanMove = true;
 				wasChoisePieces = true;
 				piecesChoise = positionBoard.getChoisePiecesHuman(location);
 				piecesChoise.setNumberCanMove();
 				
-				//System.out.println(piecesChoise.getNumberCanMove().size());
+				for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
+					positionBoard.getListPiecesAi().get(i).setNumberCanMove();
+				}
 				
-//				if(piecesChoise.getName() == "Tuong") {
-////					for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
-////						for (int j = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
-//							for(int k = 0; k < piecesChoise.getNumberCanMove().size(); k++ ) {
-//								if (piecesChoise.getNumberCanMove().get(k) == 11) {
-//									piecesChoise.getNumberCanMove().remove(k);
-//								}
-//							}
-////						}
-////					}
-//				}
+				if(piecesChoise.getName() == "Tuong") {
+					for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
+						for (int j = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
+							for(int k = 0; k < piecesChoise.getNumberCanMove().size(); k++ ) {
+								if (piecesChoise.getNumberCanMove().get(k) == positionBoard.getListPiecesAi().get(i).getNumberCanMove().get(j)) {
+									piecesChoise.getNumberCanMove().remove(k);
+								}
+							}
+						}
+					}
+				}
 				
 				repaint();
 			} else {
