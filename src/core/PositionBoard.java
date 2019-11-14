@@ -205,6 +205,10 @@ public class PositionBoard {
 				}
 				if (newPositionBoard.wasSetAi(move.getNumberNext())) {
 					newPositionBoard.getListPiecesAi().remove(newPositionBoard.getChoisePiecesAi(move.getNumberNext()));
+					//if(newPositionBoard.getChoisePiecesAi(move.getNumberNext()) != null) {
+						System.out.println(newPositionBoard.getChoisePiecesAi(move.getNumberNext()));
+					//}
+					
 					newPositionBoard.setHumanWasEat(true);
 				}
 				if (move.getPieces().getName() == "Tuong") {

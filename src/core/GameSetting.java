@@ -17,7 +17,7 @@ public class GameSetting {
 
 	public GameSetting() {
 
-		this.level = 4;
+		this.level = 2;
 		GameSetting.rootLevel = this.level;
 
 		this.humanFirst = false;
