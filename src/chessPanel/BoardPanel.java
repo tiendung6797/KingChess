@@ -124,6 +124,17 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			repaint();
 			
 			
+			for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
+				positionBoard.getListPiecesAi().get(i).setNumberCanMove();
+			}
+			
+			for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
+				for (int j = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
+					if (positionBoard.getListPiecesAi().get(i).getNumberCanMove().get(j) == positionBoard.kingPosition()) {
+						JOptionPane.showMessageDialog(null, "Notify", "Check!", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+			}
 			
 			
 			
@@ -213,7 +224,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 				
 				repaint();
 			} else {
-				if (wasChoisePieces && piecesChoise.canMove(location)) {
+				if (wasChoisePieces && piecesChoise.canMove(location) && gameSetting.isAiPlay()) {
 					Move move = new Move(piecesChoise, location);
 
 					positionBoard = positionBoard.newPositionBoard(move);
@@ -221,6 +232,17 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 					isHumanTurn = false;
 					showCanMove = false;
 					System.out.println("======**** Ai Turn ****======");
+
+					checkWin();
+					wasChoisePieces = false;
+					repaint();
+				} else if (wasChoisePieces && piecesChoise.canMove(location) && !gameSetting.isAiPlay()) {
+					Move move = new Move(piecesChoise, location);
+
+					positionBoard = positionBoard.newPositionBoard(move);
+
+					isHumanTurn = false;
+					showCanMove = false;
 
 					checkWin();
 					wasChoisePieces = false;
@@ -248,6 +270,18 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 						checkWin();
 						wasChoisePieces = false;
 						repaint();
+						
+						for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
+							positionBoard.getListPiecesAi().get(i).setNumberCanMove();
+						}
+						
+						for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
+							for (int j = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
+								if (positionBoard.getListPiecesAi().get(i).getNumberCanMove().get(j) == positionBoard.kingPosition()) {
+									JOptionPane.showMessageDialog(null, "Check Mate!", "Notify", JOptionPane.INFORMATION_MESSAGE);
+								}
+							}
+						}
 					}
 				}
 			}

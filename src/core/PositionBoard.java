@@ -205,10 +205,6 @@ public class PositionBoard {
 				}
 				if (newPositionBoard.wasSetAi(move.getNumberNext())) {
 					newPositionBoard.getListPiecesAi().remove(newPositionBoard.getChoisePiecesAi(move.getNumberNext()));
-					//if(newPositionBoard.getChoisePiecesAi(move.getNumberNext()) != null) {
-						System.out.println(newPositionBoard.getChoisePiecesAi(move.getNumberNext()));
-					//}
-					
 					newPositionBoard.setHumanWasEat(true);
 				}
 				if (move.getPieces().getName() == "Tuong") {
@@ -528,6 +524,15 @@ public class PositionBoard {
 			return true;
 		}
 		return false;
+	}
+	
+	public int kingPosition() {
+		for(int i = 0; i < listPiecesHuman.size(); i++) {
+			if(listPiecesHuman.get(i).getName() == "Tuong") {
+				return listPiecesHuman.get(i).getNumberInBoard();
+			}
+		}
+		return 0;
 	}
 
 	public String toTextSave() {
