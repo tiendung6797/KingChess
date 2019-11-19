@@ -220,6 +220,9 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 							}
 						}
 					}
+					if(piecesChoise.getNumberCanMove().size() <= 0) {
+						JOptionPane.showMessageDialog(null, "Hết cờ!", "Notify", JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 				
 				repaint();
