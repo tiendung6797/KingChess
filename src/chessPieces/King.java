@@ -148,7 +148,6 @@ public class King extends Pieces {
 			}
 			if (!positionBoard.wasSetAi(listMove[7]) && numberInBoard % 8 != 0) {
 				move.add(listMove[7]);
-
 			}
 			if (this.numberInBoard == 60) {
 				if (!positionBoard.wasSet(61)) {
@@ -197,7 +196,7 @@ public class King extends Pieces {
 		}
 		numberCanMove = move;
 	}
-
+	
 	@Override
 	public void setCurrentPower() {
 

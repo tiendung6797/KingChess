@@ -35,8 +35,6 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	private boolean wasChoisePieces = false;
 	private ArtificialIntelligence ai;
 	private boolean win;
-	
-	
 
 	public BoardPanel(GameSetting gameSetting) {
 		this.gameSetting = gameSetting;
@@ -194,9 +192,9 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	
 	
 	
-	
 	@Override
 	public void mousePressed(MouseEvent e) {
+		
 		win = false;
 		if (isHumanTurn) {
 			int location = (7 - (int) ((e.getY() - 23) / 75)) * 8 + (int) ((e.getX() - 20) / 75);
@@ -205,6 +203,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 				wasChoisePieces = true;
 				piecesChoise = positionBoard.getChoisePiecesHuman(location);
 				piecesChoise.setNumberCanMove();
+				
 				
 				for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
 					positionBoard.getListPiecesAi().get(i).setNumberCanMove();
@@ -220,11 +219,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 							}
 						}
 					}
-					if(piecesChoise.getNumberCanMove().size() <= 0) {
-						JOptionPane.showMessageDialog(null, "Hết cờ!", "Notify", JOptionPane.INFORMATION_MESSAGE);
-					}
 				}
-				
 				repaint();
 			} else {
 				if (wasChoisePieces && piecesChoise.canMove(location) && gameSetting.isAiPlay()) {

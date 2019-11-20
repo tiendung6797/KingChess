@@ -23,7 +23,7 @@ public class GameSetting {
 		this.humanFirst = false;
 		this.aiFirst = true;
 
-		this.aiPlay = true;
+		this.aiPlay = false;
 
 		// ////////////////////////
 		this.testing = false;
