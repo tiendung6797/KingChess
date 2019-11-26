@@ -43,6 +43,14 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	private boolean wasChoisePieces = false;
 	private ArtificialIntelligence ai;
 	private boolean win;
+	
+	public Move getPiecesAIChoise() {
+		return piecesAIChoise;
+	}
+
+	public void setPiecesAIChoise(Move piecesAIChoise) {
+		this.piecesAIChoise = piecesAIChoise;
+	}
 
 	public BoardPanel(GameSetting gameSetting) {
 		this.gameSetting = gameSetting;
@@ -111,8 +119,6 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			}
 		}
 		
-		this.positionBoard.draw(g);
-		
 		if(piecesAIChoise != null && isHumanTurn) {
 			int choseX = piecesAIChoise.getPieces().getNumberInBoard() % 8;
 			int choseY = piecesAIChoise.getPieces().getNumberInBoard() / 8; 
@@ -133,6 +139,9 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			positionBoard = ai.getNextPosition();
 			piecesAIChoise = positionBoard.getParentMove();
 			
+			System.out.println(positionBoard.getParentMove().getNumberNext());
+			System.out.println(positionBoard.getChoisePiecesHuman(positionBoard.getParentMove().getNumberNext()).getInformation());
+
 			if(positionBoard.isAiWasEat()) {
 				try {
 					URL url = this.getClass().getClassLoader().getResource("Capture.WAV");
@@ -191,15 +200,22 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 //		}
 //	}
 	
+	
+	
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mousePressed(MouseEvent e) {
 		win = false;
 		if (isHumanTurn) {
 			int location = (7 - (int) ((e.getY() - 23) / 75)) * 8 + (int) ((e.getX() - 20) / 75);
-			if (!positionBoard.wasSetHuman(location)) {
+			if (positionBoard.wasSetHuman(location)) {
+				showCanMove = true;
+				wasChoisePieces = true;
+				piecesHumanChoise = positionBoard.getChoisePiecesHuman(location);
+				piecesHumanChoise.setNumberCanMove();
+				repaint();
+			} else {
 				if (wasChoisePieces && piecesHumanChoise.canMove(location) && gameSetting.isAiPlay()) {
 					Move move = new Move(piecesHumanChoise, location);
-
 					positionBoard = positionBoard.newPositionBoard(move);
 
 					if(positionBoard.isHumanWasEat()) {
@@ -252,54 +268,31 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 					repaint();
 				}
 			}
-		} 
-		
-	}
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-		win = false;
-		if (isHumanTurn) {
-			int location = (7 - (int) ((e.getY() - 23) / 75)) * 8 + (int) ((e.getX() - 20) / 75);
-			if (positionBoard.wasSetHuman(location)) {
-				showCanMove = true;
-				wasChoisePieces = true;
-				piecesHumanChoise = positionBoard.getChoisePiecesHuman(location);
-				piecesHumanChoise.setNumberCanMove();
-				repaint();
+		} else {
+			if (!gameSetting.isAiPlay()) {
+				int location = (7 - (int) ((e.getY() - 23) / 75)) * 8 + (int) ((e.getX() - 20) / 75);
+				if (positionBoard.wasSetAi(location)) {
+					showCanMove = true;
+					wasChoisePieces = true;
+					piecesHumanChoise = positionBoard.getChoisePiecesAi(location);
+					piecesHumanChoise.setNumberCanMove();
+					
+					repaint();
+				} else {
+					if (wasChoisePieces && piecesHumanChoise.canMove(location)) {
+						Move move = new Move(piecesHumanChoise, location);
+						positionBoard = positionBoard.newPositionBoard(move);
+						isHumanTurn = true;
+						repaint();
+						showCanMove = false;
+						checkWin();
+						wasChoisePieces = false;
+						repaint();
+					}
+				}
 			}
-		} 
+		}
 	}
-	
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		
-	}
-	
-//	else {
-//		if (!gameSetting.isAiPlay()) {
-//			int location = (7 - (int) ((e.getY() - 23) / 75)) * 8 + (int) ((e.getX() - 20) / 75);
-//			if (positionBoard.wasSetAi(location)) {
-//				showCanMove = true;
-//				wasChoisePieces = true;
-//				piecesHumanChoise = positionBoard.getChoisePiecesAi(location);
-//				piecesHumanChoise.setNumberCanMove();
-//				
-//				repaint();
-//			} else {
-//				if (wasChoisePieces && piecesHumanChoise.canMove(location)) {
-//					Move move = new Move(piecesHumanChoise, location);
-//					positionBoard = positionBoard.newPositionBoard(move);
-//					isHumanTurn = true;
-//					repaint();
-//					showCanMove = false;
-//					checkWin();
-//					wasChoisePieces = false;
-//					repaint();
-//				}
-//			}
-//		}
-//	}
 	
 	public void checkWin() {
 		if (isHumanTurn) {
@@ -408,6 +401,14 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
+	}
+	
+	@Override
+	public void mouseDragged(MouseEvent e) {
+	}
+	
+	@Override
+	public void mouseReleased(MouseEvent e) {
 	}
 
 }

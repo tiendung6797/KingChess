@@ -79,8 +79,19 @@ public class ButtonPanel extends JPanel implements MouseListener {
 			if (!gameSetting.isAiPlay()) {	
 				Move move = mainChessFrame.getBoardPanel().getPositionBoard().getParentMove();
 				move.toString();
-				mainChessFrame.getBoardPanel()
-								.setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard());
+				mainChessFrame.getBoardPanel().setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard());
+				if(gameSetting.isAiFirst()) {
+					if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
+						mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
+					}
+				} else {
+					if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
+						mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
+					}else if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() == null){
+						mainChessFrame.getBoardPanel().setPiecesAIChoise(null);
+					}
+				}
+				mainChessFrame.getBoardPanel().setShowCanMove(false);
 				mainChessFrame.getBoardPanel().repaint();
 				if (mainChessFrame.getBoardPanel().isHumanTurn()) {
 					mainChessFrame.getBoardPanel().setHumanTurn(false);
@@ -92,6 +103,18 @@ public class ButtonPanel extends JPanel implements MouseListener {
 					Move move = mainChessFrame.getBoardPanel().getPositionBoard().getParentMove();
 					move.toString();
 					mainChessFrame.getBoardPanel().setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard());
+					if(gameSetting.isAiFirst()) {
+						if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
+							mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
+						}
+					} else {
+						if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
+							mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
+						}else if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() == null){
+							mainChessFrame.getBoardPanel().setPiecesAIChoise(null);
+						}
+					}
+					mainChessFrame.getBoardPanel().setShowCanMove(false);
 					mainChessFrame.getBoardPanel().repaint();
 					if (mainChessFrame.getBoardPanel().isHumanTurn()) {
 						mainChessFrame.getBoardPanel().setHumanTurn(false);

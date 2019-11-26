@@ -140,12 +140,12 @@ public class PositionBoard {
 	}
 
 	public PositionBoard newPositionBoard(Move move) {
-
 		if (boardPanel.isHumanTurn() && !gameSetting.testMode) {
 			PositionBoard newPositionBoard = this.copy(gameSetting.getLevel(), gameSetting);
 			for (int i = 0; i < newPositionBoard.getListPiecesHuman().size(); i++) {
 				if (newPositionBoard.getListPiecesHuman().get(i).equalPiece(move.getPieces())) {
 					newPositionBoard.getListPiecesHuman().get(i).setNewLocation(move.getNumberNext());
+					break;
 				}
 			}
 			if (newPositionBoard.wasSetAi(move.getNumberNext())) {
@@ -196,7 +196,6 @@ public class PositionBoard {
 		if (!boardPanel.isHumanTurn() || gameSetting.testMode) {
 			PositionBoard newPositionBoard = this.copy(this.depth - 1, gameSetting);
 			if (newPositionBoard.getDepth() % 2 == gameSetting.getLevel() % 2) {
-
 				for (int i = 0; i < newPositionBoard.getListPiecesHuman().size(); i++) {
 					if (newPositionBoard.getListPiecesHuman().get(i).equalPiece(move.getPieces())) {
 						newPositionBoard.getListPiecesHuman().get(i).setNewLocation(move.getNumberNext());
@@ -276,19 +275,16 @@ public class PositionBoard {
 				for (int i = 0; i < newPositionBoard.getListPiecesAi().size(); i++) {
 					if (newPositionBoard.getListPiecesAi().get(i).equalPiece(move.getPieces())) {
 						newPositionBoard.getListPiecesAi().get(i).setNewLocation(move.getNumberNext());
-
+						break;
 					}
 				}
 				if (newPositionBoard.wasSetHuman(move.getNumberNext())) {
-					newPositionBoard.getListPiecesHuman()
-							.remove(newPositionBoard.getChoisePiecesHuman(move.getNumberNext()));
+					newPositionBoard.getListPiecesHuman().remove(newPositionBoard.getChoisePiecesHuman(move.getNumberNext()));
 					newPositionBoard.setAiWasEat(true);
 				}
 				if (move.getPieces().getName() == "Tuong") {
 					if (move.getPieces().getNumberInBoard() == 60) {
 						if (move.getNumberNext() == 62) {
-
-							move.toString();
 							Move move2 = new Move(this.getChoisePiecesAi(63), 61);
 							for (int i = 0; i < newPositionBoard.getListPiecesAi().size(); i++) {
 								if (newPositionBoard.getListPiecesAi().get(i).equalPiece(move2.getPieces())) {
@@ -300,7 +296,6 @@ public class PositionBoard {
 							newPositionBoard.getHashMapPieces().put(move2.getNumberNext(), "Ai");
 						}
 						if (move.getNumberNext() == 58) {
-
 							Move move2 = new Move(this.getChoisePiecesAi(56), 59);
 							for (int i = 0; i < newPositionBoard.getListPiecesAi().size(); i++) {
 								if (newPositionBoard.getListPiecesAi().get(i).equalPiece(move2.getPieces())) {
@@ -314,8 +309,6 @@ public class PositionBoard {
 					}
 					if (move.getPieces().getNumberInBoard() == 59) {
 						if (move.getNumberNext() == 57) {
-
-							move.toString(); 
 							Move move2 = new Move(this.getChoisePiecesAi(56), 58);
 							for (int i = 0; i < newPositionBoard.getListPiecesAi().size(); i++) {
 								if (newPositionBoard.getListPiecesAi().get(i).equalPiece(move2.getPieces())) {
@@ -327,7 +320,6 @@ public class PositionBoard {
 							newPositionBoard.getHashMapPieces().put(move2.getNumberNext(), "Ai");
 						}
 						if (move.getNumberNext() == 61) {
-
 							Move move2 = new Move(this.getChoisePiecesAi(63), 60);
 							for (int i = 0; i < newPositionBoard.getListPiecesAi().size(); i++) {
 								if (newPositionBoard.getListPiecesAi().get(i).equalPiece(move2.getPieces())) {
