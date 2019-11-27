@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -22,6 +23,45 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	private JLabel btnUndo, btnExit, btnSave;
 	private MainChessFrame mainChessFrame;
 	private PanelInformation panelInformation;
+	
+	private ArrayList<String> listWhite = new ArrayList<String>();
+	private ArrayList<String> listBlack = new ArrayList<String>();
+	
+	public void addDefaul() {
+		this.listWhite.add("TuongTrang");
+		this.listWhite.add("HauTrang");
+		this.listWhite.add("TinhTrang");
+		this.listWhite.add("TinhTrang");
+		this.listWhite.add("XeTrang");
+		this.listWhite.add("XeTrang");
+		this.listWhite.add("MaTrang");
+		this.listWhite.add("MaTrang");
+		this.listWhite.add("TotTrang");
+		this.listWhite.add("TotTrang");
+		this.listWhite.add("TotTrang");
+		this.listWhite.add("TotTrang");
+		this.listWhite.add("TotTrang");
+		this.listWhite.add("TotTrang");
+		this.listWhite.add("TotTrang");
+		this.listWhite.add("TotTrang");
+	
+		this.listBlack.add("TuongDen");
+		this.listBlack.add("HauDen");
+		this.listBlack.add("TinhDen");
+		this.listBlack.add("TinhDen");
+		this.listBlack.add("XeDen");
+		this.listBlack.add("XeDen");
+		this.listBlack.add("MaDen");
+		this.listBlack.add("MaDen");
+		this.listBlack.add("TotDen");
+		this.listBlack.add("TotDen");
+		this.listBlack.add("TotDen");
+		this.listBlack.add("TotDen");
+		this.listBlack.add("TotDen");
+		this.listBlack.add("TotDen");
+		this.listBlack.add("TotDen");
+		this.listBlack.add("TotDen");
+	}
 
 	public ButtonPanel(GameSetting gameSetting, MainChessFrame mainChessFrame, PanelInformation panelInformation) {
 		this.gameSetting = gameSetting;
@@ -32,6 +72,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 		this.setFocusable(true);
 		this.setBackground(Color.GRAY);
 		addButton();
+		addDefaul();
 	}
 
 	public JLabel createButtonControl(String iconName, Box parent) {
@@ -91,7 +132,6 @@ public class ButtonPanel extends JPanel implements MouseListener {
 						mainChessFrame.getBoardPanel().setPiecesAIChoise(null);
 					}
 				}
-				panelInformation.clear();
 				mainChessFrame.getBoardPanel().setShowCanMove(false);
 				mainChessFrame.getBoardPanel().repaint();
 				if (mainChessFrame.getBoardPanel().isHumanTurn()) {
@@ -104,6 +144,9 @@ public class ButtonPanel extends JPanel implements MouseListener {
 					Move move = mainChessFrame.getBoardPanel().getPositionBoard().getParentMove();
 					move.toString();
 					mainChessFrame.getBoardPanel().setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard());
+					
+					
+					
 					if(gameSetting.isAiFirst()) {
 						if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
 							mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
@@ -124,10 +167,19 @@ public class ButtonPanel extends JPanel implements MouseListener {
 					}
 				}
 			}
-			panelInformation.clear();
-			for(int j = 0; j < mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().size(); j++) {
-				System.out.println(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().get(j).getInformation());
+			
+			listBlack.removeAll(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman());
+			
+			for(int i = 0; i < listBlack.size(); i++) {
+//				for(int j = 0; j < mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().size(); j++) {
+//					if(listBlack.get(i) == (mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().get(j).getName() 
+//							+ mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().get(j).getColor())){
+//						break;
+//					}else {
+						System.out.println(listBlack.get(i));
+				
 			}
+			
 		} else if(lbl == btnExit) {
 			Utils.inGame = false;
 			mainChessFrame.getMenuFrame().setVisible(true);
