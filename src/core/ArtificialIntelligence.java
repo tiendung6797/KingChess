@@ -11,6 +11,13 @@ public class ArtificialIntelligence implements Runnable {
 
 	public PositionBoard getNextPosition() {
 		this.run();
+		
+		/////////////////////////////////////////
+		if(positionBoard.getChoisePiecesHuman(positionBoard.getBestChild().getParentMove().getNumberNext()) != null) {
+			positionBoard.getBoardPanel().setPieceHumanDie(positionBoard.getChoisePiecesHuman(positionBoard.getBestChild().getParentMove().getNumberNext()).getName() 
+					+ positionBoard.getChoisePiecesHuman(positionBoard.getBestChild().getParentMove().getNumberNext()).getColor());
+		}
+		
 		return positionBoard.getBestChild();
 	}
 

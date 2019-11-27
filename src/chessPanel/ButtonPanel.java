@@ -1,8 +1,5 @@
 package chessPanel;
 
-import gameframe.MainChessFrame;
-import gameframe.SettingFrame;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -18,15 +15,18 @@ import core.ButtonSave;
 import core.GameSetting;
 import core.Move;
 import core.Utils;
+import gameframe.MainChessFrame;
 
 public class ButtonPanel extends JPanel implements MouseListener {
 	private GameSetting gameSetting;
 	private JLabel btnUndo, btnExit, btnSave;
 	private MainChessFrame mainChessFrame;
+	private PanelInformation panelInformation;
 
-	public ButtonPanel(GameSetting gameSetting, MainChessFrame mainChessFrame) {
+	public ButtonPanel(GameSetting gameSetting, MainChessFrame mainChessFrame, PanelInformation panelInformation) {
 		this.gameSetting = gameSetting;
 		this.mainChessFrame = mainChessFrame;
+		this.panelInformation = panelInformation;
 		this.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		this.setBounds(Utils.BOARD_GAME_WIDTH + 5, 520, Utils.GAME_WIDTH-Utils.BOARD_GAME_WIDTH-15, 115);
 		this.setFocusable(true);
@@ -91,6 +91,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 						mainChessFrame.getBoardPanel().setPiecesAIChoise(null);
 					}
 				}
+				panelInformation.clear();
 				mainChessFrame.getBoardPanel().setShowCanMove(false);
 				mainChessFrame.getBoardPanel().repaint();
 				if (mainChessFrame.getBoardPanel().isHumanTurn()) {
@@ -122,6 +123,10 @@ public class ButtonPanel extends JPanel implements MouseListener {
 						mainChessFrame.getBoardPanel().setHumanTurn(true);
 					}
 				}
+			}
+			panelInformation.clear();
+			for(int j = 0; j < mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().size(); j++) {
+				System.out.println(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().get(j).getInformation());
 			}
 		} else if(lbl == btnExit) {
 			Utils.inGame = false;

@@ -3,6 +3,7 @@ package chessPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -43,7 +44,26 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	private boolean wasChoisePieces = false;
 	private ArtificialIntelligence ai;
 	private boolean win;
+	private PanelInformation panelInformation;
+	private String pieceAIDie;
+	private String pieceHumanDie;
 	
+	public String getPieceAIDie() {
+		return pieceAIDie;
+	}
+
+	public void setPieceAIDie(String pieceAIDie) {
+		this.pieceAIDie = pieceAIDie;
+	}
+	
+	public String getPieceHumanDie() {
+		return pieceHumanDie;
+	}
+
+	public void setPieceHumanDie(String pieceHumanDie) {
+		this.pieceHumanDie = pieceHumanDie;
+	}
+
 	public Move getPiecesAIChoise() {
 		return piecesAIChoise;
 	}
@@ -52,8 +72,9 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		this.piecesAIChoise = piecesAIChoise;
 	}
 
-	public BoardPanel(GameSetting gameSetting) {
+	public BoardPanel(GameSetting gameSetting, PanelInformation panelInformation) {
 		this.gameSetting = gameSetting;
+		this.panelInformation = panelInformation;
 		this.positionBoard = new PositionBoard(gameSetting.getLevel(), gameSetting, this);
 		this.setBorder(new LineBorder(Color.BLACK));
 		this.setBounds(0, 0, Utils.BOARD_GAME_WIDTH, Utils.BOARD_GAME_HEIGHT);
@@ -137,11 +158,8 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		if (gameSetting.isAiPlay() && !win && !isHumanTurn) {
 			ai = new ArtificialIntelligence(gameSetting, positionBoard);
 			positionBoard = ai.getNextPosition();
-			piecesAIChoise = positionBoard.getParentMove();
+			piecesAIChoise = positionBoard.getParentMove(); 
 			
-			System.out.println(positionBoard.getParentMove().getNumberNext());
-			System.out.println(positionBoard.getChoisePiecesHuman(positionBoard.getParentMove().getNumberNext()).getInformation());
-
 			if(positionBoard.isAiWasEat()) {
 				try {
 					URL url = this.getClass().getClassLoader().getResource("Capture.WAV");
@@ -182,7 +200,14 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			checkWin();
 			repaint();
 		}
+		if(pieceHumanDie != null) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/" + pieceHumanDie + "3.png")).getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+			panelInformation.appendImage(img);
+		}
+		pieceHumanDie = null;
 	}
+	
+	
 	
 //	for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
 //		positionBoard.getListPiecesAi().get(i).setNumberCanMove();
@@ -267,6 +292,11 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 					wasChoisePieces = false;
 					repaint();
 				}
+				if(pieceAIDie != null) {
+					Image img = new ImageIcon(this.getClass().getResource("/imgchessman/" + pieceAIDie + "3.png")).getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+					panelInformation.appendImage(img);
+				}
+				pieceAIDie = null;
 			}
 		} else {
 			if (!gameSetting.isAiPlay()) {

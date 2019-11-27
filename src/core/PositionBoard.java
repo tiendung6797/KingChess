@@ -149,6 +149,9 @@ public class PositionBoard {
 				}
 			}
 			if (newPositionBoard.wasSetAi(move.getNumberNext())) {
+				////////////////////////////////////////////
+				boardPanel.setPieceAIDie(newPositionBoard.getChoisePiecesAi(move.getNumberNext()).getName() 
+						+ newPositionBoard.getChoisePiecesAi(move.getNumberNext()).getColor());
 				newPositionBoard.getListPiecesAi().remove(newPositionBoard.getChoisePiecesAi(move.getNumberNext()));
 				newPositionBoard.setHumanWasEat(true);
 			}
@@ -356,6 +359,10 @@ public class PositionBoard {
 	public void setBoardPanel(BoardPanel boardPanel) {
 		this.boardPanel = boardPanel;
 	}
+	
+	public BoardPanel getBoardPanel() {
+		return boardPanel;
+	}
 
 	public boolean isAiWasEat() {
 		return aiWasEat;
@@ -372,7 +379,7 @@ public class PositionBoard {
 	public void setHumanWasEat(boolean humanWasEat) {
 		this.humanWasEat = humanWasEat;
 	}
-
+	
 	public boolean wasSetHuman(int number) {
 		boolean wasSetHuman = false;
 		if (this.hashMapPieces.get(number) == "Human") {
