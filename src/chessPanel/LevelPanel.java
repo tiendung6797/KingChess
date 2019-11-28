@@ -22,7 +22,7 @@ public class LevelPanel extends JPanel {
 	private JLabel radio4, radio5, radio6;
 
 	public LevelPanel(GameSetting gameSetting) {
-		this.setBounds(0, Utils.BOARD_GAME_HEIGHT, 360, 60);
+		this.setBounds(Utils.BOARD_GAME_WIDTH, Utils.BOARD_GAME_HEIGHT, 360, 60);
 		this.setFocusable(true);
 		this.gameSetting = gameSetting;
 		

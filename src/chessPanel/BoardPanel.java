@@ -45,6 +45,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 	private ArtificialIntelligence ai;
 	private boolean win;
 	private PanelInformation panelInformation;
+	private PanelInformation1 panelInformation1;
 	private String pieceAIDie;
 	private String pieceHumanDie;
 	
@@ -72,12 +73,13 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		this.piecesAIChoise = piecesAIChoise;
 	}
 
-	public BoardPanel(GameSetting gameSetting, PanelInformation panelInformation) {
+	public BoardPanel(GameSetting gameSetting, PanelInformation panelInformation, PanelInformation1 panelInformation1) {
 		this.gameSetting = gameSetting;
 		this.panelInformation = panelInformation;
+		this.panelInformation1 = panelInformation1;
 		this.positionBoard = new PositionBoard(gameSetting.getLevel(), gameSetting, this);
 		this.setBorder(new LineBorder(Color.BLACK));
-		this.setBounds(0, 0, Utils.BOARD_GAME_WIDTH, Utils.BOARD_GAME_HEIGHT);
+		this.setBounds(0, 60, Utils.BOARD_GAME_WIDTH, Utils.BOARD_GAME_HEIGHT);
 		this.setFocusable(true);
 		showCanMove = false;
 		addMouseListener(this);
@@ -201,7 +203,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			repaint();
 		}
 		if(pieceHumanDie != null) {
-			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/" + pieceHumanDie + "3.png")).getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/" + pieceHumanDie + "3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
 			panelInformation.appendImage(img);
 		}
 		pieceHumanDie = null;
@@ -293,8 +295,8 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 					repaint();
 				}
 				if(pieceAIDie != null) {
-					Image img = new ImageIcon(this.getClass().getResource("/imgchessman/" + pieceAIDie + "3.png")).getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
-					panelInformation.appendImage(img);
+					Image img = new ImageIcon(this.getClass().getResource("/imgchessman/" + pieceAIDie + "3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+					panelInformation1.appendImage(img);
 				}
 				pieceAIDie = null;
 			}

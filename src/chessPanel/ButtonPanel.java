@@ -3,11 +3,13 @@ package chessPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -23,6 +25,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	private JLabel btnUndo, btnExit, btnSave;
 	private MainChessFrame mainChessFrame;
 	private PanelInformation panelInformation;
+	private PanelInformation1 panelInformation1;
 	
 	private ArrayList<String> listWhite = new ArrayList<String>();
 	private ArrayList<String> listBlack = new ArrayList<String>();
@@ -63,12 +66,13 @@ public class ButtonPanel extends JPanel implements MouseListener {
 		this.listBlack.add("TotDen");
 	}
 
-	public ButtonPanel(GameSetting gameSetting, MainChessFrame mainChessFrame, PanelInformation panelInformation) {
+	public ButtonPanel(GameSetting gameSetting, MainChessFrame mainChessFrame, PanelInformation panelInformation, PanelInformation1 panelInformation1) {
 		this.gameSetting = gameSetting;
 		this.mainChessFrame = mainChessFrame;
 		this.panelInformation = panelInformation;
+		this.panelInformation1 = panelInformation1;
 		this.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		this.setBounds(Utils.BOARD_GAME_WIDTH + 5, 520, Utils.GAME_WIDTH-Utils.BOARD_GAME_WIDTH-15, 115);
+		this.setBounds(Utils.BOARD_GAME_WIDTH, 520, Utils.GAME_WIDTH-Utils.BOARD_GAME_WIDTH-15, 115);
 		this.setFocusable(true);
 		this.setBackground(Color.GRAY);
 		addButton();
@@ -145,12 +149,11 @@ public class ButtonPanel extends JPanel implements MouseListener {
 					move.toString();
 					mainChessFrame.getBoardPanel().setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard());
 					
-					
-					
 					if(gameSetting.isAiFirst()) {
 						if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
 							mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
 						}
+						
 					} else {
 						if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
 							mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
@@ -158,6 +161,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 							mainChessFrame.getBoardPanel().setPiecesAIChoise(null);
 						}
 					}
+					
 					mainChessFrame.getBoardPanel().setShowCanMove(false);
 					mainChessFrame.getBoardPanel().repaint();
 					if (mainChessFrame.getBoardPanel().isHumanTurn()) {
@@ -168,17 +172,27 @@ public class ButtonPanel extends JPanel implements MouseListener {
 				}
 			}
 			
-			listBlack.removeAll(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman());
 			
-			for(int i = 0; i < listBlack.size(); i++) {
+//			panelInformation.clear();
+//			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/" + "TotDen" + "3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+//			panelInformation.appendImage(img);
+			
+			
+			for(int j = 0; j < mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().size(); j++) {
+				System.out.println(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().get(j).getName() 
+							+ mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().get(j).getColor());
+			}
+//			for(int i = 0; i < listBlack.size(); i++) {
 //				for(int j = 0; j < mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().size(); j++) {
 //					if(listBlack.get(i) == (mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().get(j).getName() 
 //							+ mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().get(j).getColor())){
 //						break;
-//					}else {
-						System.out.println(listBlack.get(i));
-				
-			}
+//					}
+//					if(j == mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().size()) {
+//						System.out.println(listBlack.get(i));
+//					}
+//				}
+//			}
 			
 		} else if(lbl == btnExit) {
 			Utils.inGame = false;

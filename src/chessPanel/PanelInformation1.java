@@ -9,12 +9,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
-public class PanelInformation extends JPanel {
+import core.Utils;
+
+public class PanelInformation1 extends JPanel {
 	private JTextPane textPane;
 
-	public PanelInformation() {
+	public PanelInformation1() {
 		this.setLayout(new BorderLayout());
-		this.setBounds(0, 0, 642, 60);
+		this.setBounds(0, Utils.BOARD_GAME_HEIGHT + 60, 642, 60);
 		textPane = new JTextPane();
 		textPane.setBackground(Color.WHITE);
 		textPane.setCaretColor(Color.BLACK);

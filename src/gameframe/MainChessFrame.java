@@ -6,11 +6,13 @@ import chessPanel.BoardPanel;
 import chessPanel.ButtonPanel;
 import chessPanel.LevelPanel;
 import chessPanel.PanelInformation;
+import chessPanel.PanelInformation1;
 import core.GameSetting;
 import core.Utils;
 
 public class MainChessFrame extends JFrame {
 	private PanelInformation panelInformation;
+	private PanelInformation1 panelInformation1;
 	private BoardPanel boardPanel;
 	private GameSetting gameSetting;
 	private LevelPanel levelPanel;
@@ -32,12 +34,14 @@ public class MainChessFrame extends JFrame {
 	}
 
 	public void addCompoment() {
-		panelInformation = new PanelInformation(gameSetting);
-		boardPanel = new BoardPanel(gameSetting, panelInformation);
+		panelInformation = new PanelInformation();
+		panelInformation1 = new  PanelInformation1();
+		boardPanel = new BoardPanel(gameSetting, panelInformation, panelInformation1);
 		levelPanel = new LevelPanel(gameSetting);
-		buttonPanel = new ButtonPanel(gameSetting, this, panelInformation);
+		buttonPanel = new ButtonPanel(gameSetting, this, panelInformation, panelInformation1);
 		
 		add(panelInformation);
+		add(panelInformation1);
 		add(boardPanel);
 		add(levelPanel);
 		add(buttonPanel);

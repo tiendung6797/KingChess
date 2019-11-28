@@ -17,9 +17,9 @@ import main.MainGame;
 public class Utils {
 	public static final String GAME_NAME = "KING CHESS - ©COPYRIGHT 2019 - DESIGN BY LIONEL";
 	public static final int GAME_WIDTH = 1000;
-	public static final int GAME_HEIGHT = 820;
+	public static final int GAME_HEIGHT = 804;
 	public static final int BOARD_GAME_WIDTH = 642;
-	public static final int BOARD_GAME_HEIGHT = 665;
+	public static final int BOARD_GAME_HEIGHT = 645;
 	public static final Image GAME_AVATAR = new ImageIcon(Utils.class.getResource("/image/avatarGame.png")).getImage();
 	public static final Image BOARD_INFORMATION = new ImageIcon(Utils.class.getResource("/image/information.png")).getImage();
 	public static final Image IMG_PANEL = new ImageIcon(Utils.class.getResource("/image/bgcolorpanel.jpg")).getImage();
