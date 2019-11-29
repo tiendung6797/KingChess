@@ -3,17 +3,16 @@ package chessPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.Box;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import chessPieces.Pieces;
 import core.ButtonSave;
 import core.GameSetting;
 import core.Move;
@@ -27,45 +26,6 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	private PanelInformation panelInformation;
 	private PanelInformation1 panelInformation1;
 	
-	private ArrayList<String> listWhite = new ArrayList<String>();
-	private ArrayList<String> listBlack = new ArrayList<String>();
-	
-	public void addDefaul() {
-		this.listWhite.add("TuongTrang");
-		this.listWhite.add("HauTrang");
-		this.listWhite.add("TinhTrang");
-		this.listWhite.add("TinhTrang");
-		this.listWhite.add("XeTrang");
-		this.listWhite.add("XeTrang");
-		this.listWhite.add("MaTrang");
-		this.listWhite.add("MaTrang");
-		this.listWhite.add("TotTrang");
-		this.listWhite.add("TotTrang");
-		this.listWhite.add("TotTrang");
-		this.listWhite.add("TotTrang");
-		this.listWhite.add("TotTrang");
-		this.listWhite.add("TotTrang");
-		this.listWhite.add("TotTrang");
-		this.listWhite.add("TotTrang");
-	
-		this.listBlack.add("TuongDen");
-		this.listBlack.add("HauDen");
-		this.listBlack.add("TinhDen");
-		this.listBlack.add("TinhDen");
-		this.listBlack.add("XeDen");
-		this.listBlack.add("XeDen");
-		this.listBlack.add("MaDen");
-		this.listBlack.add("MaDen");
-		this.listBlack.add("TotDen");
-		this.listBlack.add("TotDen");
-		this.listBlack.add("TotDen");
-		this.listBlack.add("TotDen");
-		this.listBlack.add("TotDen");
-		this.listBlack.add("TotDen");
-		this.listBlack.add("TotDen");
-		this.listBlack.add("TotDen");
-	}
-
 	public ButtonPanel(GameSetting gameSetting, MainChessFrame mainChessFrame, PanelInformation panelInformation, PanelInformation1 panelInformation1) {
 		this.gameSetting = gameSetting;
 		this.mainChessFrame = mainChessFrame;
@@ -76,7 +36,6 @@ public class ButtonPanel extends JPanel implements MouseListener {
 		this.setFocusable(true);
 		this.setBackground(Color.GRAY);
 		addButton();
-		addDefaul();
 	}
 
 	public JLabel createButtonControl(String iconName, Box parent) {
@@ -129,6 +88,9 @@ public class ButtonPanel extends JPanel implements MouseListener {
 					if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
 						mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
 					}
+					if(checkHauTrang(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesAi())) {
+						
+					}
 				} else {
 					if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
 						mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
@@ -153,7 +115,6 @@ public class ButtonPanel extends JPanel implements MouseListener {
 						if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
 							mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
 						}
-						
 					} else {
 						if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
 							mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
@@ -171,29 +132,6 @@ public class ButtonPanel extends JPanel implements MouseListener {
 					}
 				}
 			}
-			
-			
-//			panelInformation.clear();
-//			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/" + "TotDen" + "3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-//			panelInformation.appendImage(img);
-			
-			
-			for(int j = 0; j < mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().size(); j++) {
-				System.out.println(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().get(j).getName() 
-							+ mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().get(j).getColor());
-			}
-//			for(int i = 0; i < listBlack.size(); i++) {
-//				for(int j = 0; j < mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().size(); j++) {
-//					if(listBlack.get(i) == (mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().get(j).getName() 
-//							+ mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().get(j).getColor())){
-//						break;
-//					}
-//					if(j == mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman().size()) {
-//						System.out.println(listBlack.get(i));
-//					}
-//				}
-//			}
-			
 		} else if(lbl == btnExit) {
 			Utils.inGame = false;
 			mainChessFrame.getMenuFrame().setVisible(true);
@@ -230,5 +168,103 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
+	}
+	
+	public boolean checkHauDen(ArrayList<Pieces> list) {
+		for(int i = 0; i < list.size(); i++) {
+			if((list.get(i).getName() + list.get(i).getColor()) == "HauDen") {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int checkTinhDen(ArrayList<Pieces> list) {
+		int count = 0;
+		for(int i = 0; i < list.size(); i++) {
+			if((list.get(i).getName() + list.get(i).getColor()) == "TinhDen") {
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public int checkXeDen(ArrayList<Pieces> list) {
+		int count = 0;
+		for(int i = 0; i < list.size(); i++) {
+			if((list.get(i).getName() + list.get(i).getColor()) == "XeDen") {
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public int checkMaDen(ArrayList<Pieces> list) {
+		int count = 0;
+		for(int i = 0; i < list.size(); i++) {
+			if((list.get(i).getName() + list.get(i).getColor()) == "MaDen") {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public int checkTotDen(ArrayList<Pieces> list) {
+		int count = 0;
+		for(int i = 0; i < list.size(); i++) {
+			if((list.get(i).getName() + list.get(i).getColor()) == "TotDen") {
+				count++;
+			}
+		}
+		return count;
+	} 
+	
+	public boolean checkHauTrang(ArrayList<Pieces> list) {
+		for(int i = 0; i < list.size(); i++) {
+			if((list.get(i).getName() + list.get(i).getColor()) == "HauTrang") {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int checkTinhTrang(ArrayList<Pieces> list) {
+		int count = 0;
+		for(int i = 0; i < list.size(); i++) {
+			if((list.get(i).getName() + list.get(i).getColor()) == "TinhTrang") {
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public int checkXeTrang(ArrayList<Pieces> list) {
+		int count = 0;
+		for(int i = 0; i < list.size(); i++) {
+			if((list.get(i).getName() + list.get(i).getColor()) == "XeTrang") {
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public int checkMaTrang(ArrayList<Pieces> list) {
+		int count = 0;
+		for(int i = 0; i < list.size(); i++) {
+			if((list.get(i).getName() + list.get(i).getColor()) == "MaTrang") {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public int checkTotTrang(ArrayList<Pieces> list) {
+		int count = 0;
+		for(int i = 0; i < list.size(); i++) {
+			if((list.get(i).getName() + list.get(i).getColor()) == "TotTrang") {
+				count++;
+			}
+		}
+		return count;
 	}
 }
