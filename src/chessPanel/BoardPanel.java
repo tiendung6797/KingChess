@@ -79,7 +79,7 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		this.panelInformation1 = panelInformation1;
 		this.positionBoard = new PositionBoard(gameSetting.getLevel(), gameSetting, this);
 		this.setBorder(new LineBorder(Color.BLACK));
-		this.setBounds(0, 60, Utils.BOARD_GAME_WIDTH, Utils.BOARD_GAME_HEIGHT);
+		this.setBounds(10, 70, Utils.BOARD_GAME_WIDTH, Utils.BOARD_GAME_HEIGHT);
 		this.setFocusable(true);
 		showCanMove = false;
 		addMouseListener(this);

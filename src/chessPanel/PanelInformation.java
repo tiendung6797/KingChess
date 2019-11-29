@@ -14,7 +14,7 @@ public class PanelInformation extends JPanel {
 
 	public PanelInformation() {
 		this.setLayout(new BorderLayout());
-		this.setBounds(0, 0, 642, 60);
+		this.setBounds(10, 10, 652, 60);
 		textPane = new JTextPane();
 		textPane.setBackground(Color.WHITE);
 		textPane.setCaretColor(Color.BLACK);

@@ -1,13 +1,16 @@
 package chessPanel;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -32,7 +35,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 		this.panelInformation = panelInformation;
 		this.panelInformation1 = panelInformation1;
 		this.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		this.setBounds(Utils.BOARD_GAME_WIDTH, 520, Utils.GAME_WIDTH-Utils.BOARD_GAME_WIDTH-15, 115);
+		this.setBounds(Utils.BOARD_GAME_WIDTH + 20, 443, 300, 120);
 		this.setFocusable(true);
 		this.setBackground(Color.GRAY);
 		addButton();
@@ -115,12 +118,20 @@ public class ButtonPanel extends JPanel implements MouseListener {
 						if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
 							mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
 						}
+						panelInformation.clear();
+						panelInformation1.clear();
+						checkWhitePiece(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesAi());
+						checkWhiteBlack(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman());
 					} else {
 						if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
 							mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
 						}else if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() == null){
 							mainChessFrame.getBoardPanel().setPiecesAIChoise(null);
 						}
+						panelInformation.clear();
+						panelInformation1.clear();
+						checkWhitePiece1(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman());
+						checkWhiteBlack1(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesAi());
 					}
 					
 					mainChessFrame.getBoardPanel().setShowCanMove(false);
@@ -170,9 +181,101 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	public void mouseReleased(MouseEvent e) {
 	}
 	
+	public void checkWhitePiece(ArrayList<Pieces> list) {
+		for(int i = 0; i < (2 - checkMaTrang(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/MaTrang3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation1.appendImage(img);
+		}
+		for(int i = 0; i < (2 - checkTinhTrang(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/TinhTrang3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation1.appendImage(img);
+		}
+		for(int i = 0; i < (2 - checkXeTrang(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/XeTrang3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation1.appendImage(img);
+		}
+		if(checkHauTrang(list) == false) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/HauTrang3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation1.appendImage(img);
+		}
+		for(int i = 0; i < (8 - checkTotTrang(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/TotTrang3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation1.appendImage(img);
+		}
+	}
+	
+	public void checkWhitePiece1(ArrayList<Pieces> list) {
+		for(int i = 0; i < (2 - checkMaTrang(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/MaTrang3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation.appendImage(img);
+		}
+		for(int i = 0; i < (2 - checkTinhTrang(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/TinhTrang3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation.appendImage(img);
+		}
+		for(int i = 0; i < (2 - checkXeTrang(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/XeTrang3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation.appendImage(img);
+		}
+		if(checkHauTrang(list) == false) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/HauTrang3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation.appendImage(img);
+		}
+		for(int i = 0; i < (8 - checkTotTrang(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/TotTrang3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation.appendImage(img);
+		}
+	}
+	
+	public void checkWhiteBlack(ArrayList<Pieces> list) {
+		for(int i = 0; i < (2 - checkMaDen(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/MaDen3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation.appendImage(img);
+		}
+		for(int i = 0; i < (2 - checkTinhDen(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/TinhDen3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation.appendImage(img);
+		}
+		for(int i = 0; i < (2 - checkXeDen(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/XeDen3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation.appendImage(img);
+		}
+		if(checkHauDen(list) == false) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/HauDen3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation.appendImage(img);
+		}
+		for(int i = 0; i < (8 - checkTotDen(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/TotDen3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation.appendImage(img);
+		}
+	}
+	
+	public void checkWhiteBlack1(ArrayList<Pieces> list) {
+		for(int i = 0; i < (2 - checkMaDen(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/MaDen3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation1.appendImage(img);
+		}
+		for(int i = 0; i < (2 - checkTinhDen(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/TinhDen3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation1.appendImage(img);
+		}
+		for(int i = 0; i < (2 - checkXeDen(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/XeDen3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation1.appendImage(img);
+		}
+		if(checkHauDen(list) == false) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/HauDen3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation1.appendImage(img);
+		}
+		for(int i = 0; i < (8 - checkTotDen(list)); i++) {
+			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/TotDen3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+			panelInformation1.appendImage(img);
+		}
+	}
+	
 	public boolean checkHauDen(ArrayList<Pieces> list) {
 		for(int i = 0; i < list.size(); i++) {
-			if((list.get(i).getName() + list.get(i).getColor()) == "HauDen") {
+			if("HauDen".equals(list.get(i).getName() + list.get(i).getColor())) {
 				return true;
 			}
 		}
@@ -182,7 +285,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	public int checkTinhDen(ArrayList<Pieces> list) {
 		int count = 0;
 		for(int i = 0; i < list.size(); i++) {
-			if((list.get(i).getName() + list.get(i).getColor()) == "TinhDen") {
+			if("TinhDen".equals(list.get(i).getName() + list.get(i).getColor())) {
 				count++;
 			}
 		}
@@ -192,7 +295,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	public int checkXeDen(ArrayList<Pieces> list) {
 		int count = 0;
 		for(int i = 0; i < list.size(); i++) {
-			if((list.get(i).getName() + list.get(i).getColor()) == "XeDen") {
+			if("XeDen".equals(list.get(i).getName() + list.get(i).getColor())) {
 				count++;
 			}
 		}
@@ -202,7 +305,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	public int checkMaDen(ArrayList<Pieces> list) {
 		int count = 0;
 		for(int i = 0; i < list.size(); i++) {
-			if((list.get(i).getName() + list.get(i).getColor()) == "MaDen") {
+			if("MaDen".equals(list.get(i).getName() + list.get(i).getColor())) {
 				count++;
 			}
 		}
@@ -212,7 +315,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	public int checkTotDen(ArrayList<Pieces> list) {
 		int count = 0;
 		for(int i = 0; i < list.size(); i++) {
-			if((list.get(i).getName() + list.get(i).getColor()) == "TotDen") {
+			if("TotDen".equals(list.get(i).getName() + list.get(i).getColor())) {
 				count++;
 			}
 		}
@@ -221,7 +324,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	
 	public boolean checkHauTrang(ArrayList<Pieces> list) {
 		for(int i = 0; i < list.size(); i++) {
-			if((list.get(i).getName() + list.get(i).getColor()) == "HauTrang") {
+			if("HauTrang".equals(list.get(i).getName() + list.get(i).getColor())) {
 				return true;
 			}
 		}
@@ -231,7 +334,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	public int checkTinhTrang(ArrayList<Pieces> list) {
 		int count = 0;
 		for(int i = 0; i < list.size(); i++) {
-			if((list.get(i).getName() + list.get(i).getColor()) == "TinhTrang") {
+			if("TinhTrang".equals(list.get(i).getName() + list.get(i).getColor())) {
 				count++;
 			}
 		}
@@ -241,7 +344,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	public int checkXeTrang(ArrayList<Pieces> list) {
 		int count = 0;
 		for(int i = 0; i < list.size(); i++) {
-			if((list.get(i).getName() + list.get(i).getColor()) == "XeTrang") {
+			if("XeTrang".equals(list.get(i).getName() + list.get(i).getColor())) {
 				count++;
 			}
 		}
@@ -251,7 +354,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	public int checkMaTrang(ArrayList<Pieces> list) {
 		int count = 0;
 		for(int i = 0; i < list.size(); i++) {
-			if((list.get(i).getName() + list.get(i).getColor()) == "MaTrang") {
+			if("MaTrang".equals(list.get(i).getName() + list.get(i).getColor())) {
 				count++;
 			}
 		}
@@ -261,7 +364,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 	public int checkTotTrang(ArrayList<Pieces> list) {
 		int count = 0;
 		for(int i = 0; i < list.size(); i++) {
-			if((list.get(i).getName() + list.get(i).getColor()) == "TotTrang") {
+			if("TotTrang".equals(list.get(i).getName() + list.get(i).getColor())) {
 				count++;
 			}
 		}

@@ -48,17 +48,17 @@ public class MainSettingPanel extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JLabel lb1 = new JLabel("MODE");
 		lb1.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lb1.setForeground(new Color(160, 82, 45));
+		lb1.setForeground(Color.LIGHT_GRAY);
 		lb1.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
 		JLabel lb2 = new JLabel("WHO FIRST?");
 		lb2.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lb2.setForeground(new Color(139, 69, 19));
+		lb2.setForeground(Color.LIGHT_GRAY);
 		lb2.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
 		JLabel lb3 = new JLabel("LEVEL");
 		lb3.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lb3.setForeground(new Color(139, 69, 19));
+		lb3.setForeground(Color.LIGHT_GRAY);
 		lb3.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
 		Component b1 = Box.createRigidArea(new Dimension(0, 20));
@@ -115,7 +115,7 @@ public class MainSettingPanel extends JPanel {
 	}
 	private JLabel createButtonLevel(ImageIcon icon, Box parent, String level) {
 		JLabel radio = new JLabel(level);
-		radio.setForeground(Color.BLACK);
+		radio.setForeground(Color.WHITE);
 		radio.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		radio.setIcon(icon);
 		radio.addMouseListener(new RadioLevelHandler());
@@ -169,12 +169,12 @@ public class MainSettingPanel extends JPanel {
 		rdPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		JLabel cbBlack = new JLabel("Black pieces");
-		cbBlack.setForeground(Color.BLACK);
+		cbBlack.setForeground(Color.WHITE);
 		cbBlack.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		cbBlack.setIcon(Utils.ICON_CHECK_FALSE);
 		Component box = Box.createRigidArea(new Dimension(40, 0));
 		JLabel cbWhite = new JLabel("White pieces");
-		cbWhite.setForeground(Color.BLACK);
+		cbWhite.setForeground(Color.WHITE);
 		cbWhite.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		cbWhite.setIcon(Utils.ICON_CHECK_FALSE);
 		if (gameSetting.isAiFirst()) {
@@ -216,10 +216,10 @@ public class MainSettingPanel extends JPanel {
 		rdPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		JLabel rdAi = new JLabel("Computer");
-		rdAi.setForeground(Color.BLACK);
+		rdAi.setForeground(Color.WHITE);
 		rdAi.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		JLabel rd2P = new JLabel("Human");
-		rd2P.setForeground(Color.BLACK);
+		rd2P.setForeground(Color.WHITE);
 		rd2P.setFont(new Font("Times New Roman", Font.BOLD, 19));
 
 		if (gameSetting.isAiPlay()) {
@@ -312,7 +312,7 @@ public class MainSettingPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		Dimension d = getSize();
-		g.drawImage(Utils.IMG_PANEL, 0, 0, d.width, d.height, null);
+		g.drawImage(new ImageIcon(Utils.class.getResource("/image/mainsetting.png")).getImage(), 0, 0, d.width, d.height, null);
 		setOpaque(false);
 		super.paintComponent(g);
 	}

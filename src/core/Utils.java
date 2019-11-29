@@ -16,17 +16,19 @@ import main.MainGame;
 
 public class Utils {
 	public static final String GAME_NAME = "KING CHESS - ©COPYRIGHT 2019 - DESIGN BY LIONEL";
-	public static final int GAME_WIDTH = 1000;
-	public static final int GAME_HEIGHT = 804;
+	public static final int GAME_WIDTH = 990;
+	public static final int GAME_HEIGHT = 824;
 	public static final int BOARD_GAME_WIDTH = 642;
 	public static final int BOARD_GAME_HEIGHT = 645;
 	public static final Image GAME_AVATAR = new ImageIcon(Utils.class.getResource("/image/avatarGame.png")).getImage();
 	public static final Image BOARD_INFORMATION = new ImageIcon(Utils.class.getResource("/image/information.png")).getImage();
-	public static final Image IMG_PANEL = new ImageIcon(Utils.class.getResource("/image/bgcolorpanel.jpg")).getImage();
+	public static final Image IMG_PANEL = new ImageIcon(Utils.class.getResource("/image/show.jpg")).getImage();
 	public static final int BUTTON_CONTROL_WIDTH = 100;
 	public static final int BUTTON_CONTROL_HEIGHT = 50;
-	public static final int RADIO_LEVEL_WIDTH = 40;
-	public static final int RADIO_LEVEL_HEIGHT = 40;
+	public static final int RADIO_LEVEL_WIDTH = 50;
+	public static final int RADIO_LEVEL_HEIGHT = 50;
+	public static final int RADIO_LEVEL_WIDTH_1 = 60;
+	public static final int RADIO_LEVEL_HEIGHT_1 = 60;
 	public static final int GAME_MODE_RADIO_WIDTH = 90;
 	public static final int GAME_MODE_RADIO_HEIGHT = 45;
 	
@@ -34,7 +36,7 @@ public class Utils {
 	public static final int MENU_GAME_WIDTH = 820;
 	public static final int MENU_GAME_HEIGHT = 620;
 
-	public static final Image BG_IMAGE_MENU = new ImageIcon(Utils.class.getResource("/image/bgImageMenu.jpg")).getImage();
+	public static final Image BG_IMAGE_MENU = new ImageIcon(Utils.class.getResource("/image/main.jpg")).getImage();
 	public static final ImageIcon ICON_BTN_START = new ImageIcon(Utils.class.getResource("/image/iconBtnStart.png"));
 	public static final ImageIcon ICON_BTN_EXIT = new ImageIcon(Utils.class.getResource("/image/iconBtnExit.png"));
 	public static final ImageIcon ICON_BTN_SETTING = new ImageIcon(Utils.class.getResource("/image/iconBtnSetting.png"));
@@ -88,7 +90,7 @@ public class Utils {
 	
 	
 	public static void changeStateOfRadioButton(JLabel radio, String iconName) {
-		radio.setIcon(resizeImageIcon(iconName, RADIO_LEVEL_WIDTH, RADIO_LEVEL_HEIGHT));
+		radio.setIcon(resizeImageIcon(iconName, RADIO_LEVEL_WIDTH_1, RADIO_LEVEL_HEIGHT_1));
 	}
 	
 	public static ImageIcon resizeImageIcon(String iconName, int width, int height) {
