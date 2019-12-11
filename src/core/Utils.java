@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import main.MainGame;
 
 public class Utils {
-	public static final String GAME_NAME = "KING CHESS - ©COPYRIGHT 2019 - DESIGN BY LIONEL";
+	public static final String GAME_NAME = "KING CHESS - ©COPYRIGHT 2019 - DESIGN BY NGUYEN TIEN DUNG";
 	public static final int GAME_WIDTH = 990;
 	public static final int GAME_HEIGHT = 824;
 	public static final int BOARD_GAME_WIDTH = 642;
@@ -36,7 +36,7 @@ public class Utils {
 	public static final int MENU_GAME_WIDTH = 820;
 	public static final int MENU_GAME_HEIGHT = 620;
 
-	public static final Image BG_IMAGE_MENU = new ImageIcon(Utils.class.getResource("/image/main.jpg")).getImage();
+	public static final Image BG_IMAGE_MENU = new ImageIcon(Utils.class.getResource("/image/main.jpeg")).getImage();
 	public static final ImageIcon ICON_BTN_START = new ImageIcon(Utils.class.getResource("/image/iconBtnStart.png"));
 	public static final ImageIcon ICON_BTN_EXIT = new ImageIcon(Utils.class.getResource("/image/iconBtnExit.png"));
 	public static final ImageIcon ICON_BTN_SETTING = new ImageIcon(Utils.class.getResource("/image/iconBtnSetting.png"));
@@ -55,8 +55,8 @@ public class Utils {
 	public static final int CHESSMAN_CHOOSER_FRAME_HEIGHT = 600;
 	
 	/////////////// For BoardPanel ///////////////////////////
-	public static final String RESULT_LOSE = "Oh no! You losed.Do you want to play again?";
-	public static final String RESULT_WIN = "Congratulation!. You are the winner. Do you want to play again?";
+	public static final String RESULT_LOSE = "Oh no! You losed. Do you want to play again?";
+	public static final String RESULT_WIN = "Congratulation! You are the winner. Do you want to play again?";
 	public static final String TITLE_DIALOG_FAIL = "Fail";
 	public static final String TITLE_DIALOG_SUCCESS = "Success";
 	

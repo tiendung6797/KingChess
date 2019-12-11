@@ -42,7 +42,7 @@ public class MainChessFrame extends JFrame {
 	public void addCompoment() {
 		panelInformation = new PanelInformation();
 		panelInformation1 = new  PanelInformation1();
-		boardPanel = new BoardPanel(gameSetting, panelInformation, panelInformation1);
+		boardPanel = new BoardPanel(gameSetting, this, panelInformation, panelInformation1);
 		levelPanel = new LevelPanel(gameSetting);
 		buttonPanel = new ButtonPanel(gameSetting, this, panelInformation, panelInformation1);
 		

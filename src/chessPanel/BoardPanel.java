@@ -33,8 +33,10 @@ import core.GameSetting;
 import core.Move;
 import core.PositionBoard;
 import core.Utils;
+import gameframe.MainChessFrame;
 
 public class BoardPanel extends JPanel implements MouseListener, MouseMotionListener {
+	private MainChessFrame mainChessFrame;
 	private GameSetting gameSetting;
 	public PositionBoard positionBoard;
 	private boolean showCanMove;
@@ -73,8 +75,9 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		this.piecesAIChoise = piecesAIChoise;
 	}
 
-	public BoardPanel(GameSetting gameSetting, PanelInformation panelInformation, PanelInformation1 panelInformation1) {
+	public BoardPanel(GameSetting gameSetting, MainChessFrame mainChessFrame, PanelInformation panelInformation, PanelInformation1 panelInformation1) {
 		this.gameSetting = gameSetting;
+		this.mainChessFrame = mainChessFrame;
 		this.panelInformation = panelInformation;
 		this.panelInformation1 = panelInformation1;
 		this.positionBoard = new PositionBoard(gameSetting.getLevel(), gameSetting, this);
@@ -351,8 +354,11 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 				int value = ((Integer) optionPane.getValue()).intValue();
 				if (value == JOptionPane.YES_OPTION) {
 					this.positionBoard = new PositionBoard(gameSetting.getLevel(), gameSetting, this);
-					isHumanTurn = true;
 					repaint();
+				} else {
+					Utils.inGame = false;
+					mainChessFrame.getMenuFrame().setVisible(true);
+					mainChessFrame.dispose();
 				}
 			}
 		} else {
@@ -377,11 +383,13 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 				dialog.setLocationRelativeTo(null);
 				dialog.setVisible(true);
 				int value = ((Integer) optionPane.getValue()).intValue();
-				if (value == JOptionPane.YES_OPTION)
-				{
+				if (value == JOptionPane.YES_OPTION) {
 					this.positionBoard = new PositionBoard(gameSetting.getLevel(), gameSetting, this);
-					isHumanTurn = true;
 					repaint();
+				} else {
+					Utils.inGame = false;
+					mainChessFrame.getMenuFrame().setVisible(true);
+					mainChessFrame.dispose();
 				}
 			}
 		}

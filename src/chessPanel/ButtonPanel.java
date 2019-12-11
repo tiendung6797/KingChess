@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -87,20 +88,27 @@ public class ButtonPanel extends JPanel implements MouseListener {
 				Move move = mainChessFrame.getBoardPanel().getPositionBoard().getParentMove();
 				move.toString();
 				mainChessFrame.getBoardPanel().setPositionBoard(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard());
+				
 				if(gameSetting.isAiFirst()) {
 					if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
 						mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
 					}
-					if(checkHauTrang(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesAi())) {
-						
-					}
+					panelInformation.clear();
+					panelInformation1.clear();
+					checkWhitePiece(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesAi());
+					checkWhiteBlack(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman());
 				} else {
 					if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() != null && mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove().getPieces().getSide() == "Up") {
 						mainChessFrame.getBoardPanel().setPiecesAIChoise(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove());
 					}else if(mainChessFrame.getBoardPanel().getPositionBoard().getOldPositionBoard().getParentMove() == null){
 						mainChessFrame.getBoardPanel().setPiecesAIChoise(null);
 					}
+					panelInformation.clear();
+					panelInformation1.clear();
+					checkWhitePiece1(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesHuman());
+					checkWhiteBlack1(mainChessFrame.getBoardPanel().getPositionBoard().getListPiecesAi());
 				}
+				
 				mainChessFrame.getBoardPanel().setShowCanMove(false);
 				mainChessFrame.getBoardPanel().repaint();
 				if (mainChessFrame.getBoardPanel().isHumanTurn()) {
@@ -144,9 +152,18 @@ public class ButtonPanel extends JPanel implements MouseListener {
 				}
 			}
 		} else if(lbl == btnExit) {
-			Utils.inGame = false;
-			mainChessFrame.getMenuFrame().setVisible(true);
-			mainChessFrame.dispose();
+			int n = JOptionPane.showConfirmDialog(
+                    null, "Make sure you saved this game!\nDo you want to quit the game?",
+                    "Notification",
+                    JOptionPane.YES_NO_OPTION);
+		    if(n == JOptionPane.YES_OPTION){
+		    	Utils.inGame = false;
+				mainChessFrame.getMenuFrame().setVisible(true);
+				mainChessFrame.dispose();
+		    }
+		    else{
+		    	
+		    }
 		} else if(lbl == btnSave) {
 			
 		}

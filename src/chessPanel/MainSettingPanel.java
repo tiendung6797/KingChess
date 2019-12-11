@@ -48,17 +48,17 @@ public class MainSettingPanel extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JLabel lb1 = new JLabel("MODE");
 		lb1.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lb1.setForeground(Color.LIGHT_GRAY);
+		lb1.setForeground(Color.WHITE);
 		lb1.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
 		JLabel lb2 = new JLabel("WHO FIRST?");
 		lb2.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lb2.setForeground(Color.LIGHT_GRAY);
+		lb2.setForeground(Color.WHITE);
 		lb2.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
 		JLabel lb3 = new JLabel("LEVEL");
 		lb3.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lb3.setForeground(Color.LIGHT_GRAY);
+		lb3.setForeground(Color.WHITE);
 		lb3.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		
 		Component b1 = Box.createRigidArea(new Dimension(0, 20));
