@@ -16,7 +16,7 @@ public class PanelInformation1 extends JPanel {
 
 	public PanelInformation1() {
 		this.setLayout(new BorderLayout());
-		this.setBounds(10, Utils.BOARD_GAME_HEIGHT + 70, 652, 60);
+		this.setBounds(10, Utils.BOARD_GAME_HEIGHT + 70, 642, 60);
 		textPane = new JTextPane();
 		textPane.setBackground(Color.WHITE);
 		textPane.setCaretColor(Color.BLACK);

@@ -197,7 +197,6 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 			
 			isHumanTurn = true;
 			showCanMove = true;
-			System.out.println("======*** Human Turn ***=====");
 
 			repaint();
 			showCanMove = false;
@@ -280,7 +279,6 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 					
 					isHumanTurn = false;
 					showCanMove = false;
-					System.out.println("======**** Ai Turn ****======");
 
 					checkWin();
 					wasChoisePieces = false;
@@ -324,6 +322,11 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 						wasChoisePieces = false;
 						repaint();
 					}
+					if(pieceHumanDie != null) {
+						Image img = new ImageIcon(this.getClass().getResource("/imgchessman/" + pieceHumanDie + "3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+						panelInformation.appendImage(img);
+					}
+					pieceHumanDie = null;
 				}
 			}
 		}
