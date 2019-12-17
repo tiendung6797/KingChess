@@ -58,6 +58,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 		boxPanel2.setAlignmentX(CENTER_ALIGNMENT);
 		
 		btnUndo = createButtonControl("undo3", boxPanel1);
+		
 		btnSave = new ButtonSave(mainChessFrame.getBoardPanel());
 		btnSave.setIcon(Utils.ICON_SAVE1);
 		btnSave.addMouseListener(this);
@@ -153,7 +154,7 @@ public class ButtonPanel extends JPanel implements MouseListener {
 			}
 		} else if(lbl == btnExit) {
 			int n = JOptionPane.showConfirmDialog(
-                    null, "Make sure you saved this game!\nDo you want to quit the game?",
+                    null, "Make sure you saved this game! Do you want to quit the game?",
                     "Notification",
                     JOptionPane.YES_NO_OPTION);
 		    if(n == JOptionPane.YES_OPTION){

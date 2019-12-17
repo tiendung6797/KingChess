@@ -55,11 +55,8 @@ public class Utils {
 	public static final int CHESSMAN_CHOOSER_FRAME_HEIGHT = 600;
 	
 	/////////////// For BoardPanel ///////////////////////////
-	public static final String RESULT_LOSE = "Oh no! You losed. Do you want to play again?";
-	public static final String RESULT_WIN = "Congratulation! You are the winner. Do you want to play again?";
-	public static final String TITLE_DIALOG_FAIL = "Fail";
-	public static final String TITLE_DIALOG_SUCCESS = "Success";
-	
+	public static final String RESULT_LOSE = "Oh no! You losed!";
+	public static final String RESULT_WIN = "Congratulation! You are the winner!";
 	
 	/////////////// For ButtonPanel ////////////////////////////
 	public static final ImageIcon ICON_UNDO1 = resizeImageIcon("undo3", BUTTON_CONTROL_WIDTH, BUTTON_CONTROL_HEIGHT);

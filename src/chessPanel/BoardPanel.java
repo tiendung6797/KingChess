@@ -19,6 +19,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -203,6 +204,19 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 
 			checkWin();
 			repaint();
+			
+			for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
+				positionBoard.getListPiecesAi().get(i).setNumberCanMove();
+			}
+			for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
+				for (int j = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
+					if (positionBoard.kingPosition() == positionBoard.getListPiecesAi().get(i).getNumberCanMove().get(j)) {
+						Image img = new ImageIcon(this.getClass().getResource("/image/worry.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+						ImageIcon icon = new ImageIcon(img);
+						JOptionPane.showMessageDialog(null, "You are checked!", "Warning!!!", JOptionPane.CLOSED_OPTION, icon);
+					}
+				}
+			}
 		}
 		if(pieceHumanDie != null) {
 			Image img = new ImageIcon(this.getClass().getResource("/imgchessman/" + pieceHumanDie + "3.png")).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
@@ -210,26 +224,6 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		}
 		pieceHumanDie = null;
 	}
-	
-	
-	
-//	for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
-//		positionBoard.getListPiecesAi().get(i).setNumberCanMove();
-//	}
-//	
-//	if(piecesChoise.getName() == "Tuong") {
-//		for (int i = 0; i < positionBoard.getListPiecesAi().size(); i++) {
-//			for (int j = 0; j < positionBoard.getListPiecesAi().get(i).getNumberCanMove().size(); j++) {
-//				for(int k = 0; k < piecesChoise.getNumberCanMove().size(); k++ ) {
-//					if (piecesChoise.getNumberCanMove().get(k) == positionBoard.getListPiecesAi().get(i).getNumberCanMove().get(j)) {
-//						piecesChoise.getNumberCanMove().remove(k);
-//					}
-//				}
-//			}
-//		}
-//	}
-	
-	
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -336,64 +330,79 @@ public class BoardPanel extends JPanel implements MouseListener, MouseMotionList
 		if (isHumanTurn) {
 			if (this.positionBoard.checkAiWin()) {
 				win = true;
-				final JOptionPane optionPane = new JOptionPane(Utils.RESULT_LOSE,
-						JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
-				final JDialog dialog = new JDialog(new JFrame(), Utils.TITLE_DIALOG_FAIL, true);
-				dialog.setContentPane(optionPane);
-				dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-				optionPane.addPropertyChangeListener(new PropertyChangeListener() {
-					public void propertyChange(PropertyChangeEvent e) {
-						String prop = e.getPropertyName();
-						if (dialog.isVisible() && (e.getSource() == optionPane)
-								&& (JOptionPane.VALUE_PROPERTY.equals(prop))) {
-							dialog.setVisible(false);
-						}
-					}
-				});
-				dialog.pack();
-				dialog.setLocationRelativeTo(null);
-				dialog.setVisible(true);
-
-				int value = ((Integer) optionPane.getValue()).intValue();
-				if (value == JOptionPane.YES_OPTION) {
-					this.positionBoard = new PositionBoard(gameSetting.getLevel(), gameSetting, this);
-					repaint();
-				} else {
-					Utils.inGame = false;
-					mainChessFrame.getMenuFrame().setVisible(true);
-					mainChessFrame.dispose();
-				}
+				
+				Image img = new ImageIcon(this.getClass().getResource("/image/sad-icon.jpg")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+				ImageIcon icon = new ImageIcon(img);
+				JOptionPane.showMessageDialog(null, Utils.RESULT_LOSE, "Lose!!!", JOptionPane.CLOSED_OPTION, icon);
+		    	Utils.inGame = false;
+				mainChessFrame.getMenuFrame().setVisible(true);
+				mainChessFrame.dispose();
+			    
+				
+//				final JOptionPane optionPane = new JOptionPane(Utils.RESULT_LOSE, JOptionPane.CLOSED_OPTION);
+//				final JDialog dialog = new JDialog(new JFrame(), Utils.TITLE_DIALOG_FAIL, true);
+//				dialog.setContentPane(optionPane);
+//				dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+//				optionPane.addPropertyChangeListener(new PropertyChangeListener() {
+//					public void propertyChange(PropertyChangeEvent e) {
+//						String prop = e.getPropertyName();
+//						if (dialog.isVisible() && (e.getSource() == optionPane)
+//								&& (JOptionPane.VALUE_PROPERTY.equals(prop))) {
+//							dialog.setVisible(false);
+//						}
+//					}
+//				});
+//				dialog.pack();
+//				dialog.setLocationRelativeTo(null);
+//				dialog.setVisible(true);
+//
+//				int value = ((Integer) optionPane.getValue()).intValue();
+//				if (value == JOptionPane.YES_OPTION) {
+//					this.positionBoard = new PositionBoard(gameSetting.getLevel(), gameSetting, this);
+//					repaint();
+//				} else {
+//					Utils.inGame = false;
+//					mainChessFrame.getMenuFrame().setVisible(true);
+//					mainChessFrame.dispose();
+//				}
 			}
 		} else {
 			if (this.positionBoard.checkHumanWin()) {
 				win = true;
-				final JOptionPane optionPane = new JOptionPane(Utils.RESULT_WIN,
-						JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
-				final JDialog dialog = new JDialog(new JFrame(), Utils.TITLE_DIALOG_SUCCESS, true);
-				dialog.setContentPane(optionPane);
-				dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-				optionPane.addPropertyChangeListener(new PropertyChangeListener() {
-
-					public void propertyChange(PropertyChangeEvent e) {
-						String prop = e.getPropertyName();
-						if (dialog.isVisible() && (e.getSource() == optionPane)
-								&& (JOptionPane.VALUE_PROPERTY.equals(prop))) {
-							dialog.setVisible(false);
-						}
-					}
-				});
-				dialog.pack();
-				dialog.setLocationRelativeTo(null);
-				dialog.setVisible(true);
-				int value = ((Integer) optionPane.getValue()).intValue();
-				if (value == JOptionPane.YES_OPTION) {
-					this.positionBoard = new PositionBoard(gameSetting.getLevel(), gameSetting, this);
-					repaint();
-				} else {
-					Utils.inGame = false;
-					mainChessFrame.getMenuFrame().setVisible(true);
-					mainChessFrame.dispose();
-				}
+				
+				Image img = new ImageIcon(this.getClass().getResource("/image/happy.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+				ImageIcon icon = new ImageIcon(img);
+				JOptionPane.showMessageDialog(null, Utils.RESULT_WIN, "Win!!!", JOptionPane.CLOSED_OPTION, icon);
+		    	Utils.inGame = false;
+				mainChessFrame.getMenuFrame().setVisible(true);
+				mainChessFrame.dispose();
+					
+//				final JOptionPane optionPane = new JOptionPane(Utils.RESULT_WIN, JOptionPane.CLOSED_OPTION);
+//				final JDialog dialog = new JDialog(new JFrame(), Utils.TITLE_DIALOG_SUCCESS, true);
+//				dialog.setContentPane(optionPane);
+//				dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+//				optionPane.addPropertyChangeListener(new PropertyChangeListener() {
+//
+//					public void propertyChange(PropertyChangeEvent e) {
+//						String prop = e.getPropertyName();
+//						if (dialog.isVisible() && (e.getSource() == optionPane)
+//								&& (JOptionPane.VALUE_PROPERTY.equals(prop))) {
+//							dialog.setVisible(false);
+//						}
+//					}
+//				});
+//				dialog.pack();
+//				dialog.setLocationRelativeTo(null);
+//				dialog.setVisible(true);
+//				int value = ((Integer) optionPane.getValue()).intValue();
+//				if (value == JOptionPane.YES_OPTION) {
+//					this.positionBoard = new PositionBoard(gameSetting.getLevel(), gameSetting, this);
+//					repaint();
+//				} else {
+//					Utils.inGame = false;
+//					mainChessFrame.getMenuFrame().setVisible(true);
+//					mainChessFrame.dispose();
+//				}
 			}
 		}
 	}
