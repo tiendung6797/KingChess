@@ -1,1 +1,2 @@
 # KingChess
+# Copyright by Lionel
