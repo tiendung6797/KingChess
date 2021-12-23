@@ -1,5 +1,4 @@
 # KingChess
 # Copyright by Lionel
-# Senior Project
-# 2019
+# Senior Project - 2019
 # Enclave
